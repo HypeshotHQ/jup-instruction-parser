@@ -15,16 +15,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "tsup": "^6.4.0",
-    "typescript": "^4.4.4"
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.29.0",
-    "@solana/spl-token": "^0.3.8",
-    "@solana/spl-token-registry": "^0.2.7",
-    "@solana/web3.js": "^1.73.2",
-    "commander": "^9.1.0",
-    "decimal.js": "^10.3.1",
-    "got": "^11.8.2"
+    "@solana/spl-token": "^0.4.9",
+    "@solana/spl-token-registry": "^0.2.4574",
+    "@solana/web3.js": "^1.95.8",
+    "commander": "^9.5.0",
+    "decimal.js": "^10.4.3",
+    "got": "^14.4.5"
   }
 }
