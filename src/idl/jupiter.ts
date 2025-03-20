@@ -1263,6 +1263,34 @@ export type Jupiter = {
 					},
 					{
 						name: "WooFi";
+					},
+					{
+						name: "StakeDexWithdrawWrappedSol";
+					},
+					{
+						name: "VirtualsBuy";
+					},
+					{
+						name: "VirtualsSell";
+					},
+					{
+						name: "Perena";
+						fields: [
+							{
+								name: "in_index";
+								type: "u8";
+							},
+							{
+								name: "out_index";
+								type: "u8";
+							}
+						];
+					},
+					{
+						name: "PumpdotfunAmmBuy";
+					},
+					{
+						name: "PumpdotfunAmmSell";
 					}
 				];
 			};
@@ -2732,6 +2760,34 @@ export const IDL: Jupiter = {
 					},
 					{
 						name: "WooFi",
+					},
+					{
+						name: "StakeDexWithdrawWrappedSol",
+					},
+					{
+						name: "VirtualsBuy",
+					},
+					{
+						name: "VirtualsSell",
+					},
+					{
+						name: "Perena",
+						fields: [
+							{
+								name: "in_index",
+								type: "u8",
+							},
+							{
+								name: "out_index",
+								type: "u8",
+							},
+						],
+					},
+					{
+						name: "PumpdotfunAmmBuy",
+					},
+					{
+						name: "PumpdotfunAmmSell",
 					},
 				],
 			},
