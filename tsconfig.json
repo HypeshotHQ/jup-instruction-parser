@@ -1,13 +1,14 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "lib": ["ESNext"],
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "outDir": "dist"
-  },
-  "lib": ["es2015"]
+	"compilerOptions": {
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"target": "es6",
+		"lib": ["ESNext"],
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"outDir": "dist"
+	},
+	"lib": ["es2015"],
+	"exclude": ["src/tests.ts"]
 }

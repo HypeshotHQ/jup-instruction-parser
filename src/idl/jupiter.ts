@@ -42,6 +42,16 @@ export type Jupiter = {
 					isMut: true;
 					isSigner: false;
 					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
 				}
 			];
 			args: [
@@ -114,6 +124,16 @@ export type Jupiter = {
 				},
 				{
 					name: "tokenLedger";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
 					isMut: false;
 					isSigner: false;
 				}
@@ -204,6 +224,16 @@ export type Jupiter = {
 					isMut: false;
 					isSigner: false;
 					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
 				}
 			];
 			args: [
@@ -302,6 +332,16 @@ export type Jupiter = {
 					name: "tokenLedger";
 					isMut: false;
 					isSigner: false;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
 				}
 			];
 			args: [
@@ -382,6 +422,16 @@ export type Jupiter = {
 					isMut: false;
 					isSigner: false;
 					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
 				}
 			];
 			args: [
@@ -474,6 +524,16 @@ export type Jupiter = {
 					isMut: false;
 					isSigner: false;
 					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
 				}
 			];
 			args: [
@@ -703,7 +763,7 @@ export type Jupiter = {
 					isSigner: false;
 				},
 				{
-					name: "associatedTokenTokenProgram";
+					name: "tokenProgram";
 					isMut: false;
 					isSigner: false;
 				},
@@ -746,6 +806,51 @@ export type Jupiter = {
 				}
 			];
 			args: [];
+		},
+		{
+			name: "closeToken";
+			accounts: [
+				{
+					name: "operator";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "wallet";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "programTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "mint";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "tokenProgram";
+					isMut: false;
+					isSigner: false;
+				}
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+				{
+					name: "burnAll";
+					type: "bool";
+				}
+			];
 		}
 	];
 	accounts: [
@@ -1239,7 +1344,7 @@ export type Jupiter = {
 						name: "SolayerDelegateNoInit";
 					},
 					{
-						name: "SolayerUnDelegateNoInit";
+						name: "SolayerUndelegateNoInit";
 					},
 					{
 						name: "TokenMill";
@@ -1253,16 +1358,13 @@ export type Jupiter = {
 						];
 					},
 					{
-						name: "DaoFunBuy";
+						name: "DaosFunBuy";
 					},
 					{
-						name: "DaoFunSell";
+						name: "DaosFunSell";
 					},
 					{
 						name: "ZeroFi";
-					},
-					{
-						name: "WooFi";
 					},
 					{
 						name: "StakeDexWithdrawWrappedSol";
@@ -1277,11 +1379,11 @@ export type Jupiter = {
 						name: "Perena";
 						fields: [
 							{
-								name: "in_index";
+								name: "inIndex";
 								type: "u8";
 							},
 							{
-								name: "out_index";
+								name: "outIndex";
 								type: "u8";
 							}
 						];
@@ -1291,6 +1393,9 @@ export type Jupiter = {
 					},
 					{
 						name: "PumpdotfunAmmSell";
+					},
+					{
+						name: "Gamma";
 					}
 				];
 			};
@@ -1339,6 +1444,27 @@ export type Jupiter = {
 					},
 					{
 						name: "TransferHookB";
+					},
+					{
+						name: "TransferHookReward";
+					},
+					{
+						name: "TransferHookInput";
+					},
+					{
+						name: "TransferHookIntermediate";
+					},
+					{
+						name: "TransferHookOutput";
+					},
+					{
+						name: "SupplementalTickArrays";
+					},
+					{
+						name: "SupplementalTickArraysOne";
+					},
+					{
+						name: "SupplementalTickArraysTwo";
 					}
 				];
 			};
@@ -1540,6 +1666,16 @@ export const IDL: Jupiter = {
 					isSigner: false,
 					isOptional: true,
 				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
 			],
 			args: [
 				{
@@ -1611,6 +1747,16 @@ export const IDL: Jupiter = {
 				},
 				{
 					name: "tokenLedger",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
 					isMut: false,
 					isSigner: false,
 				},
@@ -1701,6 +1847,16 @@ export const IDL: Jupiter = {
 					isMut: false,
 					isSigner: false,
 					isOptional: true,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
 				},
 			],
 			args: [
@@ -1800,6 +1956,16 @@ export const IDL: Jupiter = {
 					isMut: false,
 					isSigner: false,
 				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
 			],
 			args: [
 				{
@@ -1879,6 +2045,16 @@ export const IDL: Jupiter = {
 					isMut: false,
 					isSigner: false,
 					isOptional: true,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
 				},
 			],
 			args: [
@@ -1971,6 +2147,16 @@ export const IDL: Jupiter = {
 					isMut: false,
 					isSigner: false,
 					isOptional: true,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
 				},
 			],
 			args: [
@@ -2200,7 +2386,7 @@ export const IDL: Jupiter = {
 					isSigner: false,
 				},
 				{
-					name: "associatedTokenTokenProgram",
+					name: "tokenProgram",
 					isMut: false,
 					isSigner: false,
 				},
@@ -2243,6 +2429,51 @@ export const IDL: Jupiter = {
 				},
 			],
 			args: [],
+		},
+		{
+			name: "closeToken",
+			accounts: [
+				{
+					name: "operator",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "wallet",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "programTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "mint",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "tokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+				{
+					name: "burnAll",
+					type: "bool",
+				},
+			],
 		},
 	],
 	accounts: [
@@ -2736,7 +2967,7 @@ export const IDL: Jupiter = {
 						name: "SolayerDelegateNoInit",
 					},
 					{
-						name: "SolayerUnDelegateNoInit",
+						name: "SolayerUndelegateNoInit",
 					},
 					{
 						name: "TokenMill",
@@ -2750,16 +2981,13 @@ export const IDL: Jupiter = {
 						],
 					},
 					{
-						name: "DaoFunBuy",
+						name: "DaosFunBuy",
 					},
 					{
-						name: "DaoFunSell",
+						name: "DaosFunSell",
 					},
 					{
 						name: "ZeroFi",
-					},
-					{
-						name: "WooFi",
 					},
 					{
 						name: "StakeDexWithdrawWrappedSol",
@@ -2774,11 +3002,11 @@ export const IDL: Jupiter = {
 						name: "Perena",
 						fields: [
 							{
-								name: "in_index",
+								name: "inIndex",
 								type: "u8",
 							},
 							{
-								name: "out_index",
+								name: "outIndex",
 								type: "u8",
 							},
 						],
@@ -2788,6 +3016,9 @@ export const IDL: Jupiter = {
 					},
 					{
 						name: "PumpdotfunAmmSell",
+					},
+					{
+						name: "Gamma",
 					},
 				],
 			},
@@ -2836,6 +3067,27 @@ export const IDL: Jupiter = {
 					},
 					{
 						name: "TransferHookB",
+					},
+					{
+						name: "TransferHookReward",
+					},
+					{
+						name: "TransferHookInput",
+					},
+					{
+						name: "TransferHookIntermediate",
+					},
+					{
+						name: "TransferHookOutput",
+					},
+					{
+						name: "SupplementalTickArrays",
+					},
+					{
+						name: "SupplementalTickArraysOne",
+					},
+					{
+						name: "SupplementalTickArraysTwo",
 					},
 				],
 			},

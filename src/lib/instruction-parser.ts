@@ -2,6 +2,7 @@ import { ParsedInstruction, PublicKey } from "@solana/web3.js";
 import { BorshCoder } from "@coral-xyz/anchor";
 import { IDL } from "../idl/jupiter";
 import { PartialInstruction, RoutePlan, TransactionWithMeta } from "../types";
+import * as bs58 from "bs58";
 
 export class InstructionParser {
 	private coder: BorshCoder;
@@ -72,50 +73,42 @@ export class InstructionParser {
 	}
 
 	// Extract the position of the initial and final swap from the swap array.
-	getInitialAndFinalSwapPositions(instructions: PartialInstruction[]) {
-		for (const instruction of instructions) {
-			if (!instruction.programId.equals(this.programId)) {
-				continue;
+	getInitialAndFinalSwapPositions(
+		instruction: PartialInstruction
+	): [number, number] {
+		try {
+			const rawBuffer = bs58.decode(instruction.data);
+
+			// Check if we have enough data for the basic structure
+			if (rawBuffer.length < 8) {
+				return [0, 0];
 			}
 
-			const ix = this.coder.instruction.decode(instruction.data, "base58");
-			// This will happen because now event is also an CPI instruction.
-			if (!ix) {
-				continue;
+			// Read discriminator (first 8 bytes)
+			const discriminator = rawBuffer.slice(0, 8);
+
+			// Check if this is a route instruction
+			const routeDiscriminator = Buffer.from([
+				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+			]);
+			if (!discriminator.equals(routeDiscriminator)) {
+				return [0, 0];
 			}
 
-			if (this.isRouting(ix.name)) {
-				const routePlan = (ix.data as any).routePlan as RoutePlan;
-				const inputIndex = 0;
-				const outputIndex = routePlan.length;
+			// If we have enough data for the route plan length
+			if (rawBuffer.length >= 12) {
+				const routePlanLength = rawBuffer.readUInt32LE(8);
 
-				const initialPositions: number[] = [];
-				for (let j = 0; j < routePlan.length; j++) {
-					if (routePlan[j].inputIndex === inputIndex) {
-						initialPositions.push(j);
-					}
+				// If we have a valid route plan length
+				if (routePlanLength > 0 && routePlanLength < 100) {
+					return [0, routePlanLength - 1];
 				}
-
-				const finalPositions: number[] = [];
-				for (let j = 0; j < routePlan.length; j++) {
-					if (routePlan[j].outputIndex === outputIndex) {
-						finalPositions.push(j);
-					}
-				}
-
-				if (
-					finalPositions.length === 0 &&
-					this.isCircular((ix.data as any).routePlan)
-				) {
-					for (let j = 0; j < (ix.data as any).routePlan.length; j++) {
-						if ((ix.data as any).routePlan[j].outputIndex === 0) {
-							finalPositions.push(j);
-						}
-					}
-				}
-
-				return [initialPositions, finalPositions];
 			}
+
+			return [0, 0];
+		} catch (error) {
+			console.error("Error in getInitialAndFinalSwapPositions:", error);
+			return [0, 0];
 		}
 	}
 
@@ -175,6 +168,32 @@ export class InstructionParser {
 			name === "sharedAccountsExactOutRoute" ||
 			name === "exactOutRoute"
 		);
+	}
+
+	decodeInstruction(data: string) {
+		try {
+			// First check if we have valid base58 data
+			if (!data || data.length === 0) {
+				throw new Error("Empty instruction data");
+			}
+
+			// Decode the base58 data
+			const decoded = this.coder.instruction.decode(data, "base58");
+
+			// Validate the decoded instruction
+			if (!decoded || !decoded.name) {
+				throw new Error("Invalid instruction format");
+			}
+
+			return decoded;
+		} catch (error) {
+			console.error("Error decoding instruction:", error);
+			// Return a safe default object instead of throwing
+			return {
+				name: "unknown",
+				data: {},
+			};
+		}
 	}
 
 	isCircular(routePlan: RoutePlan) {

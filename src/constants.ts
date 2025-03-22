@@ -58,4 +58,5 @@ export const AMM_TYPES = {
 	HyhpEq587ANShDdbx1mP4dTmDZC44CXWft29oYQXDb53: "Fox",
 	ZERor4xhbUycZ6gb9ntrhqscUcZmAbQDjEAtCf4hbZY: "ZeroFi",
 	swapNyd8XiQwJ6ianp9snpu4brUqFxadzvHebnAXjJZ: "Stabble Stable Swap",
+	"5U3EU2ubXtK84QcRjWVmYt9RaDyA8gKxdUrPFXmZyaki": "Pump.Fun Amm",
 };
