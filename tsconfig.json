@@ -9,6 +9,5 @@
 		"sourceMap": true,
 		"outDir": "dist"
 	},
-	"lib": ["es2015"],
-	"exclude": ["src/tests.ts"]
+	"lib": ["es2015"]
 }
