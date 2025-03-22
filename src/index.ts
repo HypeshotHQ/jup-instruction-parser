@@ -117,14 +117,15 @@ export async function extract(
 		return;
 	}
 
-	const [initialPosition, finalPosition] =
-		parser.getInitialAndFinalSwapPositions(routingInstruction);
+	const [initialPositions, finalPositions] =
+		parser.getInitialAndFinalSwapPositions(instructions);
 
 	const inSymbol = null; // We don't longer support this.
-	const inMint = swapData[initialPosition].inMint;
+	const inMint = swapData[initialPositions[0]].inMint;
 	const inSwapData = swapData.filter(
-		(swap, index) => index === initialPosition && swap.inMint === inMint
+		(swap, index) => initialPositions.includes(index) && swap.inMint === inMint
 	);
+
 	const inAmount = inSwapData.reduce((acc, curr) => {
 		return acc + BigInt(curr.inAmount);
 	}, BigInt(0));
@@ -136,9 +137,9 @@ export async function extract(
 	}, new Decimal(0));
 
 	const outSymbol = null; // We don't longer support this.
-	const outMint = swapData[finalPosition].outMint;
+	const outMint = swapData[finalPositions[0]].outMint;
 	const outSwapData = swapData.filter(
-		(swap, index) => index === finalPosition && swap.outMint === outMint
+		(swap, index) => finalPositions.includes(index) && swap.outMint === outMint
 	);
 	const outAmount = outSwapData.reduce((acc, curr) => {
 		return acc + BigInt(curr.outAmount);
