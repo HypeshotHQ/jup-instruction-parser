@@ -1396,7 +1396,50 @@ export type Jupiter = {
 					},
 					{
 						name: "Gamma";
-					}
+					},
+					{
+						name: "MeteoraDlmmSwapV2";
+						fields: [
+							{
+								name: "remainingAccountsInfo";
+								type: { defined: "RemainingAccountsInfo" };
+							}
+						];
+					},
+					{ name: "Woofi" },
+					{ name: "MeteoraDammV2" },
+					{ name: "MeteoraDynamicBondingCurveSwap" },
+					{ name: "StabbleStableSwapV2" },
+					{ name: "StabbleWeightedSwapV2" },
+					{
+						name: "RaydiumLaunchlabBuy";
+						fields: [{ name: "shareFeeRate"; type: "u64" }];
+					},
+					{
+						name: "RaydiumLaunchlabSell";
+						fields: [{ name: "shareFeeRate"; type: "u64" }];
+					},
+					{ name: "BoopdotfunWrappedBuy" },
+					{ name: "BoopdotfunWrappedSell" },
+					{
+						name: "Plasma";
+						fields: [{ name: "side"; type: { defined: "Side" } }];
+					},
+					{
+						name: "GoonFi";
+						fields: [
+							{ name: "isBid"; type: "bool" },
+							{ name: "blacklistBump"; type: "u8" }
+						];
+					},
+					{
+						name: "HumidiFi";
+						fields: [
+							{ name: "swapId"; type: "u64" },
+							{ name: "isBaseToQuote"; type: "bool" }
+						];
+					},
+					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" }
 				];
 			};
 		},
@@ -3020,6 +3063,49 @@ export const IDL: Jupiter = {
 					{
 						name: "Gamma",
 					},
+					{
+						name: "MeteoraDlmmSwapV2",
+						fields: [
+							{
+								name: "remainingAccountsInfo",
+								type: { defined: "RemainingAccountsInfo" },
+							},
+						],
+					},
+					{ name: "Woofi" },
+					{ name: "MeteoraDammV2" },
+					{ name: "MeteoraDynamicBondingCurveSwap" },
+					{ name: "StabbleStableSwapV2" },
+					{ name: "StabbleWeightedSwapV2" },
+					{
+						name: "RaydiumLaunchlabBuy",
+						fields: [{ name: "shareFeeRate", type: "u64" }],
+					},
+					{
+						name: "RaydiumLaunchlabSell",
+						fields: [{ name: "shareFeeRate", type: "u64" }],
+					},
+					{ name: "BoopdotfunWrappedBuy" },
+					{ name: "BoopdotfunWrappedSell" },
+					{
+						name: "Plasma",
+						fields: [{ name: "side", type: { defined: "Side" } }],
+					},
+					{
+						name: "GoonFi",
+						fields: [
+							{ name: "isBid", type: "bool" },
+							{ name: "blacklistBump", type: "u8" },
+						],
+					},
+					{
+						name: "HumidiFi",
+						fields: [
+							{ name: "swapId", type: "u64" },
+							{ name: "isBaseToQuote", type: "bool" },
+						],
+					},
+					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" },
 				],
 			},
 		},
