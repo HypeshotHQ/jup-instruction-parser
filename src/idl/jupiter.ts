@@ -1439,7 +1439,22 @@ export type Jupiter = {
 							{ name: "isBaseToQuote"; type: "bool" }
 						];
 					},
-					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" }
+					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" },
+					{
+						name: "TesseraV";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							}
+						];
+					},
+					{ name: "PumpWrappedBuyV2" },
+					{ name: "PumpWrappedSellV2" },
+					{ name: "PumpSwapBuyV2" },
+					{ name: "PumpSwapSellV2" }
 				];
 			};
 		},
@@ -1660,6 +1675,41 @@ export type Jupiter = {
 			code: 6018;
 			name: "SourceAndDestinationMintCannotBeTheSame";
 			msg: "Source mint and destination mint cannot the same";
+		},
+		{
+			code: 6019;
+			name: "InvalidMint";
+			msg: "Invalid mint";
+		},
+		{
+			code: 6020;
+			name: "InvalidProgramAuthority";
+			msg: "Invalid program authority";
+		},
+		{
+			code: 6021;
+			name: "InvalidOutputTokenAccount";
+			msg: "Invalid output token account";
+		},
+		{
+			code: 6022;
+			name: "InvalidFeeWallet";
+			msg: "Invalid fee wallet";
+		},
+		{
+			code: 6023;
+			name: "InvalidAuthority";
+			msg: "Invalid authority";
+		},
+		{
+			code: 6024;
+			name: "InsufficientFunds";
+			msg: "Insufficient funds";
+		},
+		{
+			code: 6025;
+			name: "InvalidTokenAccount";
+			msg: "Invalid token account";
 		}
 	];
 };
@@ -3106,6 +3156,21 @@ export const IDL: Jupiter = {
 						],
 					},
 					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" },
+					{
+						name: "TesseraV",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
+					{ name: "PumpWrappedBuyV2" },
+					{ name: "PumpWrappedSellV2" },
+					{ name: "PumpSwapBuyV2" },
+					{ name: "PumpSwapSellV2" },
 				],
 			},
 		},
@@ -3326,6 +3391,41 @@ export const IDL: Jupiter = {
 			code: 6018,
 			name: "SourceAndDestinationMintCannotBeTheSame",
 			msg: "Source mint and destination mint cannot the same",
+		},
+		{
+			code: 6019,
+			name: "InvalidMint",
+			msg: "Invalid mint",
+		},
+		{
+			code: 6020,
+			name: "InvalidProgramAuthority",
+			msg: "Invalid program authority",
+		},
+		{
+			code: 6021,
+			name: "InvalidOutputTokenAccount",
+			msg: "Invalid output token account",
+		},
+		{
+			code: 6022,
+			name: "InvalidFeeWallet",
+			msg: "Invalid fee wallet",
+		},
+		{
+			code: 6023,
+			name: "InvalidAuthority",
+			msg: "Invalid authority",
+		},
+		{
+			code: 6024,
+			name: "InsufficientFunds",
+			msg: "Insufficient funds",
+		},
+		{
+			code: 6025,
+			name: "InvalidTokenAccount",
+			msg: "Invalid token account",
 		},
 	],
 };
