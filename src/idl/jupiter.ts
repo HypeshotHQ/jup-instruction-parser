@@ -1454,7 +1454,16 @@ export type Jupiter = {
 					{ name: "PumpWrappedBuyV2" },
 					{ name: "PumpWrappedSellV2" },
 					{ name: "PumpSwapBuyV2" },
-					{ name: "PumpSwapSellV2" }
+					{ name: "PumpSwapSellV2" },
+					{
+						name: "Heaven";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							}
+						];
+					}
 				];
 			};
 		},
@@ -3171,6 +3180,15 @@ export const IDL: Jupiter = {
 					{ name: "PumpWrappedSellV2" },
 					{ name: "PumpSwapBuyV2" },
 					{ name: "PumpSwapSellV2" },
+					{
+						name: "Heaven",
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
+					},
 				],
 			},
 		},
