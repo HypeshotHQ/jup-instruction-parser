@@ -1463,7 +1463,21 @@ export type Jupiter = {
 								type: "bool";
 							}
 						];
-					}
+					},
+					{
+						name: "SolFiV2";
+						fields: [
+							{
+								name: "isQuoteToBase";
+								type: "bool";
+							}
+						];
+					},
+					{ name: "Aquifer" },
+					{ name: "PumpWrappedBuyV3" },
+					{ name: "PumpWrappedSellV3" },
+					{ name: "PumpSwapBuyV3" },
+					{ name: "PumpSwapSellV3" }
 				];
 			};
 		},
@@ -3189,6 +3203,20 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{
+						name: "SolFiV2",
+						fields: [
+							{
+								name: "isQuoteToBase",
+								type: "bool",
+							},
+						],
+					},
+					{ name: "Aquifer" },
+					{ name: "PumpWrappedBuyV3" },
+					{ name: "PumpWrappedSellV3" },
+					{ name: "PumpSwapBuyV3" },
+					{ name: "PumpSwapSellV3" },
 				],
 			},
 		},
