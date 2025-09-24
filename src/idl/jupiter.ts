@@ -851,6 +851,380 @@ export type Jupiter = {
 					type: "bool";
 				}
 			];
+		},
+		{
+			name: "routeV2";
+			accounts: [
+				{
+					name: "userTransferAuthority";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "userSourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "userDestinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "sourceMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "sourceTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
+				}
+			];
+			args: [
+				{
+					name: "inAmount";
+					type: "u64";
+				},
+				{
+					name: "quotedOutAmount";
+					type: "u64";
+				},
+				{
+					name: "slippageBps";
+					type: "u16";
+				},
+				{
+					name: "platformFeeBps";
+					type: "u16";
+				},
+				{
+					name: "positiveSlippageBps";
+					type: "u16";
+				},
+				{
+					name: "routePlan";
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2";
+						};
+					};
+				}
+			];
+			returns: "u64";
+		},
+		{
+			name: "exactOutRouteV2";
+			accounts: [
+				{
+					name: "userTransferAuthority";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "userSourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "userDestinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "sourceMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "sourceTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
+				}
+			];
+			args: [
+				{
+					name: "outAmount";
+					type: "u64";
+				},
+				{
+					name: "quotedInAmount";
+					type: "u64";
+				},
+				{
+					name: "slippageBps";
+					type: "u16";
+				},
+				{
+					name: "platformFeeBps";
+					type: "u16";
+				},
+				{
+					name: "positiveSlippageBps";
+					type: "u16";
+				},
+				{
+					name: "routePlan";
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2";
+						};
+					};
+				}
+			];
+			returns: "u64";
+		},
+		{
+			name: "sharedAccountsRouteV2";
+			accounts: [
+				{
+					name: "programAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "userTransferAuthority";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "sourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programSourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programDestinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "sourceMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "sourceTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
+				}
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+				{
+					name: "inAmount";
+					type: "u64";
+				},
+				{
+					name: "quotedOutAmount";
+					type: "u64";
+				},
+				{
+					name: "slippageBps";
+					type: "u16";
+				},
+				{
+					name: "platformFeeBps";
+					type: "u16";
+				},
+				{
+					name: "positiveSlippageBps";
+					type: "u16";
+				},
+				{
+					name: "routePlan";
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2";
+						};
+					};
+				}
+			];
+			returns: "u64";
+		},
+		{
+			name: "sharedAccountsExactOutRouteV2";
+			accounts: [
+				{
+					name: "programAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "userTransferAuthority";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "sourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programSourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programDestinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "sourceMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "sourceTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
+				}
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+				{
+					name: "outAmount";
+					type: "u64";
+				},
+				{
+					name: "quotedInAmount";
+					type: "u64";
+				},
+				{
+					name: "slippageBps";
+					type: "u16";
+				},
+				{
+					name: "platformFeeBps";
+					type: "u16";
+				},
+				{
+					name: "positiveSlippageBps";
+					type: "u16";
+				},
+				{
+					name: "routePlan";
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2";
+						};
+					};
+				}
+			];
+			returns: "u64";
 		}
 	];
 	accounts: [
@@ -902,6 +1276,32 @@ export type Jupiter = {
 					{
 						name: "percent";
 						type: "u8";
+					},
+					{
+						name: "inputIndex";
+						type: "u8";
+					},
+					{
+						name: "outputIndex";
+						type: "u8";
+					}
+				];
+			};
+		},
+		{
+			name: "RoutePlanStepV2";
+			type: {
+				kind: "struct";
+				fields: [
+					{
+						name: "swap";
+						type: {
+							defined: "Swap";
+						};
+					},
+					{
+						name: "bps";
+						type: "u16";
 					},
 					{
 						name: "inputIndex";
@@ -1477,7 +1877,36 @@ export type Jupiter = {
 					{ name: "PumpWrappedBuyV3" },
 					{ name: "PumpWrappedSellV3" },
 					{ name: "PumpSwapBuyV3" },
-					{ name: "PumpSwapSellV3" }
+					{ name: "PumpSwapSellV3" },
+					{ name: "JupiterLendDeposit" },
+					{ name: "JupiterLendRedeem" },
+					{
+						name: "DefiTuna";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+							{
+								name: "remainingAccountsInfo";
+								type: {
+									option: {
+										defined: "RemainingAccountsInfo";
+									};
+								};
+							}
+						];
+					},
+					{
+						name: "AlphaQ";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							}
+						];
+					},
+					{ name: "RaydiumV2" }
 				];
 			};
 		},
@@ -1511,6 +1940,30 @@ export type Jupiter = {
 								defined: "RemainingAccountsSlice";
 							};
 						};
+					}
+				];
+			};
+		},
+		{
+			name: "SwapEventV2";
+			type: {
+				kind: "struct";
+				fields: [
+					{
+						name: "inputMint";
+						type: "publicKey";
+					},
+					{
+						name: "inputAmount";
+						type: "u64";
+					},
+					{
+						name: "outputMint";
+						type: "publicKey";
+					},
+					{
+						name: "outputAmount";
+						type: "u64";
 					}
 				];
 			};
@@ -1598,6 +2051,20 @@ export type Jupiter = {
 				{
 					name: "amount";
 					type: "u64";
+					index: false;
+				}
+			];
+		},
+		{
+			name: "SwapsEvent";
+			fields: [
+				{
+					name: "swapEvents";
+					type: {
+						vec: {
+							defined: "SwapEventV2";
+						};
+					};
 					index: false;
 				}
 			];
@@ -2591,6 +3058,380 @@ export const IDL: Jupiter = {
 				},
 			],
 		},
+		{
+			name: "routeV2",
+			accounts: [
+				{
+					name: "userTransferAuthority",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "userSourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "userDestinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "sourceMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "sourceTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "inAmount",
+					type: "u64",
+				},
+				{
+					name: "quotedOutAmount",
+					type: "u64",
+				},
+				{
+					name: "slippageBps",
+					type: "u16",
+				},
+				{
+					name: "platformFeeBps",
+					type: "u16",
+				},
+				{
+					name: "positiveSlippageBps",
+					type: "u16",
+				},
+				{
+					name: "routePlan",
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2",
+						},
+					},
+				},
+			],
+			returns: "u64",
+		},
+		{
+			name: "exactOutRouteV2",
+			accounts: [
+				{
+					name: "userTransferAuthority",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "userSourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "userDestinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "sourceMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "sourceTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "outAmount",
+					type: "u64",
+				},
+				{
+					name: "quotedInAmount",
+					type: "u64",
+				},
+				{
+					name: "slippageBps",
+					type: "u16",
+				},
+				{
+					name: "platformFeeBps",
+					type: "u16",
+				},
+				{
+					name: "positiveSlippageBps",
+					type: "u16",
+				},
+				{
+					name: "routePlan",
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2",
+						},
+					},
+				},
+			],
+			returns: "u64",
+		},
+		{
+			name: "sharedAccountsRouteV2",
+			accounts: [
+				{
+					name: "programAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "userTransferAuthority",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "sourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programSourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programDestinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "sourceMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "sourceTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+				{
+					name: "inAmount",
+					type: "u64",
+				},
+				{
+					name: "quotedOutAmount",
+					type: "u64",
+				},
+				{
+					name: "slippageBps",
+					type: "u16",
+				},
+				{
+					name: "platformFeeBps",
+					type: "u16",
+				},
+				{
+					name: "positiveSlippageBps",
+					type: "u16",
+				},
+				{
+					name: "routePlan",
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2",
+						},
+					},
+				},
+			],
+			returns: "u64",
+		},
+		{
+			name: "sharedAccountsExactOutRouteV2",
+			accounts: [
+				{
+					name: "programAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "userTransferAuthority",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "sourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programSourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programDestinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "sourceMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "sourceTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+				{
+					name: "outAmount",
+					type: "u64",
+				},
+				{
+					name: "quotedInAmount",
+					type: "u64",
+				},
+				{
+					name: "slippageBps",
+					type: "u16",
+				},
+				{
+					name: "platformFeeBps",
+					type: "u16",
+				},
+				{
+					name: "positiveSlippageBps",
+					type: "u16",
+				},
+				{
+					name: "routePlan",
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2",
+						},
+					},
+				},
+			],
+			returns: "u64",
+		},
 	],
 	accounts: [
 		{
@@ -2641,6 +3482,32 @@ export const IDL: Jupiter = {
 					{
 						name: "percent",
 						type: "u8",
+					},
+					{
+						name: "inputIndex",
+						type: "u8",
+					},
+					{
+						name: "outputIndex",
+						type: "u8",
+					},
+				],
+			},
+		},
+		{
+			name: "RoutePlanStepV2",
+			type: {
+				kind: "struct",
+				fields: [
+					{
+						name: "swap",
+						type: {
+							defined: "Swap",
+						},
+					},
+					{
+						name: "bps",
+						type: "u16",
 					},
 					{
 						name: "inputIndex",
@@ -3217,6 +4084,35 @@ export const IDL: Jupiter = {
 					{ name: "PumpWrappedSellV3" },
 					{ name: "PumpSwapBuyV3" },
 					{ name: "PumpSwapSellV3" },
+					{ name: "JupiterLendDeposit" },
+					{ name: "JupiterLendRedeem" },
+					{
+						name: "DefiTuna",
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+							{
+								name: "remainingAccountsInfo",
+								type: {
+									option: {
+										defined: "RemainingAccountsInfo",
+									},
+								},
+							},
+						],
+					},
+					{
+						name: "AlphaQ",
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
+					},
+					{ name: "RaydiumV2" },
 				],
 			},
 		},
@@ -3250,6 +4146,30 @@ export const IDL: Jupiter = {
 								defined: "RemainingAccountsSlice",
 							},
 						},
+					},
+				],
+			},
+		},
+		{
+			name: "SwapEventV2",
+			type: {
+				kind: "struct",
+				fields: [
+					{
+						name: "inputMint",
+						type: "publicKey",
+					},
+					{
+						name: "inputAmount",
+						type: "u64",
+					},
+					{
+						name: "outputMint",
+						type: "publicKey",
+					},
+					{
+						name: "outputAmount",
+						type: "u64",
 					},
 				],
 			},
@@ -3337,6 +4257,20 @@ export const IDL: Jupiter = {
 				{
 					name: "amount",
 					type: "u64",
+					index: false,
+				},
+			],
+		},
+		{
+			name: "SwapsEvent",
+			fields: [
+				{
+					name: "swapEvents",
+					type: {
+						vec: {
+							defined: "SwapEventV2",
+						},
+					},
 					index: false,
 				},
 			],
