@@ -1906,7 +1906,60 @@ export type Jupiter = {
 							}
 						];
 					},
-					{ name: "RaydiumV2" }
+					{ name: "RaydiumV2" },
+					{
+						name: "SarosDlmm";
+						fields: [
+							{
+								name: "swapForY";
+								type: "bool";
+							}
+						];
+					},
+					{
+						name: "Futarchy";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							}
+						];
+					},
+					{ name: "MeteoraDammV2WithRemainingAccounts" }
+				];
+			};
+		},
+		{
+			name: "DefiTunaAccountsType";
+			type: {
+				kind: "enum";
+				variants: [
+					{
+						name: "TransferHookA";
+					},
+					{
+						name: "TransferHookB";
+					},
+					{
+						name: "TransferHookInput";
+					},
+					{
+						name: "TransferHookIntermediate";
+					},
+					{
+						name: "TransferHookOutput";
+					},
+					{
+						name: "SupplementalTickArrays";
+					},
+					{
+						name: "SupplementalTickArraysOne";
+					},
+					{
+						name: "SupplementalTickArraysTwo";
+					}
 				];
 			};
 		},
@@ -2200,6 +2253,11 @@ export type Jupiter = {
 			code: 6025;
 			name: "InvalidTokenAccount";
 			msg: "Invalid token account";
+		},
+		{
+			code: 6026;
+			name: "BondingCurveAlreadyCompleted";
+			msg: "Bonding curve already completed";
 		}
 	];
 };
@@ -4113,6 +4171,59 @@ export const IDL: Jupiter = {
 						],
 					},
 					{ name: "RaydiumV2" },
+					{
+						name: "SarosDlmm",
+						fields: [
+							{
+								name: "swapForY",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "Futarchy",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
+					{ name: "MeteoraDammV2WithRemainingAccounts" },
+				],
+			},
+		},
+		{
+			name: "DefiTunaAccountsType",
+			type: {
+				kind: "enum",
+				variants: [
+					{
+						name: "TransferHookA",
+					},
+					{
+						name: "TransferHookB",
+					},
+					{
+						name: "TransferHookInput",
+					},
+					{
+						name: "TransferHookIntermediate",
+					},
+					{
+						name: "TransferHookOutput",
+					},
+					{
+						name: "SupplementalTickArrays",
+					},
+					{
+						name: "SupplementalTickArraysOne",
+					},
+					{
+						name: "SupplementalTickArraysTwo",
+					},
 				],
 			},
 		},
@@ -4406,6 +4517,11 @@ export const IDL: Jupiter = {
 			code: 6025,
 			name: "InvalidTokenAccount",
 			msg: "Invalid token account",
+		},
+		{
+			code: 6026,
+			name: "BondingCurveAlreadyCompleted",
+			msg: "Bonding curve already completed",
 		},
 	],
 };
