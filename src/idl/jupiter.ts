@@ -1684,10 +1684,10 @@ export type Jupiter = {
 						name: "OneIntro";
 					},
 					{
-						name: "PumpdotfunWrappedBuy";
+						name: "PumpWrappedBuy";
 					},
 					{
-						name: "PumpdotfunWrappedSell";
+						name: "PumpWrappedSell";
 					},
 					{
 						name: "PerpsV2";
@@ -1789,10 +1789,10 @@ export type Jupiter = {
 						];
 					},
 					{
-						name: "PumpdotfunAmmBuy";
+						name: "PumpSwapBuy";
 					},
 					{
-						name: "PumpdotfunAmmSell";
+						name: "PumpSwapSell";
 					},
 					{
 						name: "Gamma";
@@ -1927,7 +1927,66 @@ export type Jupiter = {
 							}
 						];
 					},
-					{ name: "MeteoraDammV2WithRemainingAccounts" }
+					{ name: "MeteoraDammV2WithRemainingAccounts" },
+					{ name: "Obsidian" },
+					{
+						name: "WhaleStreet";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							}
+						];
+					},
+					{
+						name: "DynamicV1";
+						fields: [
+							{
+								name: "candidateSwaps";
+								type: {
+									vec: {
+										defined: "CandidateSwap";
+									};
+								};
+							}
+						];
+					},
+					{ name: "PumpWrappedBuyV4" },
+					{ name: "PumpWrappedSellV4" }
+				];
+			};
+		},
+		{
+			name: "CandidateSwap";
+			type: {
+				kind: "enum";
+				variants: [
+					{
+						name: "HumidiFi";
+						fields: [
+							{
+								name: "swapId";
+								type: "u64";
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							}
+						];
+					},
+					{
+						name: "TesseraV";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							}
+						];
+					}
 				];
 			};
 		},
@@ -2055,6 +2114,54 @@ export type Jupiter = {
 					}
 				];
 			};
+		},
+		{
+			name: "BestSwapOutAmountViolation";
+			type: {
+				kind: "struct";
+				fields: [
+					{
+						name: "expectedOutAmount";
+						type: "u64";
+					},
+					{
+						name: "outAmount";
+						type: "u64";
+					}
+				];
+			};
+		},
+		{
+			name: "CandidateSwapResult";
+			type: {
+				kind: "enum";
+				variants: [
+					{
+						name: "OutAmount";
+						fields: ["u64"];
+					},
+					{
+						name: "ProgramError";
+						fields: ["u64"];
+					}
+				];
+			};
+		},
+		{
+			name: "CandidateSwapResults";
+			type: {
+				kind: "struct";
+				fields: [
+					{
+						name: "results";
+						type: {
+							vec: {
+								defined: "CandidateSwapResult";
+							};
+						};
+					}
+				];
+			};
 		}
 	];
 	events: [
@@ -2118,6 +2225,35 @@ export type Jupiter = {
 							defined: "SwapEventV2";
 						};
 					};
+					index: false;
+				}
+			];
+		},
+		{
+			name: "CandidateSwapResults";
+			fields: [
+				{
+					name: "results";
+					type: {
+						vec: {
+							defined: "CandidateSwapResult";
+						};
+					};
+					index: false;
+				}
+			];
+		},
+		{
+			name: "BestSwapOutAmountViolation";
+			fields: [
+				{
+					name: "expectedOutAmount";
+					type: "u64";
+					index: false;
+				},
+				{
+					name: "outAmount";
+					type: "u64";
 					index: false;
 				}
 			];
@@ -3948,10 +4084,10 @@ export const IDL: Jupiter = {
 						name: "OneIntro",
 					},
 					{
-						name: "PumpdotfunWrappedBuy",
+						name: "PumpWrappedBuy",
 					},
 					{
-						name: "PumpdotfunWrappedSell",
+						name: "PumpWrappedSell",
 					},
 					{
 						name: "PerpsV2",
@@ -4053,10 +4189,10 @@ export const IDL: Jupiter = {
 						],
 					},
 					{
-						name: "PumpdotfunAmmBuy",
+						name: "PumpSwapBuy",
 					},
 					{
-						name: "PumpdotfunAmmSell",
+						name: "PumpSwapSell",
 					},
 					{
 						name: "Gamma",
@@ -4192,6 +4328,65 @@ export const IDL: Jupiter = {
 						],
 					},
 					{ name: "MeteoraDammV2WithRemainingAccounts" },
+					{ name: "Obsidian" },
+					{
+						name: "WhaleStreet",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
+					{
+						name: "DynamicV1",
+						fields: [
+							{
+								name: "candidateSwaps",
+								type: {
+									vec: {
+										defined: "CandidateSwap",
+									},
+								},
+							},
+						],
+					},
+					{ name: "PumpWrappedBuyV4" },
+					{ name: "PumpWrappedSellV4" },
+				],
+			},
+		},
+		{
+			name: "CandidateSwap",
+			type: {
+				kind: "enum",
+				variants: [
+					{
+						name: "HumidiFi",
+						fields: [
+							{
+								name: "swapId",
+								type: "u64",
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "TesseraV",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
 				],
 			},
 		},
@@ -4320,6 +4515,54 @@ export const IDL: Jupiter = {
 				],
 			},
 		},
+		{
+			name: "BestSwapOutAmountViolation",
+			type: {
+				kind: "struct",
+				fields: [
+					{
+						name: "expectedOutAmount",
+						type: "u64",
+					},
+					{
+						name: "outAmount",
+						type: "u64",
+					},
+				],
+			},
+		},
+		{
+			name: "CandidateSwapResult",
+			type: {
+				kind: "enum",
+				variants: [
+					{
+						name: "OutAmount",
+						fields: ["u64"],
+					},
+					{
+						name: "ProgramError",
+						fields: ["u64"],
+					},
+				],
+			},
+		},
+		{
+			name: "CandidateSwapResults",
+			type: {
+				kind: "struct",
+				fields: [
+					{
+						name: "results",
+						type: {
+							vec: {
+								defined: "CandidateSwapResult",
+							},
+						},
+					},
+				],
+			},
+		},
 	],
 	events: [
 		{
@@ -4382,6 +4625,35 @@ export const IDL: Jupiter = {
 							defined: "SwapEventV2",
 						},
 					},
+					index: false,
+				},
+			],
+		},
+		{
+			name: "CandidateSwapResults",
+			fields: [
+				{
+					name: "results",
+					type: {
+						vec: {
+							defined: "CandidateSwapResult",
+						},
+					},
+					index: false,
+				},
+			],
+		},
+		{
+			name: "BestSwapOutAmountViolation",
+			fields: [
+				{
+					name: "expectedOutAmount",
+					type: "u64",
+					index: false,
+				},
+				{
+					name: "outAmount",
+					type: "u64",
 					index: false,
 				},
 			],
