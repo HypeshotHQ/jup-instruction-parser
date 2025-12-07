@@ -1954,7 +1954,29 @@ export type Jupiter = {
 						];
 					},
 					{ name: "PumpWrappedBuyV4" },
-					{ name: "PumpWrappedSellV4" }
+					{ name: "PumpWrappedSellV4" },
+					{ name: "CarrotIssue" },
+					{ name: "CarrotRedeem" },
+					{
+						name: "Manifest";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							}
+						];
+					},
+					{
+						name: "BisonFi";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							}
+						];
+					}
 				];
 			};
 		},
@@ -4355,6 +4377,21 @@ export const IDL: Jupiter = {
 					},
 					{ name: "PumpWrappedBuyV4" },
 					{ name: "PumpWrappedSellV4" },
+					{ name: "CarrotIssue" },
+					{ name: "CarrotRedeem" },
+					{
+						name: "Manifest",
+						fields: [{ name: "side", type: { defined: "Side" } }],
+					},
+					{
+						name: "BisonFi",
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
+					},
 				],
 			},
 		},
