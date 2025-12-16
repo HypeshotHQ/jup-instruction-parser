@@ -1976,6 +1976,19 @@ export type Jupiter = {
 								type: "bool";
 							}
 						];
+					},
+					{
+						name: "HumidiFiV2";
+						fields: [
+							{
+								name: "swapId";
+								type: "u64";
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							}
+						];
 					}
 				];
 			};
@@ -2006,6 +2019,19 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
+							}
+						];
+					},
+					{
+						name: "HumidiFiV2";
+						fields: [
+							{
+								name: "swapId";
+								type: "u64";
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
 							}
 						];
 					}
@@ -4392,6 +4418,19 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{
+						name: "HumidiFiV2",
+						fields: [
+							{
+								name: "swapId",
+								type: "u64",
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
+					},
 				],
 			},
 		},
@@ -4421,6 +4460,19 @@ export const IDL: Jupiter = {
 								type: {
 									defined: "Side",
 								},
+							},
+						],
+					},
+					{
+						name: "HumidiFiV2",
+						fields: [
+							{
+								name: "swapId",
+								type: "u64",
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
 							},
 						],
 					},
