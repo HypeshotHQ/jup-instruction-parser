@@ -1950,6 +1950,12 @@ export type Jupiter = {
 										defined: "CandidateSwap";
 									};
 								};
+							},
+							{
+								name: "bestPosition";
+								type: {
+									option: "u8";
+								};
 							}
 						];
 					},
@@ -1989,7 +1995,65 @@ export type Jupiter = {
 								type: "bool";
 							}
 						];
-					}
+					},
+					{
+						name: "PerenaStar";
+						fields: [
+							{
+								name: "isMint";
+								type: "bool";
+							}
+						];
+					},
+					{
+						name: "JupiterRfqV2";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+							{
+								name: "fillData";
+								type: "bytes";
+							}
+						];
+					},
+					{
+						name: "GoonFiV2";
+						fields: [
+							{
+								name: "isBid";
+								type: "bool";
+							}
+						];
+					},
+					{
+						name: "Scorch";
+						fields: [
+							{
+								name: "swapId";
+								type: "u128";
+							}
+						];
+					},
+					{
+						name: "VaultLiquidUnstake";
+						fields: [
+							{
+								name: "lstAmounts";
+								type: {
+									array: ["u64", 5];
+								};
+							},
+							{
+								name: "seed";
+								type: "u64";
+							}
+						];
+					},
+					{ name: "XOrca" }
 				];
 			};
 		},
@@ -4399,6 +4463,12 @@ export const IDL: Jupiter = {
 									},
 								},
 							},
+							{
+								name: "bestPosition",
+								type: {
+									option: "u8",
+								},
+							},
 						],
 					},
 					{ name: "PumpWrappedBuyV4" },
@@ -4431,6 +4501,64 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{
+						name: "PerenaStar",
+						fields: [
+							{
+								name: "isMint",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "JupiterRfqV2",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+							{
+								name: "fillData",
+								type: "bytes",
+							},
+						],
+					},
+					{
+						name: "GoonFiV2",
+						fields: [
+							{
+								name: "isBid",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "Scorch",
+						fields: [
+							{
+								name: "swapId",
+								type: "u128",
+							},
+						],
+					},
+					{
+						name: "VaultLiquidUnstake",
+						fields: [
+							{
+								name: "lstAmounts",
+								type: {
+									array: ["u64", 5],
+								},
+							},
+							{
+								name: "seed",
+								type: "u64",
+							},
+						],
+					},
+					{ name: "XOrca" },
 				],
 			},
 		},
