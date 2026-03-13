@@ -52,7 +52,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -78,7 +78,7 @@ export type Jupiter = {
 				{
 					name: "platformFeeBps";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -136,7 +136,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -158,14 +158,14 @@ export type Jupiter = {
 				{
 					name: "platformFeeBps";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
 		{
 			name: "sharedAccountsRoute";
 			docs: [
-				"Route by using program owned token accounts and open orders accounts."
+				"Route by using program owned token accounts and open orders accounts.",
 			];
 			accounts: [
 				{
@@ -234,7 +234,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -264,7 +264,7 @@ export type Jupiter = {
 				{
 					name: "platformFeeBps";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -342,7 +342,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -368,7 +368,7 @@ export type Jupiter = {
 				{
 					name: "platformFeeBps";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -432,7 +432,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -458,14 +458,14 @@ export type Jupiter = {
 				{
 					name: "platformFeeBps";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
 		{
 			name: "sharedAccountsExactOutRoute";
 			docs: [
-				"Route by using program owned token accounts and open orders accounts."
+				"Route by using program owned token accounts and open orders accounts.",
 			];
 			accounts: [
 				{
@@ -534,7 +534,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -564,7 +564,7 @@ export type Jupiter = {
 				{
 					name: "platformFeeBps";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -580,7 +580,7 @@ export type Jupiter = {
 					name: "tokenAccount";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [];
 		},
@@ -616,7 +616,7 @@ export type Jupiter = {
 					name: "market";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [];
 		},
@@ -647,13 +647,13 @@ export type Jupiter = {
 					name: "systemProgram";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
 					name: "bump";
 					type: "u8";
-				}
+				},
 			];
 		},
 		{
@@ -693,13 +693,13 @@ export type Jupiter = {
 					name: "market";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
 					name: "id";
 					type: "u8";
-				}
+				},
 			];
 		},
 		{
@@ -719,13 +719,13 @@ export type Jupiter = {
 					name: "systemProgram";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
 					name: "id";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -776,13 +776,13 @@ export type Jupiter = {
 					name: "systemProgram";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
 					name: "id";
 					type: "u8";
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -803,7 +803,7 @@ export type Jupiter = {
 					name: "systemProgram";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [];
 		},
@@ -839,7 +839,7 @@ export type Jupiter = {
 					name: "tokenProgram";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -849,7 +849,7 @@ export type Jupiter = {
 				{
 					name: "burnAll";
 					type: "bool";
-				}
+				},
 			];
 		},
 		{
@@ -905,7 +905,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -935,7 +935,7 @@ export type Jupiter = {
 							defined: "RoutePlanStepV2";
 						};
 					};
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -992,7 +992,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -1022,7 +1022,7 @@ export type Jupiter = {
 							defined: "RoutePlanStepV2";
 						};
 					};
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -1088,7 +1088,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -1122,7 +1122,7 @@ export type Jupiter = {
 							defined: "RoutePlanStepV2";
 						};
 					};
-				}
+				},
 			];
 			returns: "u64";
 		},
@@ -1188,7 +1188,7 @@ export type Jupiter = {
 					name: "program";
 					isMut: false;
 					isSigner: false;
-				}
+				},
 			];
 			args: [
 				{
@@ -1222,10 +1222,10 @@ export type Jupiter = {
 							defined: "RoutePlanStepV2";
 						};
 					};
-				}
+				},
 			];
 			returns: "u64";
-		}
+		},
 	];
 	accounts: [
 		{
@@ -1240,10 +1240,10 @@ export type Jupiter = {
 					{
 						name: "amount";
 						type: "u64";
-					}
+					},
 				];
 			};
-		}
+		},
 	];
 	types: [
 		{
@@ -1258,7 +1258,7 @@ export type Jupiter = {
 					{
 						name: "slippageBps";
 						type: "u16";
-					}
+					},
 				];
 			};
 		},
@@ -1284,7 +1284,7 @@ export type Jupiter = {
 					{
 						name: "outputIndex";
 						type: "u8";
-					}
+					},
 				];
 			};
 		},
@@ -1310,7 +1310,7 @@ export type Jupiter = {
 					{
 						name: "outputIndex";
 						type: "u8";
-					}
+					},
 				];
 			};
 		},
@@ -1325,7 +1325,7 @@ export type Jupiter = {
 							{
 								name: "mint";
 								type: "publicKey";
-							}
+							},
 						];
 					},
 					{
@@ -1334,12 +1334,12 @@ export type Jupiter = {
 							{
 								name: "mint";
 								type: "publicKey";
-							}
+							},
 						];
 					},
 					{
 						name: "Zero";
-					}
+					},
 				];
 			};
 		},
@@ -1353,7 +1353,7 @@ export type Jupiter = {
 					},
 					{
 						name: "Ask";
-					}
+					},
 				];
 			};
 		},
@@ -1392,7 +1392,7 @@ export type Jupiter = {
 							{
 								name: "aToB";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1412,7 +1412,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1429,7 +1429,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1440,7 +1440,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1449,7 +1449,7 @@ export type Jupiter = {
 							{
 								name: "aToB";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1458,7 +1458,7 @@ export type Jupiter = {
 							{
 								name: "xToY";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1473,7 +1473,7 @@ export type Jupiter = {
 							{
 								name: "stable";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1485,7 +1485,7 @@ export type Jupiter = {
 							{
 								name: "xToY";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1496,7 +1496,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1513,7 +1513,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1524,7 +1524,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1537,7 +1537,7 @@ export type Jupiter = {
 							{
 								name: "toTokenId";
 								type: "u64";
-							}
+							},
 						];
 					},
 					{
@@ -1555,7 +1555,7 @@ export type Jupiter = {
 							{
 								name: "bridgeStakeSeed";
 								type: "u32";
-							}
+							},
 						];
 					},
 					{
@@ -1581,7 +1581,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1593,7 +1593,7 @@ export type Jupiter = {
 							{
 								name: "bridgeStakeSeed";
 								type: "u32";
-							}
+							},
 						];
 					},
 					{
@@ -1610,7 +1610,7 @@ export type Jupiter = {
 							{
 								name: "quantityIsCollateral";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1631,7 +1631,7 @@ export type Jupiter = {
 							{
 								name: "dstLstIndex";
 								type: "u32";
-							}
+							},
 						];
 					},
 					{
@@ -1644,7 +1644,7 @@ export type Jupiter = {
 							{
 								name: "lstIndex";
 								type: "u32";
-							}
+							},
 						];
 					},
 					{
@@ -1657,7 +1657,7 @@ export type Jupiter = {
 							{
 								name: "lstIndex";
 								type: "u32";
-							}
+							},
 						];
 					},
 					{
@@ -1677,7 +1677,7 @@ export type Jupiter = {
 										defined: "RemainingAccountsInfo";
 									};
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1716,7 +1716,7 @@ export type Jupiter = {
 							{
 								name: "xToY";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1728,7 +1728,7 @@ export type Jupiter = {
 							{
 								name: "isY";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1737,7 +1737,7 @@ export type Jupiter = {
 							{
 								name: "isQuoteToBase";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1754,7 +1754,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1785,7 +1785,7 @@ export type Jupiter = {
 							{
 								name: "outIndex";
 								type: "u8";
-							}
+							},
 						];
 					},
 					{
@@ -1803,7 +1803,7 @@ export type Jupiter = {
 							{
 								name: "remainingAccountsInfo";
 								type: { defined: "RemainingAccountsInfo" };
-							}
+							},
 						];
 					},
 					{ name: "Woofi" },
@@ -1829,14 +1829,14 @@ export type Jupiter = {
 						name: "GoonFi";
 						fields: [
 							{ name: "isBid"; type: "bool" },
-							{ name: "blacklistBump"; type: "u8" }
+							{ name: "blacklistBump"; type: "u8" },
 						];
 					},
 					{
 						name: "HumidiFi";
 						fields: [
 							{ name: "swapId"; type: "u64" },
-							{ name: "isBaseToQuote"; type: "bool" }
+							{ name: "isBaseToQuote"; type: "bool" },
 						];
 					},
 					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" },
@@ -1848,7 +1848,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{ name: "PumpWrappedBuyV2" },
@@ -1861,7 +1861,7 @@ export type Jupiter = {
 							{
 								name: "aToB";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1870,7 +1870,7 @@ export type Jupiter = {
 							{
 								name: "isQuoteToBase";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{ name: "Aquifer" },
@@ -1894,7 +1894,7 @@ export type Jupiter = {
 										defined: "RemainingAccountsInfo";
 									};
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1903,7 +1903,7 @@ export type Jupiter = {
 							{
 								name: "aToB";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{ name: "RaydiumV2" },
@@ -1913,7 +1913,7 @@ export type Jupiter = {
 							{
 								name: "swapForY";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1924,7 +1924,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{ name: "MeteoraDammV2WithRemainingAccounts" },
@@ -1937,7 +1937,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1956,7 +1956,7 @@ export type Jupiter = {
 								type: {
 									option: "u8";
 								};
-							}
+							},
 						];
 					},
 					{ name: "PumpWrappedBuyV4" },
@@ -1971,7 +1971,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -1980,7 +1980,7 @@ export type Jupiter = {
 							{
 								name: "aToB";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -1993,7 +1993,7 @@ export type Jupiter = {
 							{
 								name: "isBaseToQuote";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -2002,7 +2002,7 @@ export type Jupiter = {
 							{
 								name: "isMint";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -2017,7 +2017,7 @@ export type Jupiter = {
 							{
 								name: "fillData";
 								type: "bytes";
-							}
+							},
 						];
 					},
 					{
@@ -2026,7 +2026,7 @@ export type Jupiter = {
 							{
 								name: "isBid";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -2035,7 +2035,7 @@ export type Jupiter = {
 							{
 								name: "swapId";
 								type: "u128";
-							}
+							},
 						];
 					},
 					{
@@ -2050,10 +2050,63 @@ export type Jupiter = {
 							{
 								name: "seed";
 								type: "u64";
-							}
+							},
 						];
 					},
-					{ name: "XOrca" }
+					{ name: "XOrca" },
+					{
+						name: "Quantum";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+						];
+					},
+					{
+						name: "WhaleStreetV2";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+							{
+								name: "authAmountIn";
+								type: "u64";
+							},
+							{
+								name: "auth";
+								type: "u64";
+							},
+						];
+					},
+					{ name: "Unknown127" },
+					{ name: "Unknown128" },
+					{ name: "Unknown129" },
+					{ name: "Unknown130" },
+					{ name: "Unknown131" },
+					{ name: "Unknown132" },
+					{ name: "Unknown133" },
+					{ name: "Unknown134" },
+					{ name: "Unknown135" },
+					{ name: "Unknown136" },
+					{ name: "Unknown137" },
+					{ name: "Unknown138" },
+					{ name: "Unknown139" },
+					{ name: "Unknown140" },
+					{
+						name: "Unknown141";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+						];
+					},
 				];
 			};
 		},
@@ -2072,7 +2125,7 @@ export type Jupiter = {
 							{
 								name: "isBaseToQuote";
 								type: "bool";
-							}
+							},
 						];
 					},
 					{
@@ -2083,7 +2136,7 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
-							}
+							},
 						];
 					},
 					{
@@ -2096,9 +2149,9 @@ export type Jupiter = {
 							{
 								name: "isBaseToQuote";
 								type: "bool";
-							}
+							},
 						];
-					}
+					},
 				];
 			};
 		},
@@ -2130,7 +2183,7 @@ export type Jupiter = {
 					},
 					{
 						name: "SupplementalTickArraysTwo";
-					}
+					},
 				];
 			};
 		},
@@ -2148,7 +2201,7 @@ export type Jupiter = {
 					{
 						name: "length";
 						type: "u8";
-					}
+					},
 				];
 			};
 		},
@@ -2164,7 +2217,7 @@ export type Jupiter = {
 								defined: "RemainingAccountsSlice";
 							};
 						};
-					}
+					},
 				];
 			};
 		},
@@ -2188,7 +2241,7 @@ export type Jupiter = {
 					{
 						name: "outputAmount";
 						type: "u64";
-					}
+					},
 				];
 			};
 		},
@@ -2223,7 +2276,7 @@ export type Jupiter = {
 					},
 					{
 						name: "SupplementalTickArraysTwo";
-					}
+					},
 				];
 			};
 		},
@@ -2239,7 +2292,7 @@ export type Jupiter = {
 					{
 						name: "outAmount";
 						type: "u64";
-					}
+					},
 				];
 			};
 		},
@@ -2255,7 +2308,7 @@ export type Jupiter = {
 					{
 						name: "ProgramError";
 						fields: ["u64"];
-					}
+					},
 				];
 			};
 		},
@@ -2271,10 +2324,10 @@ export type Jupiter = {
 								defined: "CandidateSwapResult";
 							};
 						};
-					}
+					},
 				];
 			};
-		}
+		},
 	];
 	events: [
 		{
@@ -2304,7 +2357,7 @@ export type Jupiter = {
 					name: "outputAmount";
 					type: "u64";
 					index: false;
-				}
+				},
 			];
 		},
 		{
@@ -2324,7 +2377,7 @@ export type Jupiter = {
 					name: "amount";
 					type: "u64";
 					index: false;
-				}
+				},
 			];
 		},
 		{
@@ -2338,7 +2391,7 @@ export type Jupiter = {
 						};
 					};
 					index: false;
-				}
+				},
 			];
 		},
 		{
@@ -2352,7 +2405,7 @@ export type Jupiter = {
 						};
 					};
 					index: false;
-				}
+				},
 			];
 		},
 		{
@@ -2367,9 +2420,9 @@ export type Jupiter = {
 					name: "outAmount";
 					type: "u64";
 					index: false;
-				}
+				},
 			];
-		}
+		},
 	];
 	errors: [
 		{
@@ -2506,7 +2559,7 @@ export type Jupiter = {
 			code: 6026;
 			name: "BondingCurveAlreadyCompleted";
 			msg: "Bonding curve already completed";
-		}
+		},
 	];
 };
 
@@ -4559,6 +4612,59 @@ export const IDL: Jupiter = {
 						],
 					},
 					{ name: "XOrca" },
+					{
+						name: "Quantum",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
+					{
+						name: "WhaleStreetV2",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+							{
+								name: "authAmountIn",
+								type: "u64",
+							},
+							{
+								name: "auth",
+								type: "u64",
+							},
+						],
+					},
+					{ name: "Unknown127" },
+					{ name: "Unknown128" },
+					{ name: "Unknown129" },
+					{ name: "Unknown130" },
+					{ name: "Unknown131" },
+					{ name: "Unknown132" },
+					{ name: "Unknown133" },
+					{ name: "Unknown134" },
+					{ name: "Unknown135" },
+					{ name: "Unknown136" },
+					{ name: "Unknown137" },
+					{ name: "Unknown138" },
+					{ name: "Unknown139" },
+					{ name: "Unknown140" },
+					{
+						name: "Unknown141",
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
+					},
 				],
 			},
 		},
