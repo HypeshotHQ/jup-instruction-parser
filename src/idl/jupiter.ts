@@ -2084,29 +2084,108 @@ export type Jupiter = {
 							},
 						];
 					},
-					{ name: "Unknown127" },
-					{ name: "Unknown128" },
-					{ name: "Unknown129" },
-					{ name: "Unknown130" },
-					{ name: "Unknown131" },
-					{ name: "Unknown132" },
-					{ name: "Unknown133" },
-					{ name: "Unknown134" },
-					{ name: "Unknown135" },
-					{ name: "Unknown136" },
-					{ name: "Unknown137" },
-					{ name: "Unknown138" },
-					{ name: "Unknown139" },
-					{ name: "Unknown140" },
 					{
-						name: "Unknown141";
+						name: "Riptide";
+						fields: [{ name: "amountIsTokenA"; type: "bool" }];
+					},
+					{ name: "RunnerRodeo" },
+					{
+						name: "TaurusFi";
+						fields: [{ name: "isBaseIn"; type: "bool" }];
+					},
+					{ name: "Omnipair" },
+					{ name: "MSwap" },
+					{
+						name: "Hylo";
+						fields: [{ name: "swapType"; type: { defined: "HyloSwapType" } }];
+					},
+					{ name: "VoltrDeposit" },
+					{ name: "VoltrWithdraw" },
+					{
+						name: "SanctumSV2";
 						fields: [
-							{
-								name: "aToB";
-								type: "bool";
-							},
+							{ name: "srcLstValueCalcAccs"; type: "u8" },
+							{ name: "dstLstValueCalcAccs"; type: "u8" },
+							{ name: "srcLstIndex"; type: "u32" },
+							{ name: "dstLstIndex"; type: "u32" },
 						];
 					},
+					{
+						name: "LemmingsFi";
+						fields: [{ name: "isBaseIn"; type: "bool" }];
+					},
+					{ name: "ScaleVmmBuy" },
+					{ name: "ScaleVmmSell" },
+					{ name: "ScaleAmmBuy" },
+					{ name: "ScaleAmmSell" },
+					{
+						name: "BisonFiV2";
+						fields: [{ name: "aToB"; type: "bool" }];
+					},
+					{ name: "Trends" },
+					{ name: "HumaDeposit" },
+					{ name: "HumaInstantWithdraw" },
+					{
+						name: "Kipseli";
+						fields: [{ name: "isBaseToQuote"; type: "bool" }];
+					},
+					{
+						name: "DynamicV2";
+						fields: [
+							{
+								name: "candidateSwaps";
+								type: {
+									vec: {
+										defined: "CandidateSwapWithBps";
+									};
+								};
+							},
+							{ name: "maxSplitQuoteCalls"; type: "u8" },
+							{ name: "maxSplitCandidates"; type: "u8" },
+						];
+					},
+					{ name: "PumpSwapBuyV3WithCashbackClaim" },
+					{ name: "PumpSwapSellV3WithCashbackClaim" },
+					{ name: "PumpWrappedBuyV4WithCashbackClaim" },
+					{ name: "PumpWrappedSellV4WithCashbackClaim" },
+					{
+						name: "GoonFiV3";
+						fields: [{ name: "isBid"; type: "bool" }];
+					},
+				];
+			};
+		},
+		{
+			name: "CandidateSwapWithBps";
+			type: {
+				kind: "struct";
+				fields: [
+					{
+						name: "candidateSwap";
+						type: {
+							defined: "CandidateSwap";
+						};
+					},
+					{
+						name: "bps";
+						type: "u32";
+					},
+				];
+			};
+		},
+		{
+			name: "HyloSwapType";
+			type: {
+				kind: "enum";
+				variants: [
+					{ name: "MintStable" },
+					{ name: "RedeemStable" },
+					{ name: "MintLever" },
+					{ name: "RedeemLever" },
+					{ name: "SwapStableToLever" },
+					{ name: "SwapLeverToStable" },
+					{ name: "StabilityPoolDeposit" },
+					{ name: "StabilityPoolWithdraw" },
 				];
 			};
 		},
@@ -2118,37 +2197,51 @@ export type Jupiter = {
 					{
 						name: "HumidiFi";
 						fields: [
-							{
-								name: "swapId";
-								type: "u64";
-							},
-							{
-								name: "isBaseToQuote";
-								type: "bool";
-							},
+							{ name: "swapId"; type: "u64" },
+							{ name: "isBaseToQuote"; type: "bool" },
 						];
 					},
 					{
 						name: "TesseraV";
-						fields: [
-							{
-								name: "side";
-								type: {
-									defined: "Side";
-								};
-							},
-						];
+						fields: [{ name: "side"; type: { defined: "Side" } }];
 					},
 					{
 						name: "HumidiFiV2";
 						fields: [
+							{ name: "swapId"; type: "u64" },
+							{ name: "isBaseToQuote"; type: "bool" },
+						];
+					},
+					{ name: "RaydiumV2" },
+					{ name: "RaydiumClmm" },
+					{
+						name: "Whirlpool";
+						fields: [{ name: "aToB"; type: "bool" }];
+					},
+					{ name: "ZeroFi" },
+					{
+						name: "BisonFiV2";
+						fields: [{ name: "aToB"; type: "bool" }];
+					},
+					{
+						name: "GoonFiV2";
+						fields: [{ name: "isBid"; type: "bool" }];
+					},
+					{
+						name: "GoonFiV3";
+						fields: [{ name: "isBid"; type: "bool" }];
+					},
+					{
+						name: "WhirlpoolV2";
+						fields: [
+							{ name: "aToB"; type: "bool" },
 							{
-								name: "swapId";
-								type: "u64";
-							},
-							{
-								name: "isBaseToQuote";
-								type: "bool";
+								name: "remainingAccountsInfo";
+								type: {
+									option: {
+										defined: "RemainingAccountsInfo";
+									};
+								};
 							},
 						];
 					},
@@ -2328,6 +2421,17 @@ export type Jupiter = {
 				];
 			};
 		},
+		{
+			name: "CandidateSwapQuoteError";
+			type: {
+				kind: "struct";
+				fields: [
+					{ name: "candidateIndex"; type: "u64" },
+					{ name: "inAmount"; type: "u64" },
+					{ name: "errorCode"; type: "u64" },
+				];
+			};
+		},
 	];
 	events: [
 		{
@@ -2418,6 +2522,26 @@ export type Jupiter = {
 				},
 				{
 					name: "outAmount";
+					type: "u64";
+					index: false;
+				},
+			];
+		},
+		{
+			name: "CandidateSwapQuoteError";
+			fields: [
+				{
+					name: "candidateIndex";
+					type: "u64";
+					index: false;
+				},
+				{
+					name: "inAmount";
+					type: "u64";
+					index: false;
+				},
+				{
+					name: "errorCode";
 					type: "u64";
 					index: false;
 				},
@@ -4642,29 +4766,108 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{ name: "Unknown127" },
-					{ name: "Unknown128" },
-					{ name: "Unknown129" },
-					{ name: "Unknown130" },
-					{ name: "Unknown131" },
-					{ name: "Unknown132" },
-					{ name: "Unknown133" },
-					{ name: "Unknown134" },
-					{ name: "Unknown135" },
-					{ name: "Unknown136" },
-					{ name: "Unknown137" },
-					{ name: "Unknown138" },
-					{ name: "Unknown139" },
-					{ name: "Unknown140" },
 					{
-						name: "Unknown141",
+						name: "Riptide",
+						fields: [{ name: "amountIsTokenA", type: "bool" }],
+					},
+					{ name: "RunnerRodeo" },
+					{
+						name: "TaurusFi",
+						fields: [{ name: "isBaseIn", type: "bool" }],
+					},
+					{ name: "Omnipair" },
+					{ name: "MSwap" },
+					{
+						name: "Hylo",
+						fields: [{ name: "swapType", type: { defined: "HyloSwapType" } }],
+					},
+					{ name: "VoltrDeposit" },
+					{ name: "VoltrWithdraw" },
+					{
+						name: "SanctumSV2",
 						fields: [
-							{
-								name: "aToB",
-								type: "bool",
-							},
+							{ name: "srcLstValueCalcAccs", type: "u8" },
+							{ name: "dstLstValueCalcAccs", type: "u8" },
+							{ name: "srcLstIndex", type: "u32" },
+							{ name: "dstLstIndex", type: "u32" },
 						],
 					},
+					{
+						name: "LemmingsFi",
+						fields: [{ name: "isBaseIn", type: "bool" }],
+					},
+					{ name: "ScaleVmmBuy" },
+					{ name: "ScaleVmmSell" },
+					{ name: "ScaleAmmBuy" },
+					{ name: "ScaleAmmSell" },
+					{
+						name: "BisonFiV2",
+						fields: [{ name: "aToB", type: "bool" }],
+					},
+					{ name: "Trends" },
+					{ name: "HumaDeposit" },
+					{ name: "HumaInstantWithdraw" },
+					{
+						name: "Kipseli",
+						fields: [{ name: "isBaseToQuote", type: "bool" }],
+					},
+					{
+						name: "DynamicV2",
+						fields: [
+							{
+								name: "candidateSwaps",
+								type: {
+									vec: {
+										defined: "CandidateSwapWithBps",
+									},
+								},
+							},
+							{ name: "maxSplitQuoteCalls", type: "u8" },
+							{ name: "maxSplitCandidates", type: "u8" },
+						],
+					},
+					{ name: "PumpSwapBuyV3WithCashbackClaim" },
+					{ name: "PumpSwapSellV3WithCashbackClaim" },
+					{ name: "PumpWrappedBuyV4WithCashbackClaim" },
+					{ name: "PumpWrappedSellV4WithCashbackClaim" },
+					{
+						name: "GoonFiV3",
+						fields: [{ name: "isBid", type: "bool" }],
+					},
+				],
+			},
+		},
+		{
+			name: "CandidateSwapWithBps",
+			type: {
+				kind: "struct",
+				fields: [
+					{
+						name: "candidateSwap",
+						type: {
+							defined: "CandidateSwap",
+						},
+					},
+					{
+						name: "bps",
+						type: "u32",
+					},
+				],
+			},
+		},
+		{
+			name: "HyloSwapType",
+			type: {
+				kind: "enum",
+				variants: [
+					{ name: "MintStable" },
+					{ name: "RedeemStable" },
+					{ name: "MintLever" },
+					{ name: "RedeemLever" },
+					{ name: "SwapStableToLever" },
+					{ name: "SwapLeverToStable" },
+					{ name: "StabilityPoolDeposit" },
+					{ name: "StabilityPoolWithdraw" },
 				],
 			},
 		},
@@ -4676,14 +4879,8 @@ export const IDL: Jupiter = {
 					{
 						name: "HumidiFi",
 						fields: [
-							{
-								name: "swapId",
-								type: "u64",
-							},
-							{
-								name: "isBaseToQuote",
-								type: "bool",
-							},
+							{ name: "swapId", type: "u64" },
+							{ name: "isBaseToQuote", type: "bool" },
 						],
 					},
 					{
@@ -4700,13 +4897,40 @@ export const IDL: Jupiter = {
 					{
 						name: "HumidiFiV2",
 						fields: [
+							{ name: "swapId", type: "u64" },
+							{ name: "isBaseToQuote", type: "bool" },
+						],
+					},
+					{ name: "RaydiumV2" },
+					{ name: "RaydiumClmm" },
+					{
+						name: "Whirlpool",
+						fields: [{ name: "aToB", type: "bool" }],
+					},
+					{ name: "ZeroFi" },
+					{
+						name: "BisonFiV2",
+						fields: [{ name: "aToB", type: "bool" }],
+					},
+					{
+						name: "GoonFiV2",
+						fields: [{ name: "isBid", type: "bool" }],
+					},
+					{
+						name: "GoonFiV3",
+						fields: [{ name: "isBid", type: "bool" }],
+					},
+					{
+						name: "WhirlpoolV2",
+						fields: [
+							{ name: "aToB", type: "bool" },
 							{
-								name: "swapId",
-								type: "u64",
-							},
-							{
-								name: "isBaseToQuote",
-								type: "bool",
+								name: "remainingAccountsInfo",
+								type: {
+									option: {
+										defined: "RemainingAccountsInfo",
+									},
+								},
 							},
 						],
 					},
@@ -4886,6 +5110,17 @@ export const IDL: Jupiter = {
 				],
 			},
 		},
+		{
+			name: "CandidateSwapQuoteError",
+			type: {
+				kind: "struct",
+				fields: [
+					{ name: "candidateIndex", type: "u64" },
+					{ name: "inAmount", type: "u64" },
+					{ name: "errorCode", type: "u64" },
+				],
+			},
+		},
 	],
 	events: [
 		{
@@ -4976,6 +5211,26 @@ export const IDL: Jupiter = {
 				},
 				{
 					name: "outAmount",
+					type: "u64",
+					index: false,
+				},
+			],
+		},
+		{
+			name: "CandidateSwapQuoteError",
+			fields: [
+				{
+					name: "candidateIndex",
+					type: "u64",
+					index: false,
+				},
+				{
+					name: "inAmount",
+					type: "u64",
+					index: false,
+				},
+				{
+					name: "errorCode",
 					type: "u64",
 					index: false,
 				},
