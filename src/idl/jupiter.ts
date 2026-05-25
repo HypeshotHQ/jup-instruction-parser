@@ -2152,6 +2152,15 @@ export type Jupiter = {
 						name: "GoonFiV3";
 						fields: [{ name: "isBid"; type: "bool" }];
 					},
+					{
+						name: "PumpWrappedBuyV5";
+						fields: [{ name: "claimCashback"; type: "bool" }];
+					},
+					{
+						name: "PumpWrappedSellV5";
+						fields: [{ name: "claimCashback"; type: "bool" }];
+					},
+					{ name: "ZeroFiSwapV2" }
 				];
 			};
 		},
@@ -2245,6 +2254,7 @@ export type Jupiter = {
 							},
 						];
 					},
+					{ name: "ZeroFiSwapV2" }
 				];
 			};
 		},
@@ -4834,6 +4844,15 @@ export const IDL: Jupiter = {
 						name: "GoonFiV3",
 						fields: [{ name: "isBid", type: "bool" }],
 					},
+					{
+						name: "PumpWrappedBuyV5",
+						fields: [{ name: "claimCashback", type: "bool" }],
+					},
+					{
+						name: "PumpWrappedSellV5",
+						fields: [{ name: "claimCashback", type: "bool" }],
+					},
+					{ name: "ZeroFiSwapV2" },
 				],
 			},
 		},
@@ -4934,6 +4953,7 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{ name: "ZeroFiSwapV2" },
 				],
 			},
 		},
