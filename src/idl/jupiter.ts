@@ -1358,6 +1358,13 @@ export type Jupiter = {
 			};
 		},
 		{
+			name: "BisonFiPredictSide";
+			type: {
+				kind: "enum";
+				variants: [{ name: "Yes" }, { name: "No" }];
+			};
+		},
+		{
 			name: "Swap";
 			type: {
 				kind: "enum";
@@ -2160,7 +2167,22 @@ export type Jupiter = {
 						name: "PumpWrappedSellV5";
 						fields: [{ name: "claimCashback"; type: "bool" }];
 					},
-					{ name: "ZeroFiSwapV2" }
+					{ name: "ZeroFiSwapV2" },
+					{
+						name: "BisonFiPredict";
+						fields: [
+							{ name: "side"; type: { defined: "BisonFiPredictSide" } },
+							{ name: "isBuy"; type: "bool" },
+						];
+					},
+					{ name: "ByrealDynamicV3" },
+					{
+						name: "Flux";
+						fields: [
+							{ name: "swapId"; type: "u64" },
+							{ name: "baseToQuote"; type: "bool" },
+						];
+					},
 				];
 			};
 		},
@@ -2254,7 +2276,7 @@ export type Jupiter = {
 							},
 						];
 					},
-					{ name: "ZeroFiSwapV2" }
+					{ name: "ZeroFiSwapV2" },
 				];
 			};
 		},
@@ -4057,6 +4079,13 @@ export const IDL: Jupiter = {
 			},
 		},
 		{
+			name: "BisonFiPredictSide",
+			type: {
+				kind: "enum",
+				variants: [{ name: "Yes" }, { name: "No" }],
+			},
+		},
+		{
 			name: "Swap",
 			type: {
 				kind: "enum",
@@ -4853,6 +4882,21 @@ export const IDL: Jupiter = {
 						fields: [{ name: "claimCashback", type: "bool" }],
 					},
 					{ name: "ZeroFiSwapV2" },
+					{
+						name: "BisonFiPredict",
+						fields: [
+							{ name: "side", type: { defined: "BisonFiPredictSide" } },
+							{ name: "isBuy", type: "bool" },
+						],
+					},
+					{ name: "ByrealDynamicV3" },
+					{
+						name: "Flux",
+						fields: [
+							{ name: "swapId", type: "u64" },
+							{ name: "baseToQuote", type: "bool" },
+						],
+					},
 				],
 			},
 		},
