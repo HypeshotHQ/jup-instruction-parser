@@ -2183,6 +2183,31 @@ export type Jupiter = {
 							{ name: "baseToQuote"; type: "bool" },
 						];
 					},
+					{ name: "VaultLiquidSellLst" },
+					{
+						name: "VaultLiquidBuyLst";
+						fields: [{ name: "lstAmount"; type: "u64" }];
+					},
+					{
+						name: "KipseliV2";
+						fields: [{ name: "isBaseToQuote"; type: "bool" }];
+					},
+					{
+						name: "Deriverse";
+						fields: [
+							{ name: "side"; type: { defined: "Side" } },
+							{ name: "instrId"; type: "u32" },
+						];
+					},
+					{
+						name: "Hadron";
+						fields: [{ name: "isX"; type: "bool" }];
+					},
+					{ name: "BinaryFi" },
+					{
+						name: "Metric";
+						fields: [{ name: "zeroForOne"; type: "bool" }];
+					},
 				];
 			};
 		},
@@ -4896,6 +4921,31 @@ export const IDL: Jupiter = {
 							{ name: "swapId", type: "u64" },
 							{ name: "baseToQuote", type: "bool" },
 						],
+					},
+					{ name: "VaultLiquidSellLst" },
+					{
+						name: "VaultLiquidBuyLst",
+						fields: [{ name: "lstAmount", type: "u64" }],
+					},
+					{
+						name: "KipseliV2",
+						fields: [{ name: "isBaseToQuote", type: "bool" }],
+					},
+					{
+						name: "Deriverse",
+						fields: [
+							{ name: "side", type: { defined: "Side" } },
+							{ name: "instrId", type: "u32" },
+						],
+					},
+					{
+						name: "Hadron",
+						fields: [{ name: "isX", type: "bool" }],
+					},
+					{ name: "BinaryFi" },
+					{
+						name: "Metric",
+						fields: [{ name: "zeroForOne", type: "bool" }],
 					},
 				],
 			},
