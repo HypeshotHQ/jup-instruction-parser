@@ -3,6 +3,308 @@ export type Jupiter = {
 	name: "jupiter";
 	instructions: [
 		{
+			name: "claim";
+			accounts: [
+				{
+					name: "wallet";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programAuthority";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "systemProgram";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+			];
+			returns: "u64";
+		},
+		{
+			name: "claimToken";
+			accounts: [
+				{
+					name: "payer";
+					isMut: true;
+					isSigner: true;
+				},
+				{
+					name: "wallet";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "programAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "programTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "mint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "tokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "associatedTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "systemProgram";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+			];
+			returns: "u64";
+		},
+		{
+			name: "closeToken";
+			accounts: [
+				{
+					name: "operator";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "wallet";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "programTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "mint";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "tokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+				{
+					name: "burnAll";
+					type: "bool";
+				},
+			];
+		},
+		{
+			name: "createTokenLedger";
+			accounts: [
+				{
+					name: "tokenLedger";
+					isMut: true;
+					isSigner: true;
+				},
+				{
+					name: "payer";
+					isMut: true;
+					isSigner: true;
+				},
+				{
+					name: "systemProgram";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [];
+		},
+		{
+			name: "createTokenAccount";
+			accounts: [
+				{
+					name: "tokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "user";
+					isMut: true;
+					isSigner: true;
+				},
+				{
+					name: "mint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "tokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "systemProgram";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [
+				{
+					name: "bump";
+					type: "u8";
+				},
+			];
+		},
+		{
+			name: "closeWsolTokenAccount";
+			accounts: [
+				{
+					name: "tokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "user";
+					isMut: true;
+					isSigner: true;
+				},
+				{
+					name: "tokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "systemProgram";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [];
+		},
+		{
+			name: "exactOutRoute";
+			accounts: [
+				{
+					name: "tokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "userTransferAuthority";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "userSourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "userDestinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
+					name: "sourceMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "platformFeeAccount";
+					isMut: true;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
+					name: "token2022Program";
+					isMut: false;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [
+				{
+					name: "routePlan";
+					type: {
+						vec: {
+							defined: "RoutePlanStep";
+						};
+					};
+				},
+				{
+					name: "outAmount";
+					type: "u64";
+				},
+				{
+					name: "quotedInAmount";
+					type: "u64";
+				},
+				{
+					name: "slippageBps";
+					type: "u16";
+				},
+				{
+					name: "platformFeeBps";
+					type: "u8";
+				},
+			];
+			returns: "u64";
+		},
+		{
 			name: "route";
 			docs: ["route_plan Topologically sorted trade DAG"];
 			accounts: [
@@ -149,6 +451,128 @@ export type Jupiter = {
 				},
 				{
 					name: "quotedOutAmount";
+					type: "u64";
+				},
+				{
+					name: "slippageBps";
+					type: "u16";
+				},
+				{
+					name: "platformFeeBps";
+					type: "u8";
+				},
+			];
+			returns: "u64";
+		},
+		{
+			name: "setTokenLedger";
+			accounts: [
+				{
+					name: "tokenLedger";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "tokenAccount";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [];
+		},
+		{
+			name: "sharedAccountsExactOutRoute";
+			docs: [
+				"Route by using program owned token accounts and open orders accounts.",
+			];
+			accounts: [
+				{
+					name: "tokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "programAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "userTransferAuthority";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "sourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programSourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programDestinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "sourceMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "platformFeeAccount";
+					isMut: true;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
+					name: "token2022Program";
+					isMut: false;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+				{
+					name: "routePlan";
+					type: {
+						vec: {
+							defined: "RoutePlanStep";
+						};
+					};
+				},
+				{
+					name: "outAmount";
+					type: "u64";
+				},
+				{
+					name: "quotedInAmount";
 					type: "u64";
 				},
 				{
@@ -373,573 +797,6 @@ export type Jupiter = {
 			returns: "u64";
 		},
 		{
-			name: "exactOutRoute";
-			accounts: [
-				{
-					name: "tokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "userTransferAuthority";
-					isMut: false;
-					isSigner: true;
-				},
-				{
-					name: "userSourceTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "userDestinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "destinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-					isOptional: true;
-				},
-				{
-					name: "sourceMint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "destinationMint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "platformFeeAccount";
-					isMut: true;
-					isSigner: false;
-					isOptional: true;
-				},
-				{
-					name: "token2022Program";
-					isMut: false;
-					isSigner: false;
-					isOptional: true;
-				},
-				{
-					name: "eventAuthority";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "program";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "routePlan";
-					type: {
-						vec: {
-							defined: "RoutePlanStep";
-						};
-					};
-				},
-				{
-					name: "outAmount";
-					type: "u64";
-				},
-				{
-					name: "quotedInAmount";
-					type: "u64";
-				},
-				{
-					name: "slippageBps";
-					type: "u16";
-				},
-				{
-					name: "platformFeeBps";
-					type: "u8";
-				},
-			];
-			returns: "u64";
-		},
-		{
-			name: "sharedAccountsExactOutRoute";
-			docs: [
-				"Route by using program owned token accounts and open orders accounts.",
-			];
-			accounts: [
-				{
-					name: "tokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "programAuthority";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "userTransferAuthority";
-					isMut: false;
-					isSigner: true;
-				},
-				{
-					name: "sourceTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "programSourceTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "programDestinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "destinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "sourceMint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "destinationMint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "platformFeeAccount";
-					isMut: true;
-					isSigner: false;
-					isOptional: true;
-				},
-				{
-					name: "token2022Program";
-					isMut: false;
-					isSigner: false;
-					isOptional: true;
-				},
-				{
-					name: "eventAuthority";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "program";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "id";
-					type: "u8";
-				},
-				{
-					name: "routePlan";
-					type: {
-						vec: {
-							defined: "RoutePlanStep";
-						};
-					};
-				},
-				{
-					name: "outAmount";
-					type: "u64";
-				},
-				{
-					name: "quotedInAmount";
-					type: "u64";
-				},
-				{
-					name: "slippageBps";
-					type: "u16";
-				},
-				{
-					name: "platformFeeBps";
-					type: "u8";
-				},
-			];
-			returns: "u64";
-		},
-		{
-			name: "setTokenLedger";
-			accounts: [
-				{
-					name: "tokenLedger";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "tokenAccount";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [];
-		},
-		{
-			name: "createOpenOrders";
-			accounts: [
-				{
-					name: "openOrders";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "payer";
-					isMut: true;
-					isSigner: true;
-				},
-				{
-					name: "dexProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "systemProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "rent";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "market";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [];
-		},
-		{
-			name: "createTokenAccount";
-			accounts: [
-				{
-					name: "tokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "user";
-					isMut: true;
-					isSigner: true;
-				},
-				{
-					name: "mint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "tokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "systemProgram";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "bump";
-					type: "u8";
-				},
-			];
-		},
-		{
-			name: "createProgramOpenOrders";
-			accounts: [
-				{
-					name: "openOrders";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "payer";
-					isMut: true;
-					isSigner: true;
-				},
-				{
-					name: "programAuthority";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "dexProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "systemProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "rent";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "market";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "id";
-					type: "u8";
-				},
-			];
-		},
-		{
-			name: "claim";
-			accounts: [
-				{
-					name: "wallet";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "programAuthority";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "systemProgram";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "id";
-					type: "u8";
-				},
-			];
-			returns: "u64";
-		},
-		{
-			name: "claimToken";
-			accounts: [
-				{
-					name: "payer";
-					isMut: true;
-					isSigner: true;
-				},
-				{
-					name: "wallet";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "programAuthority";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "programTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "destinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "mint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "tokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "associatedTokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "systemProgram";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "id";
-					type: "u8";
-				},
-			];
-			returns: "u64";
-		},
-		{
-			name: "createTokenLedger";
-			accounts: [
-				{
-					name: "tokenLedger";
-					isMut: true;
-					isSigner: true;
-				},
-				{
-					name: "payer";
-					isMut: true;
-					isSigner: true;
-				},
-				{
-					name: "systemProgram";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [];
-		},
-		{
-			name: "closeToken";
-			accounts: [
-				{
-					name: "operator";
-					isMut: false;
-					isSigner: true;
-				},
-				{
-					name: "wallet";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "programAuthority";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "programTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "mint";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "tokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "id";
-					type: "u8";
-				},
-				{
-					name: "burnAll";
-					type: "bool";
-				},
-			];
-		},
-		{
-			name: "routeV2";
-			accounts: [
-				{
-					name: "userTransferAuthority";
-					isMut: false;
-					isSigner: true;
-				},
-				{
-					name: "userSourceTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "userDestinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "sourceMint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "destinationMint";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "sourceTokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "destinationTokenProgram";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "destinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-					isOptional: true;
-				},
-				{
-					name: "eventAuthority";
-					isMut: false;
-					isSigner: false;
-				},
-				{
-					name: "program";
-					isMut: false;
-					isSigner: false;
-				},
-			];
-			args: [
-				{
-					name: "inAmount";
-					type: "u64";
-				},
-				{
-					name: "quotedOutAmount";
-					type: "u64";
-				},
-				{
-					name: "slippageBps";
-					type: "u16";
-				},
-				{
-					name: "platformFeeBps";
-					type: "u16";
-				},
-				{
-					name: "positiveSlippageBps";
-					type: "u16";
-				},
-				{
-					name: "routePlan";
-					type: {
-						vec: {
-							defined: "RoutePlanStepV2";
-						};
-					};
-				},
-			];
-			returns: "u64";
-		},
-		{
 			name: "exactOutRouteV2";
 			accounts: [
 				{
@@ -1027,35 +884,20 @@ export type Jupiter = {
 			returns: "u64";
 		},
 		{
-			name: "sharedAccountsRouteV2";
+			name: "routeV2";
 			accounts: [
-				{
-					name: "programAuthority";
-					isMut: false;
-					isSigner: false;
-				},
 				{
 					name: "userTransferAuthority";
 					isMut: false;
 					isSigner: true;
 				},
 				{
-					name: "sourceTokenAccount";
+					name: "userSourceTokenAccount";
 					isMut: true;
 					isSigner: false;
 				},
 				{
-					name: "programSourceTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "programDestinationTokenAccount";
-					isMut: true;
-					isSigner: false;
-				},
-				{
-					name: "destinationTokenAccount";
+					name: "userDestinationTokenAccount";
 					isMut: true;
 					isSigner: false;
 				},
@@ -1080,6 +922,12 @@ export type Jupiter = {
 					isSigner: false;
 				},
 				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+					isOptional: true;
+				},
+				{
 					name: "eventAuthority";
 					isMut: false;
 					isSigner: false;
@@ -1091,10 +939,6 @@ export type Jupiter = {
 				},
 			];
 			args: [
-				{
-					name: "id";
-					type: "u8";
-				},
 				{
 					name: "inAmount";
 					type: "u64";
@@ -1226,6 +1070,106 @@ export type Jupiter = {
 			];
 			returns: "u64";
 		},
+		{
+			name: "sharedAccountsRouteV2";
+			accounts: [
+				{
+					name: "programAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "userTransferAuthority";
+					isMut: false;
+					isSigner: true;
+				},
+				{
+					name: "sourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programSourceTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "programDestinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenAccount";
+					isMut: true;
+					isSigner: false;
+				},
+				{
+					name: "sourceMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationMint";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "sourceTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "destinationTokenProgram";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "eventAuthority";
+					isMut: false;
+					isSigner: false;
+				},
+				{
+					name: "program";
+					isMut: false;
+					isSigner: false;
+				},
+			];
+			args: [
+				{
+					name: "id";
+					type: "u8";
+				},
+				{
+					name: "inAmount";
+					type: "u64";
+				},
+				{
+					name: "quotedOutAmount";
+					type: "u64";
+				},
+				{
+					name: "slippageBps";
+					type: "u16";
+				},
+				{
+					name: "platformFeeBps";
+					type: "u16";
+				},
+				{
+					name: "positiveSlippageBps";
+					type: "u16";
+				},
+				{
+					name: "routePlan";
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2";
+						};
+					};
+				},
+			];
+			returns: "u64";
+		},
 	];
 	accounts: [
 		{
@@ -1247,18 +1191,87 @@ export type Jupiter = {
 	];
 	types: [
 		{
-			name: "AmountWithSlippage";
+			name: "FeeEvent";
 			type: {
 				kind: "struct";
 				fields: [
 					{
+						name: "account";
+						type: "publicKey";
+					},
+					{
+						name: "mint";
+						type: "publicKey";
+					},
+					{
 						name: "amount";
 						type: "u64";
 					},
+				];
+			};
+		},
+		{
+			name: "RemainingAccountsInfo";
+			type: {
+				kind: "struct";
+				fields: [
 					{
-						name: "slippageBps";
-						type: "u16";
+						name: "slices";
+						type: {
+							vec: {
+								defined: "RemainingAccountsSlice";
+							};
+						};
 					},
+				];
+			};
+		},
+		{
+			name: "RemainingAccountsSlice";
+			type: {
+				kind: "struct";
+				fields: [
+					{
+						name: "accountsType";
+						type: "u8";
+					},
+					{
+						name: "length";
+						type: "u8";
+					},
+				];
+			};
+		},
+		{
+			name: "AccountsType";
+			type: {
+				kind: "enum";
+				variants: [
+					{ name: "TransferHookA" },
+					{ name: "TransferHookB" },
+					{ name: "TransferHookReward" },
+					{ name: "TransferHookInput" },
+					{ name: "TransferHookIntermediate" },
+					{ name: "TransferHookOutput" },
+					{ name: "SupplementalTickArrays" },
+					{ name: "SupplementalTickArraysOne" },
+					{ name: "SupplementalTickArraysTwo" },
+				];
+			};
+		},
+		{
+			name: "DefiTunaAccountsType";
+			type: {
+				kind: "enum";
+				variants: [
+					{ name: "TransferHookA" },
+					{ name: "TransferHookB" },
+					{ name: "TransferHookInput" },
+					{ name: "TransferHookIntermediate" },
+					{ name: "TransferHookOutput" },
+					{ name: "SupplementalTickArrays" },
+					{ name: "SupplementalTickArraysOne" },
+					{ name: "SupplementalTickArraysTwo" },
 				];
 			};
 		},
@@ -1315,46 +1328,10 @@ export type Jupiter = {
 			};
 		},
 		{
-			name: "PlatformFeeType";
-			type: {
-				kind: "enum";
-				variants: [
-					{
-						name: "SourceMint";
-						fields: [
-							{
-								name: "mint";
-								type: "publicKey";
-							},
-						];
-					},
-					{
-						name: "DestinationMint";
-						fields: [
-							{
-								name: "mint";
-								type: "publicKey";
-							},
-						];
-					},
-					{
-						name: "Zero";
-					},
-				];
-			};
-		},
-		{
 			name: "Side";
 			type: {
 				kind: "enum";
-				variants: [
-					{
-						name: "Bid";
-					},
-					{
-						name: "Ask";
-					},
-				];
+				variants: [{ name: "Bid" }, { name: "Ask" }];
 			};
 		},
 		{
@@ -1369,30 +1346,14 @@ export type Jupiter = {
 			type: {
 				kind: "enum";
 				variants: [
-					{
-						name: "Saber";
-					},
-					{
-						name: "SaberAddDecimalsDeposit";
-					},
-					{
-						name: "SaberAddDecimalsWithdraw";
-					},
-					{
-						name: "TokenSwap";
-					},
-					{
-						name: "Sencha";
-					},
-					{
-						name: "Step";
-					},
-					{
-						name: "Cropper";
-					},
-					{
-						name: "Raydium";
-					},
+					{ name: "Saber" },
+					{ name: "SaberAddDecimalsDeposit" },
+					{ name: "SaberAddDecimalsWithdraw" },
+					{ name: "TokenSwap" },
+					{ name: "Sencha" },
+					{ name: "Step" },
+					{ name: "Cropper" },
+					{ name: "Raydium" },
 					{
 						name: "Crema";
 						fields: [
@@ -1402,15 +1363,9 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "Lifinity";
-					},
-					{
-						name: "Mercurial";
-					},
-					{
-						name: "Cykura";
-					},
+					{ name: "Lifinity" },
+					{ name: "Mercurial" },
+					{ name: "Cykura" },
 					{
 						name: "Serum";
 						fields: [
@@ -1422,12 +1377,8 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "MarinadeDeposit";
-					},
-					{
-						name: "MarinadeUnstake";
-					},
+					{ name: "MarinadeDeposit" },
+					{ name: "MarinadeUnstake" },
 					{
 						name: "Aldrin";
 						fields: [
@@ -1468,12 +1419,8 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "Meteora";
-					},
-					{
-						name: "GooseFX";
-					},
+					{ name: "Meteora" },
+					{ name: "GooseFX" },
 					{
 						name: "DeltaFi";
 						fields: [
@@ -1483,9 +1430,7 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "Balansol";
-					},
+					{ name: "Balansol" },
 					{
 						name: "MarcoPolo";
 						fields: [
@@ -1506,12 +1451,8 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "LifinityV2";
-					},
-					{
-						name: "RaydiumClmm";
-					},
+					{ name: "LifinityV2" },
+					{ name: "RaydiumClmm" },
 					{
 						name: "Openbook";
 						fields: [
@@ -1547,15 +1488,9 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "TokenSwapV2";
-					},
-					{
-						name: "HeliumTreasuryManagementRedeemV0";
-					},
-					{
-						name: "StakeDexStakeWrappedSol";
-					},
+					{ name: "TokenSwapV2" },
+					{ name: "HeliumTreasuryManagementRedeemV0" },
+					{ name: "StakeDexStakeWrappedSol" },
 					{
 						name: "StakeDexSwapViaStake";
 						fields: [
@@ -1565,21 +1500,11 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "GooseFXV2";
-					},
-					{
-						name: "Perps";
-					},
-					{
-						name: "PerpsAddLiquidity";
-					},
-					{
-						name: "PerpsRemoveLiquidity";
-					},
-					{
-						name: "MeteoraDlmm";
-					},
+					{ name: "GooseFXV2" },
+					{ name: "Perps" },
+					{ name: "PerpsAddLiquidity" },
+					{ name: "PerpsRemoveLiquidity" },
+					{ name: "MeteoraDlmm" },
 					{
 						name: "OpenBookV2";
 						fields: [
@@ -1591,9 +1516,7 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "RaydiumClmmV2";
-					},
+					{ name: "RaydiumClmmV2" },
 					{
 						name: "StakeDexPrefundWithdrawStakeAndDepositStake";
 						fields: [
@@ -1667,9 +1590,7 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "RaydiumCP";
-					},
+					{ name: "RaydiumCP" },
 					{
 						name: "WhirlpoolSwapV2";
 						fields: [
@@ -1687,36 +1608,16 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "OneIntro";
-					},
-					{
-						name: "PumpWrappedBuy";
-					},
-					{
-						name: "PumpWrappedSell";
-					},
-					{
-						name: "PerpsV2";
-					},
-					{
-						name: "PerpsV2AddLiquidity";
-					},
-					{
-						name: "PerpsV2RemoveLiquidity";
-					},
-					{
-						name: "MoonshotWrappedBuy";
-					},
-					{
-						name: "MoonshotWrappedSell";
-					},
-					{
-						name: "StabbleStableSwap";
-					},
-					{
-						name: "StabbleWeightedSwap";
-					},
+					{ name: "OneIntro" },
+					{ name: "PumpWrappedBuy" },
+					{ name: "PumpWrappedSell" },
+					{ name: "PerpsV2" },
+					{ name: "PerpsV2AddLiquidity" },
+					{ name: "PerpsV2RemoveLiquidity" },
+					{ name: "MoonshotWrappedBuy" },
+					{ name: "MoonshotWrappedSell" },
+					{ name: "StabbleStableSwap" },
+					{ name: "StabbleWeightedSwap" },
 					{
 						name: "Obric";
 						fields: [
@@ -1726,9 +1627,7 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "FoxBuyFromEstimatedCost";
-					},
+					{ name: "FoxBuyFromEstimatedCost" },
 					{
 						name: "FoxClaimPartial";
 						fields: [
@@ -1747,12 +1646,8 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "SolayerDelegateNoInit";
-					},
-					{
-						name: "SolayerUndelegateNoInit";
-					},
+					{ name: "SolayerDelegateNoInit" },
+					{ name: "SolayerUndelegateNoInit" },
 					{
 						name: "TokenMill";
 						fields: [
@@ -1764,24 +1659,12 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "DaosFunBuy";
-					},
-					{
-						name: "DaosFunSell";
-					},
-					{
-						name: "ZeroFi";
-					},
-					{
-						name: "StakeDexWithdrawWrappedSol";
-					},
-					{
-						name: "VirtualsBuy";
-					},
-					{
-						name: "VirtualsSell";
-					},
+					{ name: "DaosFunBuy" },
+					{ name: "DaosFunSell" },
+					{ name: "ZeroFi" },
+					{ name: "StakeDexWithdrawWrappedSol" },
+					{ name: "VirtualsBuy" },
+					{ name: "VirtualsSell" },
 					{
 						name: "Perena";
 						fields: [
@@ -1795,21 +1678,17 @@ export type Jupiter = {
 							},
 						];
 					},
-					{
-						name: "PumpSwapBuy";
-					},
-					{
-						name: "PumpSwapSell";
-					},
-					{
-						name: "Gamma";
-					},
+					{ name: "PumpSwapBuy" },
+					{ name: "PumpSwapSell" },
+					{ name: "Gamma" },
 					{
 						name: "MeteoraDlmmSwapV2";
 						fields: [
 							{
 								name: "remainingAccountsInfo";
-								type: { defined: "RemainingAccountsInfo" };
+								type: {
+									defined: "RemainingAccountsInfo";
+								};
 							},
 						];
 					},
@@ -1820,30 +1699,59 @@ export type Jupiter = {
 					{ name: "StabbleWeightedSwapV2" },
 					{
 						name: "RaydiumLaunchlabBuy";
-						fields: [{ name: "shareFeeRate"; type: "u64" }];
+						fields: [
+							{
+								name: "shareFeeRate";
+								type: "u64";
+							},
+						];
 					},
 					{
 						name: "RaydiumLaunchlabSell";
-						fields: [{ name: "shareFeeRate"; type: "u64" }];
+						fields: [
+							{
+								name: "shareFeeRate";
+								type: "u64";
+							},
+						];
 					},
 					{ name: "BoopdotfunWrappedBuy" },
 					{ name: "BoopdotfunWrappedSell" },
 					{
 						name: "Plasma";
-						fields: [{ name: "side"; type: { defined: "Side" } }];
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+						];
 					},
 					{
 						name: "GoonFi";
 						fields: [
-							{ name: "isBid"; type: "bool" },
-							{ name: "blacklistBump"; type: "u8" },
+							{
+								name: "isBid";
+								type: "bool";
+							},
+							{
+								name: "blacklistBump";
+								type: "u8";
+							},
 						];
 					},
 					{
 						name: "HumidiFi";
 						fields: [
-							{ name: "swapId"; type: "u64" },
-							{ name: "isBaseToQuote"; type: "bool" },
+							{
+								name: "swapId";
+								type: "u64";
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
 						];
 					},
 					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" },
@@ -2093,33 +2001,67 @@ export type Jupiter = {
 					},
 					{
 						name: "Riptide";
-						fields: [{ name: "amountIsTokenA"; type: "bool" }];
+						fields: [
+							{
+								name: "amountIsTokenA";
+								type: "bool";
+							},
+						];
 					},
 					{ name: "RunnerRodeo" },
 					{
 						name: "TaurusFi";
-						fields: [{ name: "isBaseIn"; type: "bool" }];
+						fields: [
+							{
+								name: "isBaseIn";
+								type: "bool";
+							},
+						];
 					},
 					{ name: "Omnipair" },
 					{ name: "MSwap" },
 					{
 						name: "Hylo";
-						fields: [{ name: "swapType"; type: { defined: "HyloSwapType" } }];
+						fields: [
+							{
+								name: "swapType";
+								type: {
+									defined: "HyloSwapType";
+								};
+							},
+						];
 					},
 					{ name: "VoltrDeposit" },
 					{ name: "VoltrWithdraw" },
 					{
 						name: "SanctumSV2";
 						fields: [
-							{ name: "srcLstValueCalcAccs"; type: "u8" },
-							{ name: "dstLstValueCalcAccs"; type: "u8" },
-							{ name: "srcLstIndex"; type: "u32" },
-							{ name: "dstLstIndex"; type: "u32" },
+							{
+								name: "srcLstValueCalcAccs";
+								type: "u8";
+							},
+							{
+								name: "dstLstValueCalcAccs";
+								type: "u8";
+							},
+							{
+								name: "srcLstIndex";
+								type: "u32";
+							},
+							{
+								name: "dstLstIndex";
+								type: "u32";
+							},
 						];
 					},
 					{
 						name: "LemmingsFi";
-						fields: [{ name: "isBaseIn"; type: "bool" }];
+						fields: [
+							{
+								name: "isBaseIn";
+								type: "bool";
+							},
+						];
 					},
 					{ name: "ScaleVmmBuy" },
 					{ name: "ScaleVmmSell" },
@@ -2127,14 +2069,24 @@ export type Jupiter = {
 					{ name: "ScaleAmmSell" },
 					{
 						name: "BisonFiV2";
-						fields: [{ name: "aToB"; type: "bool" }];
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+						];
 					},
 					{ name: "Trends" },
 					{ name: "HumaDeposit" },
 					{ name: "HumaInstantWithdraw" },
 					{
 						name: "Kipseli";
-						fields: [{ name: "isBaseToQuote"; type: "bool" }];
+						fields: [
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
 					},
 					{
 						name: "DynamicV2";
@@ -2147,8 +2099,14 @@ export type Jupiter = {
 									};
 								};
 							},
-							{ name: "maxSplitQuoteCalls"; type: "u8" },
-							{ name: "maxSplitCandidates"; type: "u8" },
+							{
+								name: "maxSplitQuoteCalls";
+								type: "u8";
+							},
+							{
+								name: "maxSplitCandidates";
+								type: "u8";
+							},
 						];
 					},
 					{ name: "PumpSwapBuyV3WithCashbackClaim" },
@@ -2157,56 +2115,113 @@ export type Jupiter = {
 					{ name: "PumpWrappedSellV4WithCashbackClaim" },
 					{
 						name: "GoonFiV3";
-						fields: [{ name: "isBid"; type: "bool" }];
+						fields: [
+							{
+								name: "isBid";
+								type: "bool";
+							},
+						];
 					},
 					{
 						name: "PumpWrappedBuyV5";
-						fields: [{ name: "claimCashback"; type: "bool" }];
+						fields: [
+							{
+								name: "claimCashback";
+								type: "bool";
+							},
+						];
 					},
 					{
 						name: "PumpWrappedSellV5";
-						fields: [{ name: "claimCashback"; type: "bool" }];
+						fields: [
+							{
+								name: "claimCashback";
+								type: "bool";
+							},
+						];
 					},
 					{ name: "ZeroFiSwapV2" },
 					{
 						name: "BisonFiPredict";
 						fields: [
-							{ name: "side"; type: { defined: "BisonFiPredictSide" } },
-							{ name: "isBuy"; type: "bool" },
+							{
+								name: "side";
+								type: {
+									defined: "BisonFiPredictSide";
+								};
+							},
+							{
+								name: "isBuy";
+								type: "bool";
+							},
 						];
 					},
 					{ name: "ByrealDynamicV3" },
 					{
 						name: "Flux";
 						fields: [
-							{ name: "swapId"; type: "u64" },
-							{ name: "baseToQuote"; type: "bool" },
+							{
+								name: "swapId";
+								type: "u64";
+							},
+							{
+								name: "baseToQuote";
+								type: "bool";
+							},
 						];
 					},
 					{ name: "VaultLiquidSellLst" },
 					{
 						name: "VaultLiquidBuyLst";
-						fields: [{ name: "lstAmount"; type: "u64" }];
+						fields: [
+							{
+								name: "lstAmount";
+								type: "u64";
+							},
+						];
 					},
 					{
 						name: "KipseliV2";
-						fields: [{ name: "isBaseToQuote"; type: "bool" }];
+						fields: [
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
 					},
 					{
 						name: "Deriverse";
 						fields: [
-							{ name: "side"; type: { defined: "Side" } },
-							{ name: "instrId"; type: "u32" },
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+							{
+								name: "instrId";
+								type: "u32";
+							},
 						];
 					},
 					{
 						name: "Hadron";
-						fields: [{ name: "isX"; type: "bool" }];
+						fields: [
+							{
+								name: "isX";
+								type: "bool";
+							},
+						];
 					},
 					{ name: "BinaryFi" },
 					{
 						name: "Metric";
-						fields: [{ name: "zeroForOne"; type: "bool" }];
+						fields: [
+							{
+								name: "zeroForOne";
+								type: "bool";
+							},
+						];
 					},
 				];
 			};
@@ -2230,6 +2245,108 @@ export type Jupiter = {
 			};
 		},
 		{
+			name: "CandidateSwap";
+			type: {
+				kind: "enum";
+				variants: [
+					{
+						name: "HumidiFi";
+						fields: [
+							{
+								name: "swapId";
+								type: "u64";
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "TesseraV";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+						];
+					},
+					{
+						name: "HumidiFiV2";
+						fields: [
+							{
+								name: "swapId";
+								type: "u64";
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{ name: "RaydiumV2" },
+					{ name: "RaydiumClmm" },
+					{
+						name: "Whirlpool";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+						];
+					},
+					{ name: "ZeroFi" },
+					{
+						name: "BisonFiV2";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "GoonFiV2";
+						fields: [
+							{
+								name: "isBid";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "GoonFiV3";
+						fields: [
+							{
+								name: "isBid";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "WhirlpoolV2";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+							{
+								name: "remainingAccountsInfo";
+								type: {
+									option: {
+										defined: "RemainingAccountsInfo";
+									};
+								};
+							},
+						];
+					},
+					{ name: "ZeroFiSwapV2" },
+				];
+			};
+		},
+		{
 			name: "HyloSwapType";
 			type: {
 				kind: "enum";
@@ -2246,127 +2363,29 @@ export type Jupiter = {
 			};
 		},
 		{
-			name: "CandidateSwap";
-			type: {
-				kind: "enum";
-				variants: [
-					{
-						name: "HumidiFi";
-						fields: [
-							{ name: "swapId"; type: "u64" },
-							{ name: "isBaseToQuote"; type: "bool" },
-						];
-					},
-					{
-						name: "TesseraV";
-						fields: [{ name: "side"; type: { defined: "Side" } }];
-					},
-					{
-						name: "HumidiFiV2";
-						fields: [
-							{ name: "swapId"; type: "u64" },
-							{ name: "isBaseToQuote"; type: "bool" },
-						];
-					},
-					{ name: "RaydiumV2" },
-					{ name: "RaydiumClmm" },
-					{
-						name: "Whirlpool";
-						fields: [{ name: "aToB"; type: "bool" }];
-					},
-					{ name: "ZeroFi" },
-					{
-						name: "BisonFiV2";
-						fields: [{ name: "aToB"; type: "bool" }];
-					},
-					{
-						name: "GoonFiV2";
-						fields: [{ name: "isBid"; type: "bool" }];
-					},
-					{
-						name: "GoonFiV3";
-						fields: [{ name: "isBid"; type: "bool" }];
-					},
-					{
-						name: "WhirlpoolV2";
-						fields: [
-							{ name: "aToB"; type: "bool" },
-							{
-								name: "remainingAccountsInfo";
-								type: {
-									option: {
-										defined: "RemainingAccountsInfo";
-									};
-								};
-							},
-						];
-					},
-					{ name: "ZeroFiSwapV2" },
-				];
-			};
-		},
-		{
-			name: "DefiTunaAccountsType";
-			type: {
-				kind: "enum";
-				variants: [
-					{
-						name: "TransferHookA";
-					},
-					{
-						name: "TransferHookB";
-					},
-					{
-						name: "TransferHookInput";
-					},
-					{
-						name: "TransferHookIntermediate";
-					},
-					{
-						name: "TransferHookOutput";
-					},
-					{
-						name: "SupplementalTickArrays";
-					},
-					{
-						name: "SupplementalTickArraysOne";
-					},
-					{
-						name: "SupplementalTickArraysTwo";
-					},
-				];
-			};
-		},
-		{
-			name: "RemainingAccountsSlice";
+			name: "SwapEvent";
 			type: {
 				kind: "struct";
 				fields: [
 					{
-						name: "accountsType";
-						type: {
-							defined: "AccountsType";
-						};
+						name: "amm";
+						type: "publicKey";
 					},
 					{
-						name: "length";
-						type: "u8";
+						name: "inputMint";
+						type: "publicKey";
 					},
-				];
-			};
-		},
-		{
-			name: "RemainingAccountsInfo";
-			type: {
-				kind: "struct";
-				fields: [
 					{
-						name: "slices";
-						type: {
-							vec: {
-								defined: "RemainingAccountsSlice";
-							};
-						};
+						name: "inputAmount";
+						type: "u64";
+					},
+					{
+						name: "outputMint";
+						type: "publicKey";
+					},
+					{
+						name: "outputAmount";
+						type: "u64";
 					},
 				];
 			};
@@ -2396,36 +2415,33 @@ export type Jupiter = {
 			};
 		},
 		{
-			name: "AccountsType";
+			name: "SwapsEvent";
 			type: {
-				kind: "enum";
-				variants: [
+				kind: "struct";
+				fields: [
 					{
-						name: "TransferHookA";
+						name: "swapEvents";
+						type: {
+							vec: {
+								defined: "SwapEventV2";
+							};
+						};
+					},
+				];
+			};
+		},
+		{
+			name: "TokenLedger";
+			type: {
+				kind: "struct";
+				fields: [
+					{
+						name: "tokenAccount";
+						type: "publicKey";
 					},
 					{
-						name: "TransferHookB";
-					},
-					{
-						name: "TransferHookReward";
-					},
-					{
-						name: "TransferHookInput";
-					},
-					{
-						name: "TransferHookIntermediate";
-					},
-					{
-						name: "TransferHookOutput";
-					},
-					{
-						name: "SupplementalTickArrays";
-					},
-					{
-						name: "SupplementalTickArraysOne";
-					},
-					{
-						name: "SupplementalTickArraysTwo";
+						name: "amount";
+						type: "u64";
 					},
 				];
 			};
@@ -2483,14 +2499,43 @@ export type Jupiter = {
 			type: {
 				kind: "struct";
 				fields: [
-					{ name: "candidateIndex"; type: "u64" },
-					{ name: "inAmount"; type: "u64" },
-					{ name: "errorCode"; type: "u64" },
+					{
+						name: "candidateIndex";
+						type: "u64";
+					},
+					{
+						name: "inAmount";
+						type: "u64";
+					},
+					{
+						name: "errorCode";
+						type: "u64";
+					},
 				];
 			};
 		},
 	];
 	events: [
+		{
+			name: "FeeEvent";
+			fields: [
+				{
+					name: "account";
+					type: "publicKey";
+					index: false;
+				},
+				{
+					name: "mint";
+					type: "publicKey";
+					index: false;
+				},
+				{
+					name: "amount";
+					type: "u64";
+					index: false;
+				},
+			];
+		},
 		{
 			name: "SwapEvent";
 			fields: [
@@ -2516,26 +2561,6 @@ export type Jupiter = {
 				},
 				{
 					name: "outputAmount";
-					type: "u64";
-					index: false;
-				},
-			];
-		},
-		{
-			name: "FeeEvent";
-			fields: [
-				{
-					name: "account";
-					type: "publicKey";
-					index: false;
-				},
-				{
-					name: "mint";
-					type: "publicKey";
-					index: false;
-				},
-				{
-					name: "amount";
 					type: "u64";
 					index: false;
 				},
@@ -2570,21 +2595,6 @@ export type Jupiter = {
 			];
 		},
 		{
-			name: "BestSwapOutAmountViolation";
-			fields: [
-				{
-					name: "expectedOutAmount";
-					type: "u64";
-					index: false;
-				},
-				{
-					name: "outAmount";
-					type: "u64";
-					index: false;
-				},
-			];
-		},
-		{
 			name: "CandidateSwapQuoteError";
 			fields: [
 				{
@@ -2599,6 +2609,21 @@ export type Jupiter = {
 				},
 				{
 					name: "errorCode";
+					type: "u64";
+					index: false;
+				},
+			];
+		},
+		{
+			name: "BestSwapOutAmountViolation";
+			fields: [
+				{
+					name: "expectedOutAmount";
+					type: "u64";
+					index: false;
+				},
+				{
+					name: "outAmount";
 					type: "u64";
 					index: false;
 				},
@@ -2749,6 +2774,308 @@ export const IDL: Jupiter = {
 	name: "jupiter",
 	instructions: [
 		{
+			name: "claim",
+			accounts: [
+				{
+					name: "wallet",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programAuthority",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "systemProgram",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+			],
+			returns: "u64",
+		},
+		{
+			name: "claimToken",
+			accounts: [
+				{
+					name: "payer",
+					isMut: true,
+					isSigner: true,
+				},
+				{
+					name: "wallet",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "programAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "programTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "mint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "tokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "associatedTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "systemProgram",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+			],
+			returns: "u64",
+		},
+		{
+			name: "closeToken",
+			accounts: [
+				{
+					name: "operator",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "wallet",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "programTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "mint",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "tokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+				{
+					name: "burnAll",
+					type: "bool",
+				},
+			],
+		},
+		{
+			name: "createTokenLedger",
+			accounts: [
+				{
+					name: "tokenLedger",
+					isMut: true,
+					isSigner: true,
+				},
+				{
+					name: "payer",
+					isMut: true,
+					isSigner: true,
+				},
+				{
+					name: "systemProgram",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [],
+		},
+		{
+			name: "createTokenAccount",
+			accounts: [
+				{
+					name: "tokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "user",
+					isMut: true,
+					isSigner: true,
+				},
+				{
+					name: "mint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "tokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "systemProgram",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "bump",
+					type: "u8",
+				},
+			],
+		},
+		{
+			name: "closeWsolTokenAccount",
+			accounts: [
+				{
+					name: "tokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "user",
+					isMut: true,
+					isSigner: true,
+				},
+				{
+					name: "tokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "systemProgram",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [],
+		},
+		{
+			name: "exactOutRoute",
+			accounts: [
+				{
+					name: "tokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "userTransferAuthority",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "userSourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "userDestinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
+					name: "sourceMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "platformFeeAccount",
+					isMut: true,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
+					name: "token2022Program",
+					isMut: false,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "routePlan",
+					type: {
+						vec: {
+							defined: "RoutePlanStep",
+						},
+					},
+				},
+				{
+					name: "outAmount",
+					type: "u64",
+				},
+				{
+					name: "quotedInAmount",
+					type: "u64",
+				},
+				{
+					name: "slippageBps",
+					type: "u16",
+				},
+				{
+					name: "platformFeeBps",
+					type: "u8",
+				},
+			],
+			returns: "u64",
+		},
+		{
 			name: "route",
 			docs: ["route_plan Topologically sorted trade DAG"],
 			accounts: [
@@ -2895,6 +3222,128 @@ export const IDL: Jupiter = {
 				},
 				{
 					name: "quotedOutAmount",
+					type: "u64",
+				},
+				{
+					name: "slippageBps",
+					type: "u16",
+				},
+				{
+					name: "platformFeeBps",
+					type: "u8",
+				},
+			],
+			returns: "u64",
+		},
+		{
+			name: "setTokenLedger",
+			accounts: [
+				{
+					name: "tokenLedger",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "tokenAccount",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [],
+		},
+		{
+			name: "sharedAccountsExactOutRoute",
+			docs: [
+				"Route by using program owned token accounts and open orders accounts.",
+			],
+			accounts: [
+				{
+					name: "tokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "programAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "userTransferAuthority",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "sourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programSourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programDestinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "sourceMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "platformFeeAccount",
+					isMut: true,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
+					name: "token2022Program",
+					isMut: false,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+				{
+					name: "routePlan",
+					type: {
+						vec: {
+							defined: "RoutePlanStep",
+						},
+					},
+				},
+				{
+					name: "outAmount",
+					type: "u64",
+				},
+				{
+					name: "quotedInAmount",
 					type: "u64",
 				},
 				{
@@ -3119,573 +3568,6 @@ export const IDL: Jupiter = {
 			returns: "u64",
 		},
 		{
-			name: "exactOutRoute",
-			accounts: [
-				{
-					name: "tokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "userTransferAuthority",
-					isMut: false,
-					isSigner: true,
-				},
-				{
-					name: "userSourceTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "userDestinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "destinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-					isOptional: true,
-				},
-				{
-					name: "sourceMint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "destinationMint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "platformFeeAccount",
-					isMut: true,
-					isSigner: false,
-					isOptional: true,
-				},
-				{
-					name: "token2022Program",
-					isMut: false,
-					isSigner: false,
-					isOptional: true,
-				},
-				{
-					name: "eventAuthority",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "program",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "routePlan",
-					type: {
-						vec: {
-							defined: "RoutePlanStep",
-						},
-					},
-				},
-				{
-					name: "outAmount",
-					type: "u64",
-				},
-				{
-					name: "quotedInAmount",
-					type: "u64",
-				},
-				{
-					name: "slippageBps",
-					type: "u16",
-				},
-				{
-					name: "platformFeeBps",
-					type: "u8",
-				},
-			],
-			returns: "u64",
-		},
-		{
-			name: "sharedAccountsExactOutRoute",
-			docs: [
-				"Route by using program owned token accounts and open orders accounts.",
-			],
-			accounts: [
-				{
-					name: "tokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "programAuthority",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "userTransferAuthority",
-					isMut: false,
-					isSigner: true,
-				},
-				{
-					name: "sourceTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "programSourceTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "programDestinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "destinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "sourceMint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "destinationMint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "platformFeeAccount",
-					isMut: true,
-					isSigner: false,
-					isOptional: true,
-				},
-				{
-					name: "token2022Program",
-					isMut: false,
-					isSigner: false,
-					isOptional: true,
-				},
-				{
-					name: "eventAuthority",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "program",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "id",
-					type: "u8",
-				},
-				{
-					name: "routePlan",
-					type: {
-						vec: {
-							defined: "RoutePlanStep",
-						},
-					},
-				},
-				{
-					name: "outAmount",
-					type: "u64",
-				},
-				{
-					name: "quotedInAmount",
-					type: "u64",
-				},
-				{
-					name: "slippageBps",
-					type: "u16",
-				},
-				{
-					name: "platformFeeBps",
-					type: "u8",
-				},
-			],
-			returns: "u64",
-		},
-		{
-			name: "setTokenLedger",
-			accounts: [
-				{
-					name: "tokenLedger",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "tokenAccount",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [],
-		},
-		{
-			name: "createOpenOrders",
-			accounts: [
-				{
-					name: "openOrders",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "payer",
-					isMut: true,
-					isSigner: true,
-				},
-				{
-					name: "dexProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "systemProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "rent",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "market",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [],
-		},
-		{
-			name: "createTokenAccount",
-			accounts: [
-				{
-					name: "tokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "user",
-					isMut: true,
-					isSigner: true,
-				},
-				{
-					name: "mint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "tokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "systemProgram",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "bump",
-					type: "u8",
-				},
-			],
-		},
-		{
-			name: "createProgramOpenOrders",
-			accounts: [
-				{
-					name: "openOrders",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "payer",
-					isMut: true,
-					isSigner: true,
-				},
-				{
-					name: "programAuthority",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "dexProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "systemProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "rent",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "market",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "id",
-					type: "u8",
-				},
-			],
-		},
-		{
-			name: "claim",
-			accounts: [
-				{
-					name: "wallet",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "programAuthority",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "systemProgram",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "id",
-					type: "u8",
-				},
-			],
-			returns: "u64",
-		},
-		{
-			name: "claimToken",
-			accounts: [
-				{
-					name: "payer",
-					isMut: true,
-					isSigner: true,
-				},
-				{
-					name: "wallet",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "programAuthority",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "programTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "destinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "mint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "tokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "associatedTokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "systemProgram",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "id",
-					type: "u8",
-				},
-			],
-			returns: "u64",
-		},
-		{
-			name: "createTokenLedger",
-			accounts: [
-				{
-					name: "tokenLedger",
-					isMut: true,
-					isSigner: true,
-				},
-				{
-					name: "payer",
-					isMut: true,
-					isSigner: true,
-				},
-				{
-					name: "systemProgram",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [],
-		},
-		{
-			name: "closeToken",
-			accounts: [
-				{
-					name: "operator",
-					isMut: false,
-					isSigner: true,
-				},
-				{
-					name: "wallet",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "programAuthority",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "programTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "mint",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "tokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "id",
-					type: "u8",
-				},
-				{
-					name: "burnAll",
-					type: "bool",
-				},
-			],
-		},
-		{
-			name: "routeV2",
-			accounts: [
-				{
-					name: "userTransferAuthority",
-					isMut: false,
-					isSigner: true,
-				},
-				{
-					name: "userSourceTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "userDestinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "sourceMint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "destinationMint",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "sourceTokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "destinationTokenProgram",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "destinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-					isOptional: true,
-				},
-				{
-					name: "eventAuthority",
-					isMut: false,
-					isSigner: false,
-				},
-				{
-					name: "program",
-					isMut: false,
-					isSigner: false,
-				},
-			],
-			args: [
-				{
-					name: "inAmount",
-					type: "u64",
-				},
-				{
-					name: "quotedOutAmount",
-					type: "u64",
-				},
-				{
-					name: "slippageBps",
-					type: "u16",
-				},
-				{
-					name: "platformFeeBps",
-					type: "u16",
-				},
-				{
-					name: "positiveSlippageBps",
-					type: "u16",
-				},
-				{
-					name: "routePlan",
-					type: {
-						vec: {
-							defined: "RoutePlanStepV2",
-						},
-					},
-				},
-			],
-			returns: "u64",
-		},
-		{
 			name: "exactOutRouteV2",
 			accounts: [
 				{
@@ -3773,35 +3655,20 @@ export const IDL: Jupiter = {
 			returns: "u64",
 		},
 		{
-			name: "sharedAccountsRouteV2",
+			name: "routeV2",
 			accounts: [
-				{
-					name: "programAuthority",
-					isMut: false,
-					isSigner: false,
-				},
 				{
 					name: "userTransferAuthority",
 					isMut: false,
 					isSigner: true,
 				},
 				{
-					name: "sourceTokenAccount",
+					name: "userSourceTokenAccount",
 					isMut: true,
 					isSigner: false,
 				},
 				{
-					name: "programSourceTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "programDestinationTokenAccount",
-					isMut: true,
-					isSigner: false,
-				},
-				{
-					name: "destinationTokenAccount",
+					name: "userDestinationTokenAccount",
 					isMut: true,
 					isSigner: false,
 				},
@@ -3826,6 +3693,12 @@ export const IDL: Jupiter = {
 					isSigner: false,
 				},
 				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+					isOptional: true,
+				},
+				{
 					name: "eventAuthority",
 					isMut: false,
 					isSigner: false,
@@ -3837,10 +3710,6 @@ export const IDL: Jupiter = {
 				},
 			],
 			args: [
-				{
-					name: "id",
-					type: "u8",
-				},
 				{
 					name: "inAmount",
 					type: "u64",
@@ -3972,6 +3841,106 @@ export const IDL: Jupiter = {
 			],
 			returns: "u64",
 		},
+		{
+			name: "sharedAccountsRouteV2",
+			accounts: [
+				{
+					name: "programAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "userTransferAuthority",
+					isMut: false,
+					isSigner: true,
+				},
+				{
+					name: "sourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programSourceTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "programDestinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenAccount",
+					isMut: true,
+					isSigner: false,
+				},
+				{
+					name: "sourceMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationMint",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "sourceTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "destinationTokenProgram",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "eventAuthority",
+					isMut: false,
+					isSigner: false,
+				},
+				{
+					name: "program",
+					isMut: false,
+					isSigner: false,
+				},
+			],
+			args: [
+				{
+					name: "id",
+					type: "u8",
+				},
+				{
+					name: "inAmount",
+					type: "u64",
+				},
+				{
+					name: "quotedOutAmount",
+					type: "u64",
+				},
+				{
+					name: "slippageBps",
+					type: "u16",
+				},
+				{
+					name: "platformFeeBps",
+					type: "u16",
+				},
+				{
+					name: "positiveSlippageBps",
+					type: "u16",
+				},
+				{
+					name: "routePlan",
+					type: {
+						vec: {
+							defined: "RoutePlanStepV2",
+						},
+					},
+				},
+			],
+			returns: "u64",
+		},
 	],
 	accounts: [
 		{
@@ -3993,18 +3962,87 @@ export const IDL: Jupiter = {
 	],
 	types: [
 		{
-			name: "AmountWithSlippage",
+			name: "FeeEvent",
 			type: {
 				kind: "struct",
 				fields: [
 					{
+						name: "account",
+						type: "publicKey",
+					},
+					{
+						name: "mint",
+						type: "publicKey",
+					},
+					{
 						name: "amount",
 						type: "u64",
 					},
+				],
+			},
+		},
+		{
+			name: "RemainingAccountsInfo",
+			type: {
+				kind: "struct",
+				fields: [
 					{
-						name: "slippageBps",
-						type: "u16",
+						name: "slices",
+						type: {
+							vec: {
+								defined: "RemainingAccountsSlice",
+							},
+						},
 					},
+				],
+			},
+		},
+		{
+			name: "RemainingAccountsSlice",
+			type: {
+				kind: "struct",
+				fields: [
+					{
+						name: "accountsType",
+						type: "u8",
+					},
+					{
+						name: "length",
+						type: "u8",
+					},
+				],
+			},
+		},
+		{
+			name: "AccountsType",
+			type: {
+				kind: "enum",
+				variants: [
+					{ name: "TransferHookA" },
+					{ name: "TransferHookB" },
+					{ name: "TransferHookReward" },
+					{ name: "TransferHookInput" },
+					{ name: "TransferHookIntermediate" },
+					{ name: "TransferHookOutput" },
+					{ name: "SupplementalTickArrays" },
+					{ name: "SupplementalTickArraysOne" },
+					{ name: "SupplementalTickArraysTwo" },
+				],
+			},
+		},
+		{
+			name: "DefiTunaAccountsType",
+			type: {
+				kind: "enum",
+				variants: [
+					{ name: "TransferHookA" },
+					{ name: "TransferHookB" },
+					{ name: "TransferHookInput" },
+					{ name: "TransferHookIntermediate" },
+					{ name: "TransferHookOutput" },
+					{ name: "SupplementalTickArrays" },
+					{ name: "SupplementalTickArraysOne" },
+					{ name: "SupplementalTickArraysTwo" },
 				],
 			},
 		},
@@ -4061,46 +4099,10 @@ export const IDL: Jupiter = {
 			},
 		},
 		{
-			name: "PlatformFeeType",
-			type: {
-				kind: "enum",
-				variants: [
-					{
-						name: "SourceMint",
-						fields: [
-							{
-								name: "mint",
-								type: "publicKey",
-							},
-						],
-					},
-					{
-						name: "DestinationMint",
-						fields: [
-							{
-								name: "mint",
-								type: "publicKey",
-							},
-						],
-					},
-					{
-						name: "Zero",
-					},
-				],
-			},
-		},
-		{
 			name: "Side",
 			type: {
 				kind: "enum",
-				variants: [
-					{
-						name: "Bid",
-					},
-					{
-						name: "Ask",
-					},
-				],
+				variants: [{ name: "Bid" }, { name: "Ask" }],
 			},
 		},
 		{
@@ -4115,30 +4117,14 @@ export const IDL: Jupiter = {
 			type: {
 				kind: "enum",
 				variants: [
-					{
-						name: "Saber",
-					},
-					{
-						name: "SaberAddDecimalsDeposit",
-					},
-					{
-						name: "SaberAddDecimalsWithdraw",
-					},
-					{
-						name: "TokenSwap",
-					},
-					{
-						name: "Sencha",
-					},
-					{
-						name: "Step",
-					},
-					{
-						name: "Cropper",
-					},
-					{
-						name: "Raydium",
-					},
+					{ name: "Saber" },
+					{ name: "SaberAddDecimalsDeposit" },
+					{ name: "SaberAddDecimalsWithdraw" },
+					{ name: "TokenSwap" },
+					{ name: "Sencha" },
+					{ name: "Step" },
+					{ name: "Cropper" },
+					{ name: "Raydium" },
 					{
 						name: "Crema",
 						fields: [
@@ -4148,15 +4134,9 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "Lifinity",
-					},
-					{
-						name: "Mercurial",
-					},
-					{
-						name: "Cykura",
-					},
+					{ name: "Lifinity" },
+					{ name: "Mercurial" },
+					{ name: "Cykura" },
 					{
 						name: "Serum",
 						fields: [
@@ -4168,12 +4148,8 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "MarinadeDeposit",
-					},
-					{
-						name: "MarinadeUnstake",
-					},
+					{ name: "MarinadeDeposit" },
+					{ name: "MarinadeUnstake" },
 					{
 						name: "Aldrin",
 						fields: [
@@ -4214,12 +4190,8 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "Meteora",
-					},
-					{
-						name: "GooseFX",
-					},
+					{ name: "Meteora" },
+					{ name: "GooseFX" },
 					{
 						name: "DeltaFi",
 						fields: [
@@ -4229,9 +4201,7 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "Balansol",
-					},
+					{ name: "Balansol" },
 					{
 						name: "MarcoPolo",
 						fields: [
@@ -4252,12 +4222,8 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "LifinityV2",
-					},
-					{
-						name: "RaydiumClmm",
-					},
+					{ name: "LifinityV2" },
+					{ name: "RaydiumClmm" },
 					{
 						name: "Openbook",
 						fields: [
@@ -4293,15 +4259,9 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "TokenSwapV2",
-					},
-					{
-						name: "HeliumTreasuryManagementRedeemV0",
-					},
-					{
-						name: "StakeDexStakeWrappedSol",
-					},
+					{ name: "TokenSwapV2" },
+					{ name: "HeliumTreasuryManagementRedeemV0" },
+					{ name: "StakeDexStakeWrappedSol" },
 					{
 						name: "StakeDexSwapViaStake",
 						fields: [
@@ -4311,21 +4271,11 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "GooseFXV2",
-					},
-					{
-						name: "Perps",
-					},
-					{
-						name: "PerpsAddLiquidity",
-					},
-					{
-						name: "PerpsRemoveLiquidity",
-					},
-					{
-						name: "MeteoraDlmm",
-					},
+					{ name: "GooseFXV2" },
+					{ name: "Perps" },
+					{ name: "PerpsAddLiquidity" },
+					{ name: "PerpsRemoveLiquidity" },
+					{ name: "MeteoraDlmm" },
 					{
 						name: "OpenBookV2",
 						fields: [
@@ -4337,9 +4287,7 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "RaydiumClmmV2",
-					},
+					{ name: "RaydiumClmmV2" },
 					{
 						name: "StakeDexPrefundWithdrawStakeAndDepositStake",
 						fields: [
@@ -4413,9 +4361,7 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "RaydiumCP",
-					},
+					{ name: "RaydiumCP" },
 					{
 						name: "WhirlpoolSwapV2",
 						fields: [
@@ -4433,36 +4379,16 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "OneIntro",
-					},
-					{
-						name: "PumpWrappedBuy",
-					},
-					{
-						name: "PumpWrappedSell",
-					},
-					{
-						name: "PerpsV2",
-					},
-					{
-						name: "PerpsV2AddLiquidity",
-					},
-					{
-						name: "PerpsV2RemoveLiquidity",
-					},
-					{
-						name: "MoonshotWrappedBuy",
-					},
-					{
-						name: "MoonshotWrappedSell",
-					},
-					{
-						name: "StabbleStableSwap",
-					},
-					{
-						name: "StabbleWeightedSwap",
-					},
+					{ name: "OneIntro" },
+					{ name: "PumpWrappedBuy" },
+					{ name: "PumpWrappedSell" },
+					{ name: "PerpsV2" },
+					{ name: "PerpsV2AddLiquidity" },
+					{ name: "PerpsV2RemoveLiquidity" },
+					{ name: "MoonshotWrappedBuy" },
+					{ name: "MoonshotWrappedSell" },
+					{ name: "StabbleStableSwap" },
+					{ name: "StabbleWeightedSwap" },
 					{
 						name: "Obric",
 						fields: [
@@ -4472,9 +4398,7 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "FoxBuyFromEstimatedCost",
-					},
+					{ name: "FoxBuyFromEstimatedCost" },
 					{
 						name: "FoxClaimPartial",
 						fields: [
@@ -4493,12 +4417,8 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "SolayerDelegateNoInit",
-					},
-					{
-						name: "SolayerUndelegateNoInit",
-					},
+					{ name: "SolayerDelegateNoInit" },
+					{ name: "SolayerUndelegateNoInit" },
 					{
 						name: "TokenMill",
 						fields: [
@@ -4510,24 +4430,12 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "DaosFunBuy",
-					},
-					{
-						name: "DaosFunSell",
-					},
-					{
-						name: "ZeroFi",
-					},
-					{
-						name: "StakeDexWithdrawWrappedSol",
-					},
-					{
-						name: "VirtualsBuy",
-					},
-					{
-						name: "VirtualsSell",
-					},
+					{ name: "DaosFunBuy" },
+					{ name: "DaosFunSell" },
+					{ name: "ZeroFi" },
+					{ name: "StakeDexWithdrawWrappedSol" },
+					{ name: "VirtualsBuy" },
+					{ name: "VirtualsSell" },
 					{
 						name: "Perena",
 						fields: [
@@ -4541,21 +4449,17 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
-					{
-						name: "PumpSwapBuy",
-					},
-					{
-						name: "PumpSwapSell",
-					},
-					{
-						name: "Gamma",
-					},
+					{ name: "PumpSwapBuy" },
+					{ name: "PumpSwapSell" },
+					{ name: "Gamma" },
 					{
 						name: "MeteoraDlmmSwapV2",
 						fields: [
 							{
 								name: "remainingAccountsInfo",
-								type: { defined: "RemainingAccountsInfo" },
+								type: {
+									defined: "RemainingAccountsInfo",
+								},
 							},
 						],
 					},
@@ -4566,30 +4470,59 @@ export const IDL: Jupiter = {
 					{ name: "StabbleWeightedSwapV2" },
 					{
 						name: "RaydiumLaunchlabBuy",
-						fields: [{ name: "shareFeeRate", type: "u64" }],
+						fields: [
+							{
+								name: "shareFeeRate",
+								type: "u64",
+							},
+						],
 					},
 					{
 						name: "RaydiumLaunchlabSell",
-						fields: [{ name: "shareFeeRate", type: "u64" }],
+						fields: [
+							{
+								name: "shareFeeRate",
+								type: "u64",
+							},
+						],
 					},
 					{ name: "BoopdotfunWrappedBuy" },
 					{ name: "BoopdotfunWrappedSell" },
 					{
 						name: "Plasma",
-						fields: [{ name: "side", type: { defined: "Side" } }],
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
 					},
 					{
 						name: "GoonFi",
 						fields: [
-							{ name: "isBid", type: "bool" },
-							{ name: "blacklistBump", type: "u8" },
+							{
+								name: "isBid",
+								type: "bool",
+							},
+							{
+								name: "blacklistBump",
+								type: "u8",
+							},
 						],
 					},
 					{
 						name: "HumidiFi",
 						fields: [
-							{ name: "swapId", type: "u64" },
-							{ name: "isBaseToQuote", type: "bool" },
+							{
+								name: "swapId",
+								type: "u64",
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
 						],
 					},
 					{ name: "MeteoraDynamicBondingCurveSwapWithRemainingAccounts" },
@@ -4718,7 +4651,14 @@ export const IDL: Jupiter = {
 					{ name: "CarrotRedeem" },
 					{
 						name: "Manifest",
-						fields: [{ name: "side", type: { defined: "Side" } }],
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
 					},
 					{
 						name: "BisonFi",
@@ -4832,33 +4772,67 @@ export const IDL: Jupiter = {
 					},
 					{
 						name: "Riptide",
-						fields: [{ name: "amountIsTokenA", type: "bool" }],
+						fields: [
+							{
+								name: "amountIsTokenA",
+								type: "bool",
+							},
+						],
 					},
 					{ name: "RunnerRodeo" },
 					{
 						name: "TaurusFi",
-						fields: [{ name: "isBaseIn", type: "bool" }],
+						fields: [
+							{
+								name: "isBaseIn",
+								type: "bool",
+							},
+						],
 					},
 					{ name: "Omnipair" },
 					{ name: "MSwap" },
 					{
 						name: "Hylo",
-						fields: [{ name: "swapType", type: { defined: "HyloSwapType" } }],
+						fields: [
+							{
+								name: "swapType",
+								type: {
+									defined: "HyloSwapType",
+								},
+							},
+						],
 					},
 					{ name: "VoltrDeposit" },
 					{ name: "VoltrWithdraw" },
 					{
 						name: "SanctumSV2",
 						fields: [
-							{ name: "srcLstValueCalcAccs", type: "u8" },
-							{ name: "dstLstValueCalcAccs", type: "u8" },
-							{ name: "srcLstIndex", type: "u32" },
-							{ name: "dstLstIndex", type: "u32" },
+							{
+								name: "srcLstValueCalcAccs",
+								type: "u8",
+							},
+							{
+								name: "dstLstValueCalcAccs",
+								type: "u8",
+							},
+							{
+								name: "srcLstIndex",
+								type: "u32",
+							},
+							{
+								name: "dstLstIndex",
+								type: "u32",
+							},
 						],
 					},
 					{
 						name: "LemmingsFi",
-						fields: [{ name: "isBaseIn", type: "bool" }],
+						fields: [
+							{
+								name: "isBaseIn",
+								type: "bool",
+							},
+						],
 					},
 					{ name: "ScaleVmmBuy" },
 					{ name: "ScaleVmmSell" },
@@ -4866,14 +4840,24 @@ export const IDL: Jupiter = {
 					{ name: "ScaleAmmSell" },
 					{
 						name: "BisonFiV2",
-						fields: [{ name: "aToB", type: "bool" }],
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
 					},
 					{ name: "Trends" },
 					{ name: "HumaDeposit" },
 					{ name: "HumaInstantWithdraw" },
 					{
 						name: "Kipseli",
-						fields: [{ name: "isBaseToQuote", type: "bool" }],
+						fields: [
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
 					},
 					{
 						name: "DynamicV2",
@@ -4886,8 +4870,14 @@ export const IDL: Jupiter = {
 									},
 								},
 							},
-							{ name: "maxSplitQuoteCalls", type: "u8" },
-							{ name: "maxSplitCandidates", type: "u8" },
+							{
+								name: "maxSplitQuoteCalls",
+								type: "u8",
+							},
+							{
+								name: "maxSplitCandidates",
+								type: "u8",
+							},
 						],
 					},
 					{ name: "PumpSwapBuyV3WithCashbackClaim" },
@@ -4896,56 +4886,113 @@ export const IDL: Jupiter = {
 					{ name: "PumpWrappedSellV4WithCashbackClaim" },
 					{
 						name: "GoonFiV3",
-						fields: [{ name: "isBid", type: "bool" }],
+						fields: [
+							{
+								name: "isBid",
+								type: "bool",
+							},
+						],
 					},
 					{
 						name: "PumpWrappedBuyV5",
-						fields: [{ name: "claimCashback", type: "bool" }],
+						fields: [
+							{
+								name: "claimCashback",
+								type: "bool",
+							},
+						],
 					},
 					{
 						name: "PumpWrappedSellV5",
-						fields: [{ name: "claimCashback", type: "bool" }],
+						fields: [
+							{
+								name: "claimCashback",
+								type: "bool",
+							},
+						],
 					},
 					{ name: "ZeroFiSwapV2" },
 					{
 						name: "BisonFiPredict",
 						fields: [
-							{ name: "side", type: { defined: "BisonFiPredictSide" } },
-							{ name: "isBuy", type: "bool" },
+							{
+								name: "side",
+								type: {
+									defined: "BisonFiPredictSide",
+								},
+							},
+							{
+								name: "isBuy",
+								type: "bool",
+							},
 						],
 					},
 					{ name: "ByrealDynamicV3" },
 					{
 						name: "Flux",
 						fields: [
-							{ name: "swapId", type: "u64" },
-							{ name: "baseToQuote", type: "bool" },
+							{
+								name: "swapId",
+								type: "u64",
+							},
+							{
+								name: "baseToQuote",
+								type: "bool",
+							},
 						],
 					},
 					{ name: "VaultLiquidSellLst" },
 					{
 						name: "VaultLiquidBuyLst",
-						fields: [{ name: "lstAmount", type: "u64" }],
+						fields: [
+							{
+								name: "lstAmount",
+								type: "u64",
+							},
+						],
 					},
 					{
 						name: "KipseliV2",
-						fields: [{ name: "isBaseToQuote", type: "bool" }],
+						fields: [
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
 					},
 					{
 						name: "Deriverse",
 						fields: [
-							{ name: "side", type: { defined: "Side" } },
-							{ name: "instrId", type: "u32" },
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+							{
+								name: "instrId",
+								type: "u32",
+							},
 						],
 					},
 					{
 						name: "Hadron",
-						fields: [{ name: "isX", type: "bool" }],
+						fields: [
+							{
+								name: "isX",
+								type: "bool",
+							},
+						],
 					},
 					{ name: "BinaryFi" },
 					{
 						name: "Metric",
-						fields: [{ name: "zeroForOne", type: "bool" }],
+						fields: [
+							{
+								name: "zeroForOne",
+								type: "bool",
+							},
+						],
 					},
 				],
 			},
@@ -4969,22 +5016,6 @@ export const IDL: Jupiter = {
 			},
 		},
 		{
-			name: "HyloSwapType",
-			type: {
-				kind: "enum",
-				variants: [
-					{ name: "MintStable" },
-					{ name: "RedeemStable" },
-					{ name: "MintLever" },
-					{ name: "RedeemLever" },
-					{ name: "SwapStableToLever" },
-					{ name: "SwapLeverToStable" },
-					{ name: "StabilityPoolDeposit" },
-					{ name: "StabilityPoolWithdraw" },
-				],
-			},
-		},
-		{
 			name: "CandidateSwap",
 			type: {
 				kind: "enum",
@@ -4992,8 +5023,14 @@ export const IDL: Jupiter = {
 					{
 						name: "HumidiFi",
 						fields: [
-							{ name: "swapId", type: "u64" },
-							{ name: "isBaseToQuote", type: "bool" },
+							{
+								name: "swapId",
+								type: "u64",
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
 						],
 					},
 					{
@@ -5010,33 +5047,62 @@ export const IDL: Jupiter = {
 					{
 						name: "HumidiFiV2",
 						fields: [
-							{ name: "swapId", type: "u64" },
-							{ name: "isBaseToQuote", type: "bool" },
+							{
+								name: "swapId",
+								type: "u64",
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
 						],
 					},
 					{ name: "RaydiumV2" },
 					{ name: "RaydiumClmm" },
 					{
 						name: "Whirlpool",
-						fields: [{ name: "aToB", type: "bool" }],
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
 					},
 					{ name: "ZeroFi" },
 					{
 						name: "BisonFiV2",
-						fields: [{ name: "aToB", type: "bool" }],
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
 					},
 					{
 						name: "GoonFiV2",
-						fields: [{ name: "isBid", type: "bool" }],
+						fields: [
+							{
+								name: "isBid",
+								type: "bool",
+							},
+						],
 					},
 					{
 						name: "GoonFiV3",
-						fields: [{ name: "isBid", type: "bool" }],
+						fields: [
+							{
+								name: "isBid",
+								type: "bool",
+							},
+						],
 					},
 					{
 						name: "WhirlpoolV2",
 						fields: [
-							{ name: "aToB", type: "bool" },
+							{
+								name: "aToB",
+								type: "bool",
+							},
 							{
 								name: "remainingAccountsInfo",
 								type: {
@@ -5052,67 +5118,45 @@ export const IDL: Jupiter = {
 			},
 		},
 		{
-			name: "DefiTunaAccountsType",
+			name: "HyloSwapType",
 			type: {
 				kind: "enum",
 				variants: [
-					{
-						name: "TransferHookA",
-					},
-					{
-						name: "TransferHookB",
-					},
-					{
-						name: "TransferHookInput",
-					},
-					{
-						name: "TransferHookIntermediate",
-					},
-					{
-						name: "TransferHookOutput",
-					},
-					{
-						name: "SupplementalTickArrays",
-					},
-					{
-						name: "SupplementalTickArraysOne",
-					},
-					{
-						name: "SupplementalTickArraysTwo",
-					},
+					{ name: "MintStable" },
+					{ name: "RedeemStable" },
+					{ name: "MintLever" },
+					{ name: "RedeemLever" },
+					{ name: "SwapStableToLever" },
+					{ name: "SwapLeverToStable" },
+					{ name: "StabilityPoolDeposit" },
+					{ name: "StabilityPoolWithdraw" },
 				],
 			},
 		},
 		{
-			name: "RemainingAccountsSlice",
+			name: "SwapEvent",
 			type: {
 				kind: "struct",
 				fields: [
 					{
-						name: "accountsType",
-						type: {
-							defined: "AccountsType",
-						},
+						name: "amm",
+						type: "publicKey",
 					},
 					{
-						name: "length",
-						type: "u8",
+						name: "inputMint",
+						type: "publicKey",
 					},
-				],
-			},
-		},
-		{
-			name: "RemainingAccountsInfo",
-			type: {
-				kind: "struct",
-				fields: [
 					{
-						name: "slices",
-						type: {
-							vec: {
-								defined: "RemainingAccountsSlice",
-							},
-						},
+						name: "inputAmount",
+						type: "u64",
+					},
+					{
+						name: "outputMint",
+						type: "publicKey",
+					},
+					{
+						name: "outputAmount",
+						type: "u64",
 					},
 				],
 			},
@@ -5142,36 +5186,33 @@ export const IDL: Jupiter = {
 			},
 		},
 		{
-			name: "AccountsType",
+			name: "SwapsEvent",
 			type: {
-				kind: "enum",
-				variants: [
+				kind: "struct",
+				fields: [
 					{
-						name: "TransferHookA",
+						name: "swapEvents",
+						type: {
+							vec: {
+								defined: "SwapEventV2",
+							},
+						},
+					},
+				],
+			},
+		},
+		{
+			name: "TokenLedger",
+			type: {
+				kind: "struct",
+				fields: [
+					{
+						name: "tokenAccount",
+						type: "publicKey",
 					},
 					{
-						name: "TransferHookB",
-					},
-					{
-						name: "TransferHookReward",
-					},
-					{
-						name: "TransferHookInput",
-					},
-					{
-						name: "TransferHookIntermediate",
-					},
-					{
-						name: "TransferHookOutput",
-					},
-					{
-						name: "SupplementalTickArrays",
-					},
-					{
-						name: "SupplementalTickArraysOne",
-					},
-					{
-						name: "SupplementalTickArraysTwo",
+						name: "amount",
+						type: "u64",
 					},
 				],
 			},
@@ -5229,14 +5270,43 @@ export const IDL: Jupiter = {
 			type: {
 				kind: "struct",
 				fields: [
-					{ name: "candidateIndex", type: "u64" },
-					{ name: "inAmount", type: "u64" },
-					{ name: "errorCode", type: "u64" },
+					{
+						name: "candidateIndex",
+						type: "u64",
+					},
+					{
+						name: "inAmount",
+						type: "u64",
+					},
+					{
+						name: "errorCode",
+						type: "u64",
+					},
 				],
 			},
 		},
 	],
 	events: [
+		{
+			name: "FeeEvent",
+			fields: [
+				{
+					name: "account",
+					type: "publicKey",
+					index: false,
+				},
+				{
+					name: "mint",
+					type: "publicKey",
+					index: false,
+				},
+				{
+					name: "amount",
+					type: "u64",
+					index: false,
+				},
+			],
+		},
 		{
 			name: "SwapEvent",
 			fields: [
@@ -5262,26 +5332,6 @@ export const IDL: Jupiter = {
 				},
 				{
 					name: "outputAmount",
-					type: "u64",
-					index: false,
-				},
-			],
-		},
-		{
-			name: "FeeEvent",
-			fields: [
-				{
-					name: "account",
-					type: "publicKey",
-					index: false,
-				},
-				{
-					name: "mint",
-					type: "publicKey",
-					index: false,
-				},
-				{
-					name: "amount",
 					type: "u64",
 					index: false,
 				},
@@ -5316,21 +5366,6 @@ export const IDL: Jupiter = {
 			],
 		},
 		{
-			name: "BestSwapOutAmountViolation",
-			fields: [
-				{
-					name: "expectedOutAmount",
-					type: "u64",
-					index: false,
-				},
-				{
-					name: "outAmount",
-					type: "u64",
-					index: false,
-				},
-			],
-		},
-		{
 			name: "CandidateSwapQuoteError",
 			fields: [
 				{
@@ -5345,6 +5380,21 @@ export const IDL: Jupiter = {
 				},
 				{
 					name: "errorCode",
+					type: "u64",
+					index: false,
+				},
+			],
+		},
+		{
+			name: "BestSwapOutAmountViolation",
+			fields: [
+				{
+					name: "expectedOutAmount",
+					type: "u64",
+					index: false,
+				},
+				{
+					name: "outAmount",
 					type: "u64",
 					index: false,
 				},

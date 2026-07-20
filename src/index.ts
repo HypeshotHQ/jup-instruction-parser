@@ -14,7 +14,7 @@ export { TransactionWithMeta };
 export const program = new Program<Jupiter>(
 	IDL,
 	JUPITER_V6_PROGRAM_ID,
-	{} as Provider
+	{} as Provider,
 );
 
 type AccountInfoMap = Map<string, AccountInfo<Buffer>>;
@@ -66,7 +66,7 @@ export async function extract(
 	signature: string,
 	connection: Connection,
 	tx: TransactionWithMeta,
-	blockTime?: number
+	blockTime?: number,
 ): Promise<SwapAttributes | undefined> {
 	const programId = JUPITER_V6_PROGRAM_ID;
 	const accountInfosMap: AccountInfoMap = new Map();
@@ -107,9 +107,8 @@ export async function extract(
 	if (feeEvent) {
 		accountsToBeFetched.push(feeEvent.account);
 	}
-	const accountInfos = await connection.getMultipleAccountsInfo(
-		accountsToBeFetched
-	);
+	const accountInfos =
+		await connection.getMultipleAccountsInfo(accountsToBeFetched);
 	accountsToBeFetched.forEach((account, index) => {
 		accountInfosMap.set(account.toBase58(), accountInfos[index]);
 	});
@@ -134,7 +133,7 @@ export async function extract(
 	const inSymbol = null; // We don't longer support this.
 	const inMint = swapData[initialPositions[0]].inMint;
 	const inSwapData = swapData.filter(
-		(swap, index) => initialPositions.includes(index) && swap.inMint === inMint
+		(swap, index) => initialPositions.includes(index) && swap.inMint === inMint,
 	);
 
 	const inAmount = inSwapData.reduce((acc, curr) => {
@@ -150,7 +149,7 @@ export async function extract(
 	const outSymbol = null; // We don't longer support this.
 	const outMint = swapData[finalPositions[0]].outMint;
 	const outSwapData = swapData.filter(
-		(swap, index) => finalPositions.includes(index) && swap.outMint === outMint
+		(swap, index) => finalPositions.includes(index) && swap.outMint === outMint,
 	);
 	const outAmount = outSwapData.reduce((acc, curr) => {
 		return acc + BigInt(curr.outAmount);
@@ -165,7 +164,7 @@ export async function extract(
 	const volumeInUSD =
 		outAmountInUSD && inAmountInUSD
 			? Decimal.min(outAmountInUSD, inAmountInUSD)
-			: outAmountInUSD ?? inAmountInUSD;
+			: (outAmountInUSD ?? inAmountInUSD);
 
 	const swap = {} as SwapAttributes;
 
@@ -195,7 +194,7 @@ export async function extract(
 	swap.outMint = outMint;
 
 	const exactOutAmount = parser.getExactOutAmount(
-		tx.transaction.message.instructions
+		tx.transaction.message.instructions,
 	);
 	if (exactOutAmount) {
 		swap.exactOutAmount = BigInt(exactOutAmount);
@@ -209,7 +208,7 @@ export async function extract(
 	}
 
 	const exactInAmount = parser.getExactInAmount(
-		tx.transaction.message.instructions
+		tx.transaction.message.instructions,
 	);
 	if (exactInAmount) {
 		swap.exactInAmount = BigInt(exactInAmount);
@@ -228,12 +227,12 @@ export async function extract(
 		const { mint, amount, amountInDecimal, amountInUSD } = await extractVolume(
 			accountInfosMap,
 			feeEvent.mint,
-			feeEvent.amount
+			feeEvent.amount,
 		);
 		swap.feeTokenPubkey = feeEvent.account.toBase58();
 		swap.feeOwner = extractTokenAccountOwner(
 			accountInfosMap,
-			feeEvent.account
+			feeEvent.account,
 		)?.toBase58();
 		swap.feeAmount = BigInt(amount);
 		swap.feeAmountInDecimal = amountInDecimal?.toNumber();
@@ -246,10 +245,10 @@ export async function extract(
 
 async function parseSwapEvents(
 	accountInfosMap: AccountInfoMap,
-	swapEvents: SwapEvent[]
+	swapEvents: SwapEvent[],
 ) {
 	const swapData = await Promise.all(
-		swapEvents.map(swapEvent => extractSwapData(accountInfosMap, swapEvent))
+		swapEvents.map(swapEvent => extractSwapData(accountInfosMap, swapEvent)),
 	);
 
 	return swapData;
@@ -257,12 +256,12 @@ async function parseSwapEvents(
 
 async function extractSwapData(
 	accountInfosMap: AccountInfoMap,
-	swapEvent: SwapEvent | any
+	swapEvent: SwapEvent | any,
 ) {
 	// Handle both V1 (SwapEvent with amm field) and V2 (SwapEventV2 without amm field)
 	const amm = swapEvent.amm
-		? AMM_TYPES[swapEvent.amm.toBase58()] ??
-		  `Unknown program ${swapEvent.amm.toBase58()}`
+		? (AMM_TYPES[swapEvent.amm.toBase58()] ??
+			`Unknown program ${swapEvent.amm.toBase58()}`)
 		: "Unknown AMM";
 
 	// Handle both PublicKey (V1) and string (V2) formats
@@ -304,7 +303,7 @@ async function extractSwapData(
 async function extractVolume(
 	accountInfosMap: AccountInfoMap,
 	mint: PublicKey,
-	amount: BN | string
+	amount: BN | string,
 ) {
 	// Handle both BN (V1) and hex string (V2) formats
 	const amountBN = typeof amount === "string" ? new BN(amount, 16) : amount;
@@ -326,7 +325,7 @@ async function extractVolume(
 
 function extractTokenAccountOwner(
 	accountInfosMap: AccountInfoMap,
-	account: PublicKey
+	account: PublicKey,
 ) {
 	const accountData = accountInfosMap.get(account.toBase58());
 

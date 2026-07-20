@@ -8,27 +8,27 @@ type RoutePlanStep = IdlTypes<Jupiter>["RoutePlanStep"];
 export type RoutePlan = RoutePlanStep[];
 
 export interface PartialInstruction {
-  programId: PublicKey;
-  data: string /** Expecting base58 */;
-  accounts: PublicKey[];
+	programId: PublicKey;
+	data: string /** Expecting base58 */;
+	accounts: PublicKey[];
 }
 
 // Subset of @solana/web3.js ParsedTransactionWithMeta to allow flexible upstream data
 export interface TransactionWithMeta {
-  meta: {
-    logMessages?: string[] | null;
-    innerInstructions?:
-      | {
-          index: number;
-          instructions: (ParsedInstruction | PartialInstruction)[];
-        }[]
-      | null;
-  } | null;
-  transaction: {
-    signatures: string[];
-    message: {
-      accountKeys: { pubkey: PublicKey }[];
-      instructions: (ParsedInstruction | PartialInstruction)[];
-    };
-  };
+	meta: {
+		logMessages?: string[] | null;
+		innerInstructions?:
+			| {
+					index: number;
+					instructions: (ParsedInstruction | PartialInstruction)[];
+			  }[]
+			| null;
+	} | null;
+	transaction: {
+		signatures: string[];
+		message: {
+			accountKeys: { pubkey: PublicKey }[];
+			instructions: (ParsedInstruction | PartialInstruction)[];
+		};
+	};
 }
