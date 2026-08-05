@@ -2223,6 +2223,67 @@ export type Jupiter = {
 							},
 						];
 					},
+					{
+						name: "JupiterLendDexSwap";
+						fields: [
+							{
+								name: "swap0to1";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "Gatorswap";
+						fields: [
+							{
+								name: "baseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "Flint";
+						fields: [
+							{
+								name: "isGlobal";
+								type: "bool";
+							},
+							{
+								name: "takerBuy";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "Denali";
+						fields: [
+							{
+								name: "baseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{ name: "PerenaStarV2Deposit" },
+					{
+						name: "PerenaStarV2WithdrawFromExternal";
+						fields: [
+							{
+								name: "externalLiquiditySource";
+								type: "u8";
+							},
+						];
+					},
+					{
+						name: "SanctumSols";
+						fields: [
+							{
+								name: "swapType";
+								type: {
+									defined: "SanctumSolsSwapType";
+								};
+							},
+						];
+					},
 				];
 			};
 		},
@@ -2347,6 +2408,17 @@ export type Jupiter = {
 			};
 		},
 		{
+			name: "SanctumSolsSwapType";
+			type: {
+				kind: "enum";
+				variants: [
+					{ name: "Mint" },
+					{ name: "Claim" },
+					{ name: "ClaimHolding" },
+				];
+			};
+		},
+		{
 			name: "HyloSwapType";
 			type: {
 				kind: "enum";
@@ -2410,6 +2482,10 @@ export type Jupiter = {
 					{
 						name: "outputAmount";
 						type: "u64";
+					},
+					{
+						name: "amm";
+						type: "publicKey";
 					},
 				];
 			};
@@ -4994,6 +5070,67 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{
+						name: "JupiterLendDexSwap",
+						fields: [
+							{
+								name: "swap0to1",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "Gatorswap",
+						fields: [
+							{
+								name: "baseToQuote",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "Flint",
+						fields: [
+							{
+								name: "isGlobal",
+								type: "bool",
+							},
+							{
+								name: "takerBuy",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "Denali",
+						fields: [
+							{
+								name: "baseToQuote",
+								type: "bool",
+							},
+						],
+					},
+					{ name: "PerenaStarV2Deposit" },
+					{
+						name: "PerenaStarV2WithdrawFromExternal",
+						fields: [
+							{
+								name: "externalLiquiditySource",
+								type: "u8",
+							},
+						],
+					},
+					{
+						name: "SanctumSols",
+						fields: [
+							{
+								name: "swapType",
+								type: {
+									defined: "SanctumSolsSwapType",
+								},
+							},
+						],
+					},
 				],
 			},
 		},
@@ -5118,6 +5255,17 @@ export const IDL: Jupiter = {
 			},
 		},
 		{
+			name: "SanctumSolsSwapType",
+			type: {
+				kind: "enum",
+				variants: [
+					{ name: "Mint" },
+					{ name: "Claim" },
+					{ name: "ClaimHolding" },
+				],
+			},
+		},
+		{
 			name: "HyloSwapType",
 			type: {
 				kind: "enum",
@@ -5181,6 +5329,10 @@ export const IDL: Jupiter = {
 					{
 						name: "outputAmount",
 						type: "u64",
+					},
+					{
+						name: "amm",
+						type: "publicKey",
 					},
 				],
 			},

@@ -341,8 +341,12 @@ function extractMintDecimals(accountInfosMap: AccountInfoMap, mint: PublicKey) {
 	const mintData = accountInfosMap.get(mint.toBase58());
 
 	if (mintData) {
-		const mintInfo = unpackMint(mint, mintData, mintData.owner);
-		return mintInfo.decimals;
+		try {
+			const mintInfo = unpackMint(mint, mintData, mintData.owner);
+			return mintInfo.decimals;
+		} catch {
+			return;
+		}
 	}
 
 	return;
