@@ -306,7 +306,9 @@ export type Jupiter = {
 		},
 		{
 			name: "route";
-			docs: ["route_plan Topologically sorted trade DAG"];
+			docs: [
+				"route_plan Topologically sorted trade DAG",
+			];
 			accounts: [
 				{
 					name: "tokenProgram";
@@ -1331,14 +1333,20 @@ export type Jupiter = {
 			name: "Side";
 			type: {
 				kind: "enum";
-				variants: [{ name: "Bid" }, { name: "Ask" }];
+				variants: [
+					{ name: "Bid" },
+					{ name: "Ask" },
+				];
 			};
 		},
 		{
 			name: "BisonFiPredictSide";
 			type: {
 				kind: "enum";
-				variants: [{ name: "Yes" }, { name: "No" }];
+				variants: [
+					{ name: "Yes" },
+					{ name: "No" },
+				];
 			};
 		},
 		{
@@ -1959,7 +1967,10 @@ export type Jupiter = {
 							{
 								name: "lstAmounts";
 								type: {
-									array: ["u64", 5];
+									array: [
+										"u64",
+										5,
+									];
 								};
 							},
 							{
@@ -2284,6 +2295,51 @@ export type Jupiter = {
 							},
 						];
 					},
+					{
+						name: "HyloV2";
+						fields: [
+							{
+								name: "swapType";
+								type: {
+									defined: "HyloSwapType";
+								};
+							},
+						];
+					},
+					{ name: "SanctumPamm" },
+					{
+						name: "Archer";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+						];
+					},
+					{ name: "TrenchWrappedBuy" },
+					{ name: "TrenchWrappedSell" },
+					{
+						name: "BisonFiMarketBacked";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "TesseraVV2";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+						];
+					},
 				];
 			};
 		},
@@ -2404,6 +2460,27 @@ export type Jupiter = {
 						];
 					},
 					{ name: "ZeroFiSwapV2" },
+					{
+						name: "BisonFiMarketBacked";
+						fields: [
+							{
+								name: "aToB";
+								type: "bool";
+							},
+						];
+					},
+					{ name: "RaydiumClmmV2" },
+					{
+						name: "TesseraVV2";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+						];
+					},
 				];
 			};
 		},
@@ -2545,11 +2622,15 @@ export type Jupiter = {
 				variants: [
 					{
 						name: "OutAmount";
-						fields: ["u64"];
+						fields: [
+							"u64",
+						];
 					},
 					{
 						name: "ProgramError";
-						fields: ["u64"];
+						fields: [
+							"u64",
+						];
 					},
 				];
 			};
@@ -3153,7 +3234,9 @@ export const IDL: Jupiter = {
 		},
 		{
 			name: "route",
-			docs: ["route_plan Topologically sorted trade DAG"],
+			docs: [
+				"route_plan Topologically sorted trade DAG",
+			],
 			accounts: [
 				{
 					name: "tokenProgram",
@@ -4178,14 +4261,20 @@ export const IDL: Jupiter = {
 			name: "Side",
 			type: {
 				kind: "enum",
-				variants: [{ name: "Bid" }, { name: "Ask" }],
+				variants: [
+					{ name: "Bid" },
+					{ name: "Ask" },
+				],
 			},
 		},
 		{
 			name: "BisonFiPredictSide",
 			type: {
 				kind: "enum",
-				variants: [{ name: "Yes" }, { name: "No" }],
+				variants: [
+					{ name: "Yes" },
+					{ name: "No" },
+				],
 			},
 		},
 		{
@@ -4806,7 +4895,10 @@ export const IDL: Jupiter = {
 							{
 								name: "lstAmounts",
 								type: {
-									array: ["u64", 5],
+									array: [
+										"u64",
+										5,
+									],
 								},
 							},
 							{
@@ -5131,6 +5223,51 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{
+						name: "HyloV2",
+						fields: [
+							{
+								name: "swapType",
+								type: {
+									defined: "HyloSwapType",
+								},
+							},
+						],
+					},
+					{ name: "SanctumPamm" },
+					{
+						name: "Archer",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
+					{ name: "TrenchWrappedBuy" },
+					{ name: "TrenchWrappedSell" },
+					{
+						name: "BisonFiMarketBacked",
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "TesseraVV2",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
 				],
 			},
 		},
@@ -5251,6 +5388,27 @@ export const IDL: Jupiter = {
 						],
 					},
 					{ name: "ZeroFiSwapV2" },
+					{
+						name: "BisonFiMarketBacked",
+						fields: [
+							{
+								name: "aToB",
+								type: "bool",
+							},
+						],
+					},
+					{ name: "RaydiumClmmV2" },
+					{
+						name: "TesseraVV2",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
 				],
 			},
 		},
@@ -5392,11 +5550,15 @@ export const IDL: Jupiter = {
 				variants: [
 					{
 						name: "OutAmount",
-						fields: ["u64"],
+						fields: [
+							"u64",
+						],
 					},
 					{
 						name: "ProgramError",
-						fields: ["u64"],
+						fields: [
+							"u64",
+						],
 					},
 				],
 			},
