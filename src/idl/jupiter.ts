@@ -2340,6 +2340,95 @@ export type Jupiter = {
 							},
 						];
 					},
+					{ name: "Stableswap" },
+					{ name: "BinaryFiV2" },
+					{
+						name: "KipseliV3";
+						fields: [
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "PerenaStarV2TrancheDeposit";
+						fields: [
+							{
+								name: "kind";
+								type: {
+									defined: "PerenaTrancheKind";
+								};
+							},
+						];
+					},
+					{
+						name: "PerenaStarV2TrancheWithdrawFromExternal";
+						fields: [
+							{
+								name: "kind";
+								type: {
+									defined: "PerenaTrancheKind";
+								};
+							},
+							{
+								name: "externalLiquiditySource";
+								type: {
+									option: "u8";
+								};
+							},
+						];
+					},
+					{
+						name: "Quay";
+						fields: [
+							{
+								name: "sellBase";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "HumidiFiRouter";
+						fields: [
+							{
+								name: "claimedMs";
+								type: "u64";
+							},
+							{
+								name: "seedRng";
+								type: {
+									array: [
+										"u8",
+										32,
+									];
+								};
+							},
+							{
+								name: "token";
+								type: {
+									array: [
+										"u8",
+										16,
+									];
+								};
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
+					},
+				];
+			};
+		},
+		{
+			name: "PerenaTrancheKind";
+			type: {
+				kind: "enum";
+				variants: [
+					{ name: "Junior" },
+					{ name: "Senior" },
 				];
 			};
 		},
@@ -2478,6 +2567,37 @@ export type Jupiter = {
 								type: {
 									defined: "Side";
 								};
+							},
+						];
+					},
+					{
+						name: "HumidiFiRouter";
+						fields: [
+							{
+								name: "claimedMs";
+								type: "u64";
+							},
+							{
+								name: "seedRng";
+								type: {
+									array: [
+										"u8",
+										32,
+									];
+								};
+							},
+							{
+								name: "token";
+								type: {
+									array: [
+										"u8",
+										16,
+									];
+								};
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
 							},
 						];
 					},
@@ -2922,6 +3042,11 @@ export type Jupiter = {
 			code: 6026;
 			name: "BondingCurveAlreadyCompleted";
 			msg: "Bonding curve already completed";
+		},
+		{
+			code: 6027;
+			name: "IncorrectSwapProgramId";
+			msg: "Swap program ID is invalid";
 		},
 	];
 };
@@ -5268,6 +5393,95 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{ name: "Stableswap" },
+					{ name: "BinaryFiV2" },
+					{
+						name: "KipseliV3",
+						fields: [
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "PerenaStarV2TrancheDeposit",
+						fields: [
+							{
+								name: "kind",
+								type: {
+									defined: "PerenaTrancheKind",
+								},
+							},
+						],
+					},
+					{
+						name: "PerenaStarV2TrancheWithdrawFromExternal",
+						fields: [
+							{
+								name: "kind",
+								type: {
+									defined: "PerenaTrancheKind",
+								},
+							},
+							{
+								name: "externalLiquiditySource",
+								type: {
+									option: "u8",
+								},
+							},
+						],
+					},
+					{
+						name: "Quay",
+						fields: [
+							{
+								name: "sellBase",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "HumidiFiRouter",
+						fields: [
+							{
+								name: "claimedMs",
+								type: "u64",
+							},
+							{
+								name: "seedRng",
+								type: {
+									array: [
+										"u8",
+										32,
+									],
+								},
+							},
+							{
+								name: "token",
+								type: {
+									array: [
+										"u8",
+										16,
+									],
+								},
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
+					},
+				],
+			},
+		},
+		{
+			name: "PerenaTrancheKind",
+			type: {
+				kind: "enum",
+				variants: [
+					{ name: "Junior" },
+					{ name: "Senior" },
 				],
 			},
 		},
@@ -5406,6 +5620,37 @@ export const IDL: Jupiter = {
 								type: {
 									defined: "Side",
 								},
+							},
+						],
+					},
+					{
+						name: "HumidiFiRouter",
+						fields: [
+							{
+								name: "claimedMs",
+								type: "u64",
+							},
+							{
+								name: "seedRng",
+								type: {
+									array: [
+										"u8",
+										32,
+									],
+								},
+							},
+							{
+								name: "token",
+								type: {
+									array: [
+										"u8",
+										16,
+									],
+								},
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
 							},
 						],
 					},
@@ -5850,6 +6095,11 @@ export const IDL: Jupiter = {
 			code: 6026,
 			name: "BondingCurveAlreadyCompleted",
 			msg: "Bonding curve already completed",
+		},
+		{
+			code: 6027,
+			name: "IncorrectSwapProgramId",
+			msg: "Swap program ID is invalid",
 		},
 	],
 };
