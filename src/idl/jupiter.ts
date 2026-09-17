@@ -306,9 +306,7 @@ export type Jupiter = {
 		},
 		{
 			name: "route";
-			docs: [
-				"route_plan Topologically sorted trade DAG",
-			];
+			docs: ["route_plan Topologically sorted trade DAG"];
 			accounts: [
 				{
 					name: "tokenProgram";
@@ -1333,20 +1331,14 @@ export type Jupiter = {
 			name: "Side";
 			type: {
 				kind: "enum";
-				variants: [
-					{ name: "Bid" },
-					{ name: "Ask" },
-				];
+				variants: [{ name: "Bid" }, { name: "Ask" }];
 			};
 		},
 		{
 			name: "BisonFiPredictSide";
 			type: {
 				kind: "enum";
-				variants: [
-					{ name: "Yes" },
-					{ name: "No" },
-				];
+				variants: [{ name: "Yes" }, { name: "No" }];
 			};
 		},
 		{
@@ -1967,10 +1959,7 @@ export type Jupiter = {
 							{
 								name: "lstAmounts";
 								type: {
-									array: [
-										"u64",
-										5,
-									];
+									array: ["u64", 5];
 								};
 							},
 							{
@@ -2398,23 +2387,59 @@ export type Jupiter = {
 							{
 								name: "seedRng";
 								type: {
-									array: [
-										"u8",
-										32,
-									];
+									array: ["u8", 32];
 								};
 							},
 							{
 								name: "token";
 								type: {
-									array: [
-										"u8",
-										16,
-									];
+									array: ["u8", 16];
 								};
 							},
 							{
 								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "HumidiFiRouterV2";
+						fields: [
+							{
+								name: "routerId";
+								type: "u64";
+							},
+							{
+								name: "claimedMs";
+								type: "u64";
+							},
+							{
+								name: "seedRng";
+								type: {
+									array: ["u8", 32];
+								};
+							},
+							{
+								name: "token";
+								type: {
+									array: ["u8", 16];
+								};
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "PumpWrappedBuyV6";
+						fields: [
+							{
+								name: "claimCashback";
+								type: "bool";
+							},
+							{
+								name: "allowPartialFill";
 								type: "bool";
 							},
 						];
@@ -2426,10 +2451,7 @@ export type Jupiter = {
 			name: "PerenaTrancheKind";
 			type: {
 				kind: "enum";
-				variants: [
-					{ name: "Junior" },
-					{ name: "Senior" },
-				];
+				variants: [{ name: "Junior" }, { name: "Senior" }];
 			};
 		},
 		{
@@ -2580,19 +2602,42 @@ export type Jupiter = {
 							{
 								name: "seedRng";
 								type: {
-									array: [
-										"u8",
-										32,
-									];
+									array: ["u8", 32];
 								};
 							},
 							{
 								name: "token";
 								type: {
-									array: [
-										"u8",
-										16,
-									];
+									array: ["u8", 16];
+								};
+							},
+							{
+								name: "isBaseToQuote";
+								type: "bool";
+							},
+						];
+					},
+					{
+						name: "HumidiFiRouterV2";
+						fields: [
+							{
+								name: "routerId";
+								type: "u64";
+							},
+							{
+								name: "claimedMs";
+								type: "u64";
+							},
+							{
+								name: "seedRng";
+								type: {
+									array: ["u8", 32];
+								};
+							},
+							{
+								name: "token";
+								type: {
+									array: ["u8", 16];
 								};
 							},
 							{
@@ -2742,15 +2787,11 @@ export type Jupiter = {
 				variants: [
 					{
 						name: "OutAmount";
-						fields: [
-							"u64",
-						];
+						fields: ["u64"];
 					},
 					{
 						name: "ProgramError";
-						fields: [
-							"u64",
-						];
+						fields: ["u64"];
 					},
 				];
 			};
@@ -3359,9 +3400,7 @@ export const IDL: Jupiter = {
 		},
 		{
 			name: "route",
-			docs: [
-				"route_plan Topologically sorted trade DAG",
-			],
+			docs: ["route_plan Topologically sorted trade DAG"],
 			accounts: [
 				{
 					name: "tokenProgram",
@@ -4386,20 +4425,14 @@ export const IDL: Jupiter = {
 			name: "Side",
 			type: {
 				kind: "enum",
-				variants: [
-					{ name: "Bid" },
-					{ name: "Ask" },
-				],
+				variants: [{ name: "Bid" }, { name: "Ask" }],
 			},
 		},
 		{
 			name: "BisonFiPredictSide",
 			type: {
 				kind: "enum",
-				variants: [
-					{ name: "Yes" },
-					{ name: "No" },
-				],
+				variants: [{ name: "Yes" }, { name: "No" }],
 			},
 		},
 		{
@@ -5020,10 +5053,7 @@ export const IDL: Jupiter = {
 							{
 								name: "lstAmounts",
 								type: {
-									array: [
-										"u64",
-										5,
-									],
+									array: ["u64", 5],
 								},
 							},
 							{
@@ -5451,23 +5481,59 @@ export const IDL: Jupiter = {
 							{
 								name: "seedRng",
 								type: {
-									array: [
-										"u8",
-										32,
-									],
+									array: ["u8", 32],
 								},
 							},
 							{
 								name: "token",
 								type: {
-									array: [
-										"u8",
-										16,
-									],
+									array: ["u8", 16],
 								},
 							},
 							{
 								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "HumidiFiRouterV2",
+						fields: [
+							{
+								name: "routerId",
+								type: "u64",
+							},
+							{
+								name: "claimedMs",
+								type: "u64",
+							},
+							{
+								name: "seedRng",
+								type: {
+									array: ["u8", 32],
+								},
+							},
+							{
+								name: "token",
+								type: {
+									array: ["u8", 16],
+								},
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "PumpWrappedBuyV6",
+						fields: [
+							{
+								name: "claimCashback",
+								type: "bool",
+							},
+							{
+								name: "allowPartialFill",
 								type: "bool",
 							},
 						],
@@ -5479,10 +5545,7 @@ export const IDL: Jupiter = {
 			name: "PerenaTrancheKind",
 			type: {
 				kind: "enum",
-				variants: [
-					{ name: "Junior" },
-					{ name: "Senior" },
-				],
+				variants: [{ name: "Junior" }, { name: "Senior" }],
 			},
 		},
 		{
@@ -5633,19 +5696,42 @@ export const IDL: Jupiter = {
 							{
 								name: "seedRng",
 								type: {
-									array: [
-										"u8",
-										32,
-									],
+									array: ["u8", 32],
 								},
 							},
 							{
 								name: "token",
 								type: {
-									array: [
-										"u8",
-										16,
-									],
+									array: ["u8", 16],
+								},
+							},
+							{
+								name: "isBaseToQuote",
+								type: "bool",
+							},
+						],
+					},
+					{
+						name: "HumidiFiRouterV2",
+						fields: [
+							{
+								name: "routerId",
+								type: "u64",
+							},
+							{
+								name: "claimedMs",
+								type: "u64",
+							},
+							{
+								name: "seedRng",
+								type: {
+									array: ["u8", 32],
+								},
+							},
+							{
+								name: "token",
+								type: {
+									array: ["u8", 16],
 								},
 							},
 							{
@@ -5795,15 +5881,11 @@ export const IDL: Jupiter = {
 				variants: [
 					{
 						name: "OutAmount",
-						fields: [
-							"u64",
-						],
+						fields: ["u64"],
 					},
 					{
 						name: "ProgramError",
-						fields: [
-							"u64",
-						],
+						fields: ["u64"],
 					},
 				],
 			},
