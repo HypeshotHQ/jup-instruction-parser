@@ -11,11 +11,12 @@
 	"scripts": {
 		"start": "ts-node src/cli.ts",
 		"build": "tsup",
-		"test": "ts-node src/tests.ts"
+		"test": "node --require ts-node/register --test src/lib/utils.test.ts"
 	},
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"@types/node": "^22",
 		"ts-node": "^10.9.2",
 		"tsup": "^8.3.5",
 		"typescript": "^5.3.3"
@@ -27,7 +28,6 @@
 		"@solana/web3.js": "^1.90.0",
 		"bs58": "^6.0.0",
 		"commander": "^11.1.0",
-		"decimal.js": "^10.4.3",
-		"got": "^11.8.6"
+		"decimal.js": "^10.4.3"
 	}
 }
