@@ -2444,6 +2444,7 @@ export type Jupiter = {
 							},
 						];
 					},
+					{ name: "HyloRouter" },
 				];
 			};
 		},
@@ -5538,6 +5539,7 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{ name: "HyloRouter" },
 				],
 			},
 		},

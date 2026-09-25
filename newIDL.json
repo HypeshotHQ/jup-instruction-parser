@@ -3039,6 +3039,9 @@
                 "type": "bool"
               }
             ]
+          },
+          {
+            "name": "HyloRouter"
           }
         ]
       }
