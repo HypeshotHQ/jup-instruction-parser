@@ -17,6 +17,11 @@ export const program = new Program<Jupiter>(
 	{} as Provider,
 );
 
+// Built once: its BorshCoder covers the whole Jupiter IDL and costs ~12ms of
+// synchronous CPU to construct, too much to pay on every swap. It holds no
+// per-transaction state.
+const parser = new InstructionParser(JUPITER_V6_PROGRAM_ID);
+
 type AccountInfoMap = Map<string, AccountInfo<Buffer>>;
 
 export type SwapAttributes = {
@@ -70,7 +75,6 @@ export async function extract(
 		throw new Error("Missing log messages...");
 	}
 
-	const parser = new InstructionParser(programId);
 	const events = getEvents(program, tx);
 
 	// Handle both SwapEvent (V1) and SwapsEvent (V2) formats

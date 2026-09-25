@@ -2,6 +2,7 @@ import { afterEach, describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { extract } from "./index";
 import { fixtureConnection, loadParsedTransaction } from "./__fixtures__/load";
+import * as instructionParserModule from "./lib/instruction-parser";
 
 // A real 4-hop Jupiter v6 swap (SOL -> 3ZLek…), captured from mainnet.
 const FIXTURE = "jupiter-spl-2SxaABxi";
@@ -44,6 +45,29 @@ async function run() {
 }
 
 describe("extract", () => {
+	// Building the parser builds a BorshCoder over the whole Jupiter IDL:
+	// ~12ms of synchronous CPU, which used to be paid on every swap.
+	it("reuses one instruction parser instead of building one per call", async () => {
+		const mod = instructionParserModule as {
+			InstructionParser: typeof instructionParserModule.InstructionParser;
+		};
+		const Original = mod.InstructionParser;
+		let constructed = 0;
+		mod.InstructionParser = class extends Original {
+			constructor(...args: ConstructorParameters<typeof Original>) {
+				super(...args);
+				constructed += 1;
+			}
+		};
+		try {
+			await run();
+			await run();
+		} finally {
+			mod.InstructionParser = Original;
+		}
+		assert.equal(constructed, 0);
+	});
+
 	it("makes no HTTP request; its only I/O is one getMultipleAccountsInfo", async () => {
 		const { httpRequests, rpcCalls } = await run();
 		assert.equal(httpRequests, 0);
