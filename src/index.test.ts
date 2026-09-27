@@ -1,6 +1,6 @@
 import { afterEach, describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { extract } from "./index";
+import { extract, readTokenBalanceFacts } from "./index";
 import { fixtureConnection, loadParsedTransaction } from "./__fixtures__/load";
 import * as instructionParserModule from "./lib/instruction-parser";
 
@@ -27,13 +27,26 @@ const USD_FIELDS = [
 	"feeAmountInUSD",
 ];
 
-async function run() {
+/** Drops the token balances for `mints` (all of them when omitted). */
+const withoutBalances = (mints?: string[]) => (tx: any) => {
+	const keep = (b: any) => mints !== undefined && !mints.includes(b.mint);
+	return {
+		...tx,
+		meta: {
+			...tx.meta,
+			preTokenBalances: tx.meta.preTokenBalances.filter(keep),
+			postTokenBalances: tx.meta.postTokenBalances.filter(keep),
+		},
+	};
+};
+
+async function run(transform: (tx: any) => any = tx => tx) {
 	let httpRequests = 0;
 	globalThis.fetch = (async () => {
 		httpRequests += 1;
 		throw new Error("extract() must not make HTTP requests");
 	}) as typeof fetch;
-	const tx = loadParsedTransaction(FIXTURE);
+	const tx = transform(loadParsedTransaction(FIXTURE));
 	const connection = fixtureConnection(FIXTURE);
 	const swap = await extract(
 		tx.transaction.signatures[0],
@@ -41,7 +54,12 @@ async function run() {
 		tx,
 		tx.blockTime,
 	);
-	return { swap: plain(swap), httpRequests, rpcCalls: connection.requested.length };
+	return {
+		swap: plain(swap),
+		httpRequests,
+		rpcCalls: connection.requested.length,
+		requested: connection.requested.flat(),
+	};
 }
 
 describe("extract", () => {
@@ -68,10 +86,24 @@ describe("extract", () => {
 		assert.equal(constructed, 0);
 	});
 
-	it("makes no HTTP request; its only I/O is one getMultipleAccountsInfo", async () => {
+	it("makes no HTTP request and no RPC call when the token balances cover every mint", async () => {
 		const { httpRequests, rpcCalls } = await run();
 		assert.equal(httpRequests, 0);
+		assert.equal(rpcCalls, 0);
+	});
+
+	it("asks the RPC only for a mint the token balances leave out", async () => {
+		const USDC = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
+		const { rpcCalls, requested, swap } = await run(withoutBalances([USDC]));
 		assert.equal(rpcCalls, 1);
+		assert.deepEqual(requested, [USDC]);
+		assert.deepEqual(swap, (await run()).swap);
+	});
+
+	it("falls back to the RPC for everything when the transaction has no token balances", async () => {
+		const { rpcCalls, swap } = await run(withoutBalances());
+		assert.equal(rpcCalls, 1);
+		assert.deepEqual(swap, (await run()).swap);
 	});
 
 	// Recorded from @hypeshot/instruction-parser 1.0.29 on this transaction, with
@@ -150,3 +182,35 @@ const BASELINE_HOPS = [
 		"outAmountInDecimal": "1112.80265186"
 	}
 ];
+
+describe("readTokenBalanceFacts", () => {
+	it("reads each mint's decimals and each token account's owner", () => {
+		const tx = loadParsedTransaction(FIXTURE);
+		const facts = readTokenBalanceFacts(tx);
+
+		assert.equal(facts.decimalsByMint.get("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"), 6);
+		assert.equal(facts.decimalsByMint.get("So11111111111111111111111111111111111111112"), 9);
+		assert.equal(facts.decimalsByMint.get("3ZLekZYq2qkZiSpnSvabjit34tUkjSwD1JFuW9as9wBG"), 9);
+
+		const [balance] = tx.meta.postTokenBalances;
+		const account = tx.transaction.message.accountKeys[balance.accountIndex].pubkey.toBase58();
+		assert.equal(facts.ownerByTokenAccount.get(account), balance.owner);
+	});
+
+	it("skips a balance whose account index is not in the account keys", () => {
+		const tx = loadParsedTransaction(FIXTURE);
+		const facts = readTokenBalanceFacts({
+			...tx,
+			meta: {
+				...tx.meta,
+				preTokenBalances: [],
+				postTokenBalances: [
+					{ accountIndex: 999, mint: "M", owner: "O", uiTokenAmount: { decimals: 4 } },
+				],
+			},
+		});
+
+		assert.equal(facts.decimalsByMint.get("M"), 4);
+		assert.equal(facts.ownerByTokenAccount.size, 0);
+	});
+});

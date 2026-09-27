@@ -24,6 +24,43 @@ const parser = new InstructionParser(JUPITER_V6_PROGRAM_ID);
 
 type AccountInfoMap = Map<string, AccountInfo<Buffer>>;
 
+/** Mint decimals and token-account owners, as the transaction itself states them. */
+export type TokenBalanceFacts = {
+	decimalsByMint: Map<string, number>;
+	ownerByTokenAccount: Map<string, string>;
+};
+
+/**
+ * Reads what `extract()` needs from the transaction's own token balances, so it
+ * only asks the RPC for what they leave out. Every token account a swap moves
+ * funds through appears there with its mint's decimals and its owner. The RPC
+ * read was one round trip (~50-130ms) on every swap whose mints were not
+ * already cached upstream, typically a coin's first trades.
+ */
+export function readTokenBalanceFacts(tx: TransactionWithMeta): TokenBalanceFacts {
+	const decimalsByMint = new Map<string, number>();
+	const ownerByTokenAccount = new Map<string, string>();
+	const accountKeys = tx.transaction.message.accountKeys;
+	const balances = [
+		...(tx.meta?.preTokenBalances ?? []),
+		...(tx.meta?.postTokenBalances ?? []),
+	];
+	for (const balance of balances) {
+		const decimals = balance.uiTokenAmount?.decimals;
+		if (typeof decimals === "number") {
+			decimalsByMint.set(balance.mint, decimals);
+		}
+		const account = accountKeys[balance.accountIndex]?.pubkey?.toBase58();
+		if (account && balance.owner) {
+			ownerByTokenAccount.set(account, balance.owner);
+		}
+	}
+	return { decimalsByMint, ownerByTokenAccount };
+}
+
+const toPublicKey = (key: PublicKey | string) =>
+	typeof key === "string" ? new PublicKey(key) : key;
+
 export type SwapAttributes = {
 	owner: string;
 	transferAuthority: string;
@@ -96,22 +133,30 @@ export async function extract(
 		return;
 	}
 
-	const accountsToBeFetched = new Array<PublicKey>();
+	const facts = readTokenBalanceFacts(tx);
+	const toFetch = new Map<string, PublicKey>();
 	swapEvents.forEach(swapEvent => {
-		accountsToBeFetched.push(swapEvent.inputMint);
-		accountsToBeFetched.push(swapEvent.outputMint);
+		for (const mint of [swapEvent.inputMint, swapEvent.outputMint]) {
+			const key = toPublicKey(mint);
+			if (!facts.decimalsByMint.has(key.toBase58())) {
+				toFetch.set(key.toBase58(), key);
+			}
+		}
 	});
 
-	if (feeEvent) {
-		accountsToBeFetched.push(feeEvent.account);
+	if (feeEvent && !facts.ownerByTokenAccount.has(feeEvent.account.toBase58())) {
+		toFetch.set(feeEvent.account.toBase58(), feeEvent.account);
 	}
-	const accountInfos =
-		await connection.getMultipleAccountsInfo(accountsToBeFetched);
-	accountsToBeFetched.forEach((account, index) => {
-		accountInfosMap.set(account.toBase58(), accountInfos[index]);
-	});
+	if (toFetch.size > 0) {
+		const accountsToBeFetched = [...toFetch.values()];
+		const accountInfos =
+			await connection.getMultipleAccountsInfo(accountsToBeFetched);
+		accountsToBeFetched.forEach((account, index) => {
+			accountInfosMap.set(account.toBase58(), accountInfos[index]);
+		});
+	}
 
-	const swapData = parseSwapEvents(accountInfosMap, swapEvents);
+	const swapData = parseSwapEvents(facts, accountInfosMap, swapEvents);
 	const instructions = parser.getInstructions(tx);
 
 	// Find the first routing instruction
@@ -195,12 +240,14 @@ export async function extract(
 
 	if (feeEvent) {
 		const { mint, amount, amountInDecimal } = extractVolume(
+			facts,
 			accountInfosMap,
 			feeEvent.mint,
 			feeEvent.amount,
 		);
 		swap.feeTokenPubkey = feeEvent.account.toBase58();
 		swap.feeOwner = extractTokenAccountOwner(
+			facts,
 			accountInfosMap,
 			feeEvent.account,
 		)?.toBase58();
@@ -213,13 +260,17 @@ export async function extract(
 }
 
 function parseSwapEvents(
+	facts: TokenBalanceFacts,
 	accountInfosMap: AccountInfoMap,
 	swapEvents: SwapEvent[],
 ) {
-	return swapEvents.map(swapEvent => extractSwapData(accountInfosMap, swapEvent));
+	return swapEvents.map(swapEvent =>
+		extractSwapData(facts, accountInfosMap, swapEvent),
+	);
 }
 
 function extractSwapData(
+	facts: TokenBalanceFacts,
 	accountInfosMap: AccountInfoMap,
 	swapEvent: SwapEvent | any,
 ) {
@@ -243,12 +294,12 @@ function extractSwapData(
 		mint: inMint,
 		amount: inAmount,
 		amountInDecimal: inAmountInDecimal,
-	} = extractVolume(accountInfosMap, inputMint, swapEvent.inputAmount);
+	} = extractVolume(facts, accountInfosMap, inputMint, swapEvent.inputAmount);
 	const {
 		mint: outMint,
 		amount: outAmount,
 		amountInDecimal: outAmountInDecimal,
-	} = extractVolume(accountInfosMap, outputMint, swapEvent.outputAmount);
+	} = extractVolume(facts, accountInfosMap, outputMint, swapEvent.outputAmount);
 
 	return {
 		amm,
@@ -268,6 +319,7 @@ function extractSwapData(
  * trades themselves.
  */
 function extractVolume(
+	facts: TokenBalanceFacts,
 	accountInfosMap: AccountInfoMap,
 	mint: PublicKey,
 	amount: BN | string,
@@ -275,7 +327,7 @@ function extractVolume(
 	// Handle both BN (V1) and hex string (V2) formats
 	const amountBN = typeof amount === "string" ? new BN(amount, 16) : amount;
 
-	const tokenDecimals = extractMintDecimals(accountInfosMap, mint);
+	const tokenDecimals = extractMintDecimals(facts, accountInfosMap, mint);
 	const amountInDecimal = DecimalUtil.fromBN(amountBN, tokenDecimals);
 
 	return {
@@ -286,9 +338,15 @@ function extractVolume(
 }
 
 function extractTokenAccountOwner(
+	facts: TokenBalanceFacts,
 	accountInfosMap: AccountInfoMap,
 	account: PublicKey,
 ) {
+	const known = facts.ownerByTokenAccount.get(account.toBase58());
+	if (known) {
+		return new PublicKey(known);
+	}
+
 	const accountData = accountInfosMap.get(account.toBase58());
 
 	if (accountData) {
@@ -299,7 +357,16 @@ function extractTokenAccountOwner(
 	return;
 }
 
-function extractMintDecimals(accountInfosMap: AccountInfoMap, mint: PublicKey) {
+function extractMintDecimals(
+	facts: TokenBalanceFacts,
+	accountInfosMap: AccountInfoMap,
+	mint: PublicKey,
+) {
+	const known = facts.decimalsByMint.get(mint.toBase58());
+	if (known !== undefined) {
+		return known;
+	}
+
 	const mintData = accountInfosMap.get(mint.toBase58());
 
 	if (mintData) {
