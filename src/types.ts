@@ -13,10 +13,20 @@ export interface PartialInstruction {
 	accounts: PublicKey[];
 }
 
+/** The fields of a web3.js `TokenBalance` that `extract()` reads. */
+export interface TokenBalance {
+	accountIndex: number;
+	mint: string;
+	owner?: string;
+	uiTokenAmount?: { decimals: number };
+}
+
 // Subset of @solana/web3.js ParsedTransactionWithMeta to allow flexible upstream data
 export interface TransactionWithMeta {
 	meta: {
 		logMessages?: string[] | null;
+		preTokenBalances?: TokenBalance[] | null;
+		postTokenBalances?: TokenBalance[] | null;
 		innerInstructions?:
 			| {
 					index: number;
