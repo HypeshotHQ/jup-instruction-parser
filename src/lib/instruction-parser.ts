@@ -14,7 +14,7 @@ export class InstructionParser {
 	}
 
 	getInstructionNameAndTransferAuthorityAndLastAccount(
-		instructions: PartialInstruction[]
+		instructions: PartialInstruction[],
 	) {
 		for (const instruction of instructions) {
 			if (!instruction.programId.equals(this.programId)) {
@@ -22,6 +22,9 @@ export class InstructionParser {
 			}
 
 			const ix = this.coder.instruction.decode(instruction.data, "base58");
+			if (!ix) {
+				continue;
+			}
 
 			if (this.isRouting(ix.name)) {
 				const instructionName = ix.name;
@@ -132,6 +135,9 @@ export class InstructionParser {
 			if (!("data" in instruction)) continue; // Guard in case it is a parsed decoded instruction, should be impossible
 
 			const ix = this.coder.instruction.decode(instruction.data, "base58");
+			if (!ix) {
+				continue;
+			}
 
 			if (this.isExactIn(ix.name)) {
 				return (ix.data as any).quotedOutAmount.toString();
@@ -149,6 +155,9 @@ export class InstructionParser {
 			if (!("data" in instruction)) continue; // Guard in case it is a parsed decoded instruction, should be impossible
 
 			const ix = this.coder.instruction.decode(instruction.data, "base58");
+			if (!ix) {
+				continue;
+			}
 
 			if (this.isExactOut(ix.name)) {
 				return (ix.data as any).quotedInAmount.toString();
@@ -200,12 +209,16 @@ export class InstructionParser {
 				throw new Error("Empty instruction data");
 			}
 
-			// Decode the base58 data
+			// Decode the base58 data. Unrecognized Jupiter instructions
+			// (for example createIdempotentAssociatedTokenAccount, whose
+			// discriminator is not the Anchor sighash) are skipped.
 			const decoded = this.coder.instruction.decode(data, "base58");
 
-			// Validate the decoded instruction
 			if (!decoded || !decoded.name) {
-				throw new Error("Invalid instruction format");
+				return {
+					name: "unknown",
+					data: {},
+				};
 			}
 
 			return decoded;
@@ -225,7 +238,7 @@ export class InstructionParser {
 		}
 
 		const indexMap = new Map(
-			routePlan.map(obj => [obj.inputIndex, obj.outputIndex])
+			routePlan.map(obj => [obj.inputIndex, obj.outputIndex]),
 		);
 		let visited = new Set();
 		let currentIndex = routePlan[0].inputIndex; // Start from the first object's inputIndex

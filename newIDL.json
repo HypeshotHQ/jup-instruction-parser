@@ -3227,6 +3227,40 @@
                 "type": "bool"
               }
             ]
+          },
+          {
+            "name": "QuantumV2",
+            "fields": [
+              {
+                "name": "side",
+                "type": {
+                  "defined": {
+                    "name": "Side"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "DrFraudsworthSolBuy"
+          },
+          {
+            "name": "DrFraudsworthSolSell",
+            "fields": [
+              {
+                "name": "is_zig",
+                "type": "bool"
+              }
+            ]
+          },
+          {
+            "name": "DrFraudsworthSplBuy"
+          },
+          {
+            "name": "DrFraudsworthSplSell"
+          },
+          {
+            "name": "DrFraudsworthVaultConvert"
           }
         ]
       }

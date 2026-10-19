@@ -15,7 +15,7 @@ program
 	.action(async ({ signature, rpc }) => {
 		const connection = new Connection(rpc); // Use your own RPC endpoint here.
 		const tx = await connection.getParsedTransaction(signature, {
-			maxSupportedTransactionVersion: 0,
+			maxSupportedTransactionVersion: 1,
 		});
 
 		if (tx.meta.err) {

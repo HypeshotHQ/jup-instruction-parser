@@ -2647,6 +2647,30 @@ export type Jupiter = {
 							},
 						];
 					},
+					{
+						name: "QuantumV2";
+						fields: [
+							{
+								name: "side";
+								type: {
+									defined: "Side";
+								};
+							},
+						];
+					},
+					{ name: "DrFraudsworthSolBuy" },
+					{
+						name: "DrFraudsworthSolSell";
+						fields: [
+							{
+								name: "isZig";
+								type: "bool";
+							},
+						];
+					},
+					{ name: "DrFraudsworthSplBuy" },
+					{ name: "DrFraudsworthSplSell" },
+					{ name: "DrFraudsworthVaultConvert" },
 				];
 			};
 		},
@@ -6007,6 +6031,30 @@ export const IDL: Jupiter = {
 							},
 						],
 					},
+					{
+						name: "QuantumV2",
+						fields: [
+							{
+								name: "side",
+								type: {
+									defined: "Side",
+								},
+							},
+						],
+					},
+					{ name: "DrFraudsworthSolBuy" },
+					{
+						name: "DrFraudsworthSolSell",
+						fields: [
+							{
+								name: "isZig",
+								type: "bool",
+							},
+						],
+					},
+					{ name: "DrFraudsworthSplBuy" },
+					{ name: "DrFraudsworthSplSell" },
+					{ name: "DrFraudsworthVaultConvert" },
 				],
 			},
 		},
