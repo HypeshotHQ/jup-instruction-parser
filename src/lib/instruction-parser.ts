@@ -49,12 +49,14 @@ export class InstructionParser {
 			case "routeWithTokenLedger":
 			case "routeV2":
 			case "exactOutRouteV2":
+			case "routeWithAttestation":
 				return 0; // V2 instructions have userTransferAuthority at index 0
 			case "sharedAccountsRoute":
 			case "sharedAccountsRouteWithTokenLedger":
 			case "sharedAccountsExactOutRoute":
 			case "sharedAccountsRouteV2":
 			case "sharedAccountsExactOutRouteV2":
+			case "sharedAccountsRouteWithAttestation":
 				return 1; // V2 shared accounts have userTransferAuthority at index 1
 		}
 	}
@@ -174,7 +176,9 @@ export class InstructionParser {
 			name === "sharedAccountsRoute" ||
 			name === "sharedAccountsRouteWithTokenLedger" ||
 			name === "routeV2" ||
-			name === "sharedAccountsRouteV2"
+			name === "sharedAccountsRouteV2" ||
+			name === "routeWithAttestation" ||
+			name === "sharedAccountsRouteWithAttestation"
 		);
 	}
 
@@ -198,7 +202,9 @@ export class InstructionParser {
 			name === "routeV2" ||
 			name === "exactOutRouteV2" ||
 			name === "sharedAccountsRouteV2" ||
-			name === "sharedAccountsExactOutRouteV2"
+			name === "sharedAccountsExactOutRouteV2" ||
+			name === "routeWithAttestation" ||
+			name === "sharedAccountsRouteWithAttestation"
 		);
 	}
 
