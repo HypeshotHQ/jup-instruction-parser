@@ -3541,6 +3541,21 @@
                 }
               }
             ]
+          },
+          {
+            "name": "HyloRouterV2"
+          },
+          {
+            "name": "BinaryFiV3"
+          },
+          {
+            "name": "HadronV2",
+            "fields": [
+              {
+                "name": "is_x",
+                "type": "bool"
+              }
+            ]
           }
         ]
       }

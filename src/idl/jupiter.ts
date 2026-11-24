@@ -2954,6 +2954,17 @@ export type Jupiter = {
 							},
 						];
 					},
+					{ name: "HyloRouterV2" },
+					{ name: "BinaryFiV3" },
+					{
+						name: "HadronV2";
+						fields: [
+							{
+								name: "isX";
+								type: "bool";
+							},
+						];
+					},
 				];
 			};
 		},
@@ -6656,6 +6667,17 @@ export const IDL: Jupiter = {
 								type: {
 									defined: "RemainingAccountsInfo",
 								},
+							},
+						],
+					},
+					{ name: "HyloRouterV2" },
+					{ name: "BinaryFiV3" },
+					{
+						name: "HadronV2",
+						fields: [
+							{
+								name: "isX",
+								type: "bool",
 							},
 						],
 					},
